@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,9 @@ import com.emc.metalnx.services.interfaces.ConfigService;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
+
+    @Value("${irods.auth.scheme:STANDARD}")
+    private String irodsAuthScheme;
 
 	public static final String AJAX_ORIG_PATH = "ajaxOrigPath";
 
@@ -96,6 +100,12 @@ public class LoginController {
 
 			}
 			model = new ModelAndView(redirect);
+
+        } else if (irodsAuthScheme.equalsIgnoreCase("shibboleth")) {
+            // this will end up at Http403ForbiddenEntry point at which point
+            // the shib login processing will run
+            redirect = "redirect:/browse/home";
+            model = new ModelAndView(redirect);
 		} else {
 			model = new ModelAndView("login/index");
 			addAuthTypesAndDefaultAuthToModel(model);

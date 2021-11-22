@@ -35,7 +35,7 @@
 	<!-- **************************************************************** -->
 
 	<bean id="customAuthenticationProvider"
-		class="com.emc.metalnx.services.auth.IRODSAuthenticationProvider">
+		class="com.emc.metalnx.services.auth.SC2iAuthenticationProvider">
 		<property name="irodsHost" value="${irods.host}" />
 		<property name="irodsPort" value="${irods.port}" />
 		<property name="irodsZoneName" value="${irods.zoneName}" />
@@ -46,7 +46,7 @@
 	<bean id="customAuthenticationFailureHandler"
 		class="com.emc.metalnx.handler.DataGridAuthenticationFailureHandler" />
 	<bean id="logoutHandler"
-		class="com.emc.metalnx.services.auth.IRODSLogoutSuccessHandler" />
+		class="com.emc.metalnx.services.auth.SC2iIRODSLogoutSuccessHandler" />
 
 	<!-- Instead of redirecting the user to the login page when he tries to 
 		access a page with an expired session id, we return an error (403). By doing 

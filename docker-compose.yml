@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: superdupersecret
+      POSTGRES_USER: metalnxuser
+      POSTGRES_DB: metalnxdb
+
+  metalnx:
+    image: myimages/metalnx:latest
+    restart: always
+    volumes:
+      - ./metalnx-config:/etc/irods-ext
+    ports:
+      - 8080:8080

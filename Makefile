@@ -15,7 +15,7 @@ warbuilderimage:
 #
 # it creates the .war file in packaging/docker/
 packaging/docker/metalnx.war: warbuilderimage
-	docker run -it --rm \
+	docker run -t --rm \
 		-v "$$PWD":/usr/src \
 		-v "$$PWD"/src:/usr/src/mymaven \
 		-v "$$HOME/.m2":/root/.m2 \
@@ -32,7 +32,7 @@ dockerimage: packaging/docker/metalnx.war
 # it does not remove the docker image
 clean:
 	rm -f packaging/docker/metalnx.war
-	docker run -it --rm \
+	docker run -t --rm \
 		-v "$$PWD":/usr/src \
 		-v "$$PWD"/src:/usr/src/mymaven \
 		-v "$$HOME/.m2":/root/.m2 \

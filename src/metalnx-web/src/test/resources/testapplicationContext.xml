@@ -42,7 +42,7 @@
 	<!-- **************************************************************** -->
 
 	<bean id="customAuthenticationProvider"
-		class="com.emc.metalnx.services.auth.IRODSAuthenticationProvider">
+		class="com.emc.metalnx.services.auth.SC2iAuthenticationProvider">
 		<property name="irodsHost" value="${irods.host}" />
 		<property name="irodsPort" value="${irods.port}" />
 		<property name="irodsZoneName" value="${irods.zoneName}" />
