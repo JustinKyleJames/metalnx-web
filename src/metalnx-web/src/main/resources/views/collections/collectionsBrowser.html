@@ -1,6 +1,12 @@
 <!-- Copyright (c) 2018, University of North Carolina at Chapel Hill -->
 <!-- Copyright (c) 2015-2017, Dell EMC -->
 
+<div class="login-popup">
+    <span id="loginPopup" hidden="hidden" class="login-popup-msg">SC2i is a restricted system. Usage may be monitored, recorded, and subject to audit.  Unauthorized use of Metalnx is prohibited and subject to criminal and civil penalties. Use of this system indicates you consent to these conditions and agree to abide by applicable usage policies.</span>
+        <a class="login-popup-btn"><i class="fa fa-times"></i></a>
+</div>
+
+
 <!-- Invalid path provided -->
 <div class="col-xs-12" id="invalidPathErrorMsg">
 	<div class="alert alert-danger" role="alert"
@@ -444,6 +450,13 @@
 
         	var i = 0;
 
+            let element = document.getElementById("loginPopup");
+            if (localStorage.getItem('render-restricted-message') === 'true') {
+                element.removeAttribute("hidden");
+            } else {
+                $(".login-popup").hide();
+            }
+
         	datatable = $('#treeViewTable').DataTable( {
     		    "serverSide": true,
     		    "dom": dtPatternMlxCollections,
@@ -581,6 +594,11 @@
             $("input[type=checkbox]").prop("disabled", false);
 
 
+        });
+
+        $(".login-popup-btn").click(function () {
+            $(".login-popup").hide();
+            localStorage.setItem('render-restricted-message', 'false');
         });
 
 		$('#treeViewTable').on('page.dt', function (){
