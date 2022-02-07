@@ -1,9 +1,9 @@
 <!-- Copyright (c) 2018, University of North Carolina at Chapel Hill -->
 <!-- Copyright (c) 2015-2017, Dell EMC -->
 
-<div class="login-popup">
-    <span id="loginPopup" hidden="hidden" class="login-popup-msg">SC2i is a restricted system. Usage may be monitored, recorded, and subject to audit.  Unauthorized use of Metalnx is prohibited and subject to criminal and civil penalties. Use of this system indicates you consent to these conditions and agree to abide by applicable usage policies.</span>
-        <a class="login-popup-btn"><i class="fa fa-times"></i></a>
+<div id="login-popup" th:if="${popupText != null and #strings.length(popupText)>0}">
+    <span id="login-popup-msg" th:text="${popupText}"></span>
+        <a id="login-popup-btn"><i class="fa fa-times"></i></a>
 </div>
 
 
@@ -450,12 +450,19 @@
 
         	var i = 0;
 
-            let element = document.getElementById("loginPopup");
-            if (localStorage.getItem('render-restricted-message') === 'true') {
-                element.removeAttribute("hidden");
-            } else {
-                $(".login-popup").hide();
+			// render the popup block if needed
+            let popupContainer = document.getElementById("login-popup");
+            if (popupContainer !== null && localStorage.getItem('restricted-message-read') === null) {
+                popupContainer.style.display = 'block'
             }
+			// add event handler to button
+			let popupButton = document.getElementById('login-popup-btn')
+			if(popupButton != null) {
+				popupButton.addEventListener('click', function () {
+            	$("#login-popup").hide();
+            	localStorage.setItem('restricted-message-read', 'true');
+				})
+			}
 
         	datatable = $('#treeViewTable').DataTable( {
     		    "serverSide": true,

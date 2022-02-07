@@ -29,6 +29,7 @@ import org.irodsext.dataprofiler.favorites.FavoritesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -175,6 +176,9 @@ public class BrowseController {
         parentPath = "";
         currentPath = "";
     }
+
+    @Value("${collection.popup_text}")
+	private String popupText;
 
     /**
      * Get a list of resources in which an object doesn't have replicas
@@ -1059,6 +1063,7 @@ public class BrowseController {
         model.addAttribute("inheritanceDisabled", inheritanceDisabled);
         model.addAttribute("requestMapping", "/browse/add/action/");
         model.addAttribute("parentPath", parentPath);
+        model.addAttribute("popupText", popupText);
 
         setBreadcrumbToModel(model, dataGridObj);
         logger.info("forwarding to collections/collectionsBrowser");
