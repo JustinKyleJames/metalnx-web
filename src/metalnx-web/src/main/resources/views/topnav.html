@@ -39,7 +39,7 @@
 								data-target="#aboutModal"><i class="fa fa-info-circle"></i>
 									<span>About</span></a></li>
 							<li class="divider"></li>
-							<li><a th:href="@{/logout/}"><i class="fa fa-sign-out"></i>
+							<li><a th:href="@{/logout/}" onclick="localStorage.removeItem('restricted-message-read'); return true;"><i class="fa fa-sign-out"></i>
 									<span th:text="#{user.logout.label}"></span></a></li>
 						</ul> <!-- /.dropdown-user --></li>
 					<!-- /.dropdown -->
