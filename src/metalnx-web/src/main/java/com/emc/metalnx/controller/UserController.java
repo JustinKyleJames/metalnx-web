@@ -84,9 +84,6 @@ public class UserController {
 	UserBookmarkService userBookmarkService;
 
 	@Autowired
-	UserBookmarkController userBookmarkController;
-
-	@Autowired
 	LoggedUserUtils loggedUserUtils;
 
 	@Autowired
@@ -282,15 +279,8 @@ public class UserController {
 		}
 
 		DataGridUser newUser = new DataGridUser();
-		newUser.setAdditionalInfo(user.getAdditionalInfo());
 		newUser.setUsername(user.getUsername());
-		newUser.setFirstName(user.getFirstName());
-		newUser.setLastName(user.getLastName());
-		newUser.setEmail(user.getEmail());
 		newUser.setUserType(user.getUserType());
-		newUser.setOrganizationalRole(user.getOrganizationalRole() != null ? user.getOrganizationalRole() : "");
-		newUser.setCompany(user.getCompany() != null ? user.getCompany() : "");
-		newUser.setDepartment(user.getDepartment() != null ? user.getDepartment() : "");
 		logger.info("adding user:{}", newUser);
 
 		String[] groupList = groupsToBeAdded.toArray(new String[groupsToBeAdded.size()]);
@@ -328,8 +318,6 @@ public class UserController {
 
 			DataGridUser userForGroups = userService.findByUsernameAndAdditionalInfo(newUser.getUsername(),
 					newUser.getAdditionalInfo());
-			// User bookmarks
-			updateBookmarksList(newUser.getUsername(), newUser.getAdditionalInfo());
 
 			userService.modifyUser(userForGroups);
 			redirectAttributes.addFlashAttribute("userAddedSuccessfully", user.getUsername());
@@ -387,33 +375,9 @@ public class UserController {
 		if (user != null) {
 			UserForm userForm = new UserForm();
 			// iRODS data
-			userForm.setDataGridId(user.getDataGridId());
 			userForm.setUsername(user.getUsername());
-			userForm.setAdditionalInfo(user.getAdditionalInfo());
 			userForm.setUserProfile(user.getUserProfile());
-			userForm.setOrganizationalRole(user.getOrganizationalRole());
 			userForm.setUserType(user.getUserType());
-
-			// our data
-			if (user.getEmail() != null) {
-				userForm.setEmail(user.getEmail());
-			}
-
-			if (user.getFirstName() != null) {
-				userForm.setFirstName(user.getFirstName());
-			}
-
-			if (user.getLastName() != null) {
-				userForm.setLastName(user.getLastName());
-			}
-
-			if (user.getCompany() != null) {
-				userForm.setCompany(user.getCompany());
-			}
-
-			if (user.getDepartment() != null) {
-				userForm.setDepartment(user.getDepartment());
-			}
 
 			// Getting the list of groups the user belongs to
 			String[] groupList = userService.getGroupIdsForUser(user);
@@ -476,20 +440,9 @@ public class UserController {
 		}
 
 		if (user != null) {
-			user.setAdditionalInfo(userForm.getAdditionalInfo());
 			user.setUsername(userForm.getUsername());
 			user.setPassword(userForm.getPassword());
-			user.setFirstName(userForm.getFirstName());
-			user.setLastName(userForm.getLastName());
-			user.setEmail(userForm.getEmail());
-			user.setOrganizationalRole(
-					userForm.getOrganizationalRole() != null ? userForm.getOrganizationalRole() : "");
 			user.setUserType(userForm.getUserType());
-			user.setCompany(userForm.getCompany() != null ? userForm.getCompany() : "");
-			user.setDepartment(userForm.getDepartment() != null ? userForm.getDepartment() : "");
-
-			// User bookmarks
-			updateBookmarksList(user.getUsername(), user.getAdditionalInfo());
 
 			userService.modifyUser(user);
 			userService.updateGroupList(user, groups);
@@ -775,26 +728,4 @@ public class UserController {
 	 * *****************************************************************************
 	 * ***************
 	 */
-
-	/**
-	 * Persists the changes on the bookmarks lists for the given group on the
-	 * database
-	 *
-	 * @param groupName
-	 */
-	private void updateBookmarksList(String username, String additionalInfo) {
-		if (username == null || username.isEmpty() || additionalInfo == null || additionalInfo.isEmpty()) {
-			return;
-		}
-
-		DataGridUser user = userService.findByUsernameAndAdditionalInfo(username, additionalInfo);
-
-		if (user != null) {
-			Set<String> bookmarksToAdd = userBookmarkController.getAddBookmark();
-			Set<String> bookmarksToRemove = userBookmarkController.getRemoveBookmark();
-			userBookmarkService.updateBookmarks(user, bookmarksToAdd, bookmarksToRemove);
-		}
-
-		userBookmarkController.clearBookmarksLists();
-	}
 }

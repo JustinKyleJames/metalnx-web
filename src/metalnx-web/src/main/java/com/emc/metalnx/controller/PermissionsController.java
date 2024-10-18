@@ -27,7 +27,6 @@ import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridFilePermission;
 import com.emc.metalnx.core.domain.entity.DataGridGroupPermission;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
-import com.emc.metalnx.core.domain.entity.DataGridUserBookmark;
 import com.emc.metalnx.core.domain.entity.DataGridUserPermission;
 import com.emc.metalnx.core.domain.entity.enums.DataGridPermType;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
@@ -120,7 +119,6 @@ public class PermissionsController {
 		List<DataGridFilePermission> permissions;
 		List<DataGridGroupPermission> groupPermissions;
 		List<DataGridUserPermission> userPermissions;
-		List<DataGridUserBookmark> userBookmarks;
 		Set<String> groupsWithBookmarks;
 		Set<String> usersWithBookmarks;
 		boolean userCanModify = false;
@@ -133,16 +131,6 @@ public class PermissionsController {
 			groupPermissions = ps.getGroupsWithPermissions(permissions);
 			userPermissions = ps.getUsersWithPermissions(permissions);
 
-			userBookmarks = uBMS.findBookmarksOnPath(path);
-			userCanModify = loggedUser.isAdmin() || ps.canLoggedUserModifyPermissionOnPath(path);
-
-			groupsWithBookmarks = new HashSet<>();
-
-			usersWithBookmarks = new HashSet<>();
-			for (DataGridUserBookmark userBookmark : userBookmarks) {
-				usersWithBookmarks.add(userBookmark.getUser().getUsername());
-			}
-
 			obj = cs.findByName(path);
 			obj.setMostPermissiveAccessForCurrentUser(
 					ps.resolveMostPermissiveAccessForUser(obj.getPath(), loggedUser.getUsername()));
@@ -151,8 +139,6 @@ public class PermissionsController {
 			throw new DataGridException("error getting permissions", e);
 		}
 
-		model.addAttribute("usersWithBookmarks", usersWithBookmarks);
-		model.addAttribute("groupsWithBookmark", groupsWithBookmarks);
 		model.addAttribute("groupPermissions", groupPermissions);
 		model.addAttribute("userPermissions", userPermissions);
 		model.addAttribute("userCanModify", userCanModify);
