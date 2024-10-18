@@ -4,7 +4,6 @@
 
 package com.emc.metalnx.core.domain.dao.generic;
 
-import org.hibernate.Query;
 
 import java.io.Serializable;
 import java.util.List;

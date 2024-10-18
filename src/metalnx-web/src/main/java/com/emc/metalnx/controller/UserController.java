@@ -52,7 +52,6 @@ import com.emc.metalnx.modelattribute.user.UserForm;
 import com.emc.metalnx.services.interfaces.GroupService;
 import com.emc.metalnx.services.interfaces.HeaderService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
-import com.emc.metalnx.services.interfaces.UserBookmarkService;
 import com.emc.metalnx.services.interfaces.UserService;
 import com.emc.metalnx.services.interfaces.ZoneService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -79,9 +78,6 @@ public class UserController {
 
 	@Autowired
 	ZoneService zoneService;
-
-	@Autowired
-	UserBookmarkService userBookmarkService;
 
 	@Autowired
 	LoggedUserUtils loggedUserUtils;

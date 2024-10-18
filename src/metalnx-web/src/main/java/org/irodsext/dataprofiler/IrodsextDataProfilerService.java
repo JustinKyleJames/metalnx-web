@@ -12,7 +12,6 @@ import org.irods.jargon.core.pub.domain.DataObject;
 import org.irods.jargon.extensions.dataprofiler.DataProfile;
 import org.irods.jargon.extensions.dataprofiler.DataProfilerService;
 import org.irods.jargon.extensions.dataprofiler.DataProfilerSettings;
-import org.irodsext.dataprofiler.favorites.FavoritesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,11 +27,6 @@ import com.emc.metalnx.core.domain.entity.DataGridUser;
 public class IrodsextDataProfilerService extends DataProfilerService {
 
 	/**
-	 * This will be provided by the factory
-	 */
-	private FavoritesService favoritesService;
-
-	/**
 	 * logged in user identity
 	 */
 	private DataGridUser dataGridUser;
@@ -42,26 +36,6 @@ public class IrodsextDataProfilerService extends DataProfilerService {
 	public IrodsextDataProfilerService(DataProfilerSettings defaultDataProfilerSettings,
 			IRODSAccessObjectFactory irodsAccessObjectFactory, IRODSAccount irodsAccount) {
 		super(defaultDataProfilerSettings, irodsAccessObjectFactory, irodsAccount);
-	}
-
-	@Override
-	protected void addStarringDataToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
-		validateContext();
-		boolean isStarred = favoritesService.isPathFavoriteForUser(dataGridUser,
-				dataProfile.getDomainObject().getAbsolutePath());
-		dataProfile.setStarred(isStarred);
-		log.debug("starring set to:{}", isStarred);
-	}
-
-	@Override
-	protected void addStarringDataToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
-		validateContext();
-		boolean isStarred = favoritesService.isPathFavoriteForUser(dataGridUser,
-				dataProfile.getDomainObject().getAbsolutePath());
-		dataProfile.setStarred(isStarred);
-		log.debug("starring set to:{}", isStarred);
 	}
 
 	@Override
@@ -120,23 +94,10 @@ public class IrodsextDataProfilerService extends DataProfilerService {
 
 	}
 
-	public FavoritesService getFavoritesService() {
-		return favoritesService;
-	}
-
-	public void setFavoritesService(FavoritesService favoritesService) {
-		this.favoritesService = favoritesService;
-	}
-
 	/**
 	 * Check for any missing dependencies or misconfiguration
 	 */
 	private void validateContext() {
-		if (favoritesService == null) {
-			log.error("favoritesService not configured");
-			throw new JargonRuntimeException("favoritesService not configured");
-		}
-
 	}
 
 	public DataGridUser getDataGridUser() {
@@ -145,6 +106,20 @@ public class IrodsextDataProfilerService extends DataProfilerService {
 
 	public void setDataGridUser(DataGridUser dataGridUser) {
 		this.dataGridUser = dataGridUser;
+	}
+
+	@Override
+	protected void addStarringDataToCollection(DataProfile<Collection> arg0, DataProfilerSettings arg1)
+			throws JargonException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addStarringDataToDataObject(DataProfile<DataObject> arg0, DataProfilerSettings arg1)
+			throws JargonException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

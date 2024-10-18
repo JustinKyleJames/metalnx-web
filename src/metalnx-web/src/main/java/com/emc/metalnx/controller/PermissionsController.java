@@ -34,7 +34,6 @@ import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.GroupService;
 import com.emc.metalnx.services.interfaces.PermissionsService;
-import com.emc.metalnx.services.interfaces.UserBookmarkService;
 import com.emc.metalnx.services.interfaces.UserService;
 
 @Controller
@@ -47,9 +46,6 @@ public class PermissionsController {
 
 	@Autowired
 	private GroupService gs;
-
-	@Autowired
-	private UserBookmarkService uBMS;
 
 	@Autowired
 	private PermissionsService ps;
@@ -256,18 +252,6 @@ public class PermissionsController {
 
 		for (String username : usernames) {
 			operationResult &= ps.setPermissionOnPath(permType, username, recursive, loggedUser.isAdmin(), path);
-
-			// Updating bookmarks for the recently-created permissions
-			if (bookmark) {
-				Set<String> bookmarks = new HashSet<String>();
-				bookmarks.add(path);
-
-				// Getting list of users and updating bookmarks
-				List<DataGridUser> dataGridUsers = us.findByUsername(username);
-				if (dataGridUsers != null && !dataGridUsers.isEmpty()) {
-					uBMS.updateBookmarks(dataGridUsers.get(0), bookmarks, null);
-				}
-			}
 		}
 
 		return operationResult ? REQUEST_OK : REQUEST_ERROR;

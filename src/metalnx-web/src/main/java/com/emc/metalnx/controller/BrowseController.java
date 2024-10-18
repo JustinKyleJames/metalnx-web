@@ -25,7 +25,6 @@ import org.irods.jargon.core.exception.FileNotFoundException;
 import org.irods.jargon.core.exception.JargonException;
 import org.irods.jargon.core.utils.MiscIRODSUtils;
 import org.irods.jargon.extensions.dataprofiler.DataProfile;
-import org.irodsext.dataprofiler.favorites.FavoritesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,6 @@ import com.emc.metalnx.services.interfaces.MetadataService;
 import com.emc.metalnx.services.interfaces.PermissionsService;
 import com.emc.metalnx.services.interfaces.ResourceService;
 import com.emc.metalnx.services.interfaces.RuleDeploymentService;
-import com.emc.metalnx.services.interfaces.UserBookmarkService;
 import com.emc.metalnx.services.interfaces.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -96,9 +94,6 @@ public class BrowseController {
     GroupService groupService;
 
     @Autowired
-    UserBookmarkService userBookmarkService;
-
-    @Autowired
     MetadataService metadataService;
 
     @Autowired
@@ -106,9 +101,6 @@ public class BrowseController {
 
     @Autowired
     IRODSServices irodsServices;
-
-    @Autowired
-    FavoritesService favoritesService;
 
     @Autowired
     LoggedUserUtils loggedUserUtils;
@@ -463,11 +455,6 @@ public class BrowseController {
                         // may not find based on permissions..it's ok
                     }
                 }
-
-                List<DataGridUser> users = userService.findByUsername(username);
-                if (users != null && !users.isEmpty()) {
-                    userBookmarks = userBookmarkService.findBookmarksForUserAsString(users.get(0));
-                }
             }
         }
 
@@ -575,28 +562,8 @@ public class BrowseController {
         boolean modificationSuccessful = cs.modifyCollectionAndDataObject(previousPath, newPath,
                 collForm.getInheritOption());
 
-        // checking if the previousPath collection/dataobject was marked as favorite:
-        String username = irodsServices.getCurrentUser();
-        String zoneName = irodsServices.getCurrentUserZone();
-        DataGridUser user = userService.findByUsernameAndAdditionalInfo(username, zoneName);
-        boolean isMarkedFavorite = favoritesService.isPathFavoriteForUser(user, previousPath);
-        logger.info("Favorite status for previousPath: " + previousPath + " is: " + String.valueOf(isMarkedFavorite));
-
         if (modificationSuccessful) {
             logger.debug("Collection/Data Object {} modified to {}", previousPath, newPath);
-
-            if (isMarkedFavorite) {
-                Set<String> toAdd = new HashSet<String>();
-                Set<String> toRemove = new HashSet<String>();
-                toAdd.add(newPath);
-                toRemove.add(previousPath);
-                boolean operationResult = favoritesService.updateFavorites(user, toAdd, toRemove);
-                if (operationResult) {
-                    logger.info("Favorite re-added successfully for: " + newPath);
-                } else {
-                    logger.info("Error re-adding favorite to: " + newPath);
-                }
-            }
             redirectAttributes.addFlashAttribute("collectionModifiedSuccessfully", collForm.getCollectionName());
         }
 
