@@ -430,16 +430,7 @@ public class DataGridUser implements Serializable, Comparable<DataGridUser> {
 			builder.append("title=").append(title).append(", ");
 		}
 		builder.append("advancedView=").append(advancedView).append(", ");
-		if (bookmarks != null) {
-			builder.append("bookmarks=").append(bookmarks).append(", ");
-		}
 		builder.append("metadataUnitView=").append(metadataUnitView).append(", ");
-		if (bookmarks != null) {
-			builder.append("bookmarks=").append(bookmarks).append(", ");
-		}
-		if (favorites != null) {
-			builder.append("favorites=").append(favorites);
-		}
 		builder.append("]");
 		return builder.toString();
 	}

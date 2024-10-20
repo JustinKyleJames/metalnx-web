@@ -19,7 +19,6 @@ import org.irods.jargon.core.pub.domain.User;
 import org.irods.jargon.core.pub.domain.UserGroup;
 import org.irods.jargon.core.pub.io.IRODSFile;
 import org.irods.jargon.core.pub.io.IRODSFileFactory;
-import org.irodsext.dataprofiler.favorites.FavoritesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,6 @@ import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.ConfigService;
 import com.emc.metalnx.services.interfaces.GroupService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
-import com.emc.metalnx.services.interfaces.UserBookmarkService;
 import com.emc.metalnx.services.interfaces.UserService;
 
 @Service("userService")
@@ -45,12 +43,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	GroupService groupService;
-
-	@Autowired
-	UserBookmarkService userBookmarkService;
-
-	@Autowired
-	FavoritesService favoritesService;
 
 	@Autowired
 	private IRODSServices irodsServices;
@@ -149,13 +141,6 @@ public class UserServiceImpl implements UserService {
 			// Removing user
 			userAO.deleteUser(username);
 			userDao.deleteByUsername(username);
-
-			// Removing favorites and user bookmarks before removing user
-			userBookmarkService.removeBookmarkBasedOnUser(user);
-			userBookmarkService.removeBookmarkBasedOnPath(userHomeFolder);
-
-			favoritesService.removeFavoriteBasedOnUser(user);
-			favoritesService.removeFavoriteBasedOnPath(userHomeFolder);
 
 			return true;
 		} catch (Exception e) {
