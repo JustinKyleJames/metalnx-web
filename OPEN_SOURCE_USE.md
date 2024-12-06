@@ -121,54 +121,6 @@ Metalnx (the application), the Metalnx Remote Monitor Daemon, the Metalnx MSI pa
 Copyright 2010-2016 Mike Bostock
 All rights reserved.
 
-**Datatables Plug-in for jQuery**
-
-Copyright (c) 2008-2015 SpryMedia Limited
-http://datatables.net
-
-**Hibernate: ORM**
-
-Copyright (c) 2009 by Red Hat Inc and/or its affiliates or by
-third-party contributors as indicated by either @author tags or express
-copyright attribution statements applied by the authors.  All
-third-party contributions are distributed under license by Red Hat Inc.
-
-**Hibernate: Validator**
-
-Hibernate: Validator is release under an Apache License v2.0.  Below is copied from the copyright.txt file on the Hibernate: Validator Github page:
-
-Alaa Nassef,
-Brent Douglas,
-Carlos Vara,
-Dag Hovland,
-Davide Marchignoli,
-Doug Lea,
-Emmanuel Bernard,
-Efthymis Sarbanis,
-Federico
-Federico Mancini,
-Gavin King,
-George Gastaldi,
-Gerhard Petracek,
-Gunnar Morling,
-Hardy Ferentschik,
-Henno Vermeulen,
-Jason T. Greene,
-Juraci Krohling,
-Justin Nauman,
-Kevin Pollet,
-Khalid Alqinyah,
-Leonardo Loch Zanivan,
-Mark Hobson,
-Paolo Perrotta,
-Pete Muir,
-Sanne Grinovero,
-Shane Bryzak,
-Shelly McGowan,
-Steve Ebersole,
-Strong Liu,
-Victor Rezende dos Santos
-
 **Jackson**
 
 Copyright (c) 2007- Tatu Saloranta, tatu.saloranta@iki.fi

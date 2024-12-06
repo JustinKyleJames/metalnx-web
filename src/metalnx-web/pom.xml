@@ -537,20 +537,6 @@
 
 									compute.checksum=${metalnx.compute.checksum}
 
-									db.driverClassName=${metalnx.jdbc.driver}
-									db.url=${metalnx.jdbc.url}
-									db.username=${metalnx.jdbc.user}
-									db.password=${metalnx.jdbc.password}
-									hibernate.dialect=${metalnx.jdbc.dialect}
-
-
-									hibernate.show_sql=true
-									hibernate.format_sql=false
-
-
-									hibernate.hbm2ddl.auto=update
-
-
 									connection.pool_size=5
 
 
