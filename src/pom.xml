@@ -254,11 +254,6 @@
 				<artifactId>hibernate-envers</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>javassist</groupId>
-				<artifactId>javassist</artifactId>
-				<version>${javassist.version}</version>
-			</dependency>
 
 			<!-- Logging libraries -->
 			<!--  <dependency>
