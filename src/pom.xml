@@ -79,7 +79,6 @@
 
 	<modules>
 		<module>metalnx-web</module>
-		<module>metalnx-tools</module>
 	</modules>
 
 	<repositories>
