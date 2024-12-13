@@ -12,6 +12,6 @@ COPY src/metalnx-tools/src/main/resources/migrations/ /migrations
 
 COPY packaging/docker/runit.sh /
 COPY packaging/docker/metalnx.war /usr/local/tomcat/webapps/
-COPY packaging/docker/server.xml /conf/server.xml
+COPY packaging/docker/server.xml /usr/local/tomcat/conf/server.xml
 
 CMD ["/runit.sh"]
