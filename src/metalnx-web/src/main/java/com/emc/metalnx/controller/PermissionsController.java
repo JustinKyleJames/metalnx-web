@@ -61,8 +61,10 @@ public class PermissionsController {
 	private HashMap<String, String> usersToAdd;
 	private HashMap<String, String> groupsToAdd;
 
-	private static final String[] PERMISSIONS = { "NONE", "READ", "WRITE", "OWN" };
-	private static final String[] PERMISSIONS_WITHOUT_NONE = { "READ", "WRITE", "OWN" };
+	private static final String[] PERMISSIONS = { 
+			"OWN", "DELETE_OBJECT", "MODIFY_OBJECT", "CREATE_OBJECT", "DELETE_METADATA", "MODIFY_METADATA", "CREATE_METADATA", "READ_OBJECT", "READ_METADATA", "NONE" };
+	private static final String[] PERMISSIONS_WITHOUT_NONE = { 
+			"OWN", "DELETE_OBJECT", "MODIFY_OBJECT", "CREATE_OBJECT", "DELETE_METADATA", "MODIFY_METADATA", "CREATE_METADATA", "READ_OBJECT", "READ_METADATA" };
 
 	private static final String REQUEST_OK = "OK";
 	private static final String REQUEST_ERROR = "ERROR";
