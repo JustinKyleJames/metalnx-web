@@ -8,6 +8,7 @@ services:
         dockerfile: Dockerfile
       volumes:
         - ${METALNX_ETC_DIR}:/etc/irods-ext
+        - ${CERTS_DIR}:/tmp/cert
       ports:
         - "8080:8080" 
       networks:
