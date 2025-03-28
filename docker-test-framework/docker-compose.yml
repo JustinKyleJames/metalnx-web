@@ -11,10 +11,10 @@ services:
       ports:
         - "8080:8080" 
       networks:
-        - irodsnet
+        - irods-demo_default
 
 networks:
-   irodsnet:
+   irods-demo_default:
     external: true
      
 
