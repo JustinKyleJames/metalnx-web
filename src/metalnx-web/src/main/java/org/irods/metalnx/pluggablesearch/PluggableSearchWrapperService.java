@@ -3,7 +3,7 @@
  */
 package org.irods.metalnx.pluggablesearch;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.irods.jargon.extensions.searchplugin.SearchIndexInventory;
 import org.irods.jargon.extensions.searchplugin.SearchPluginDiscoveryService;

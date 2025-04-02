@@ -17,8 +17,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.irods.jargon.core.connection.IRODSAccount;
 import org.irods.jargon.core.exception.FileNotFoundException;

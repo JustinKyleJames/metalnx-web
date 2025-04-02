@@ -3,7 +3,7 @@ package com.emc.metalnx.controller;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.irods.jargon.core.exception.JargonException;
 import org.json.simple.JSONArray;

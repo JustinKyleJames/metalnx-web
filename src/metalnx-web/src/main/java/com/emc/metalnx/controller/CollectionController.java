@@ -7,7 +7,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.irods.jargon.core.exception.JargonException;
 import org.irods.jargon.core.utils.CollectionAndPath;

@@ -3,8 +3,8 @@
 
 package com.emc.metalnx.interceptors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
 import org.irods.jargon.core.utils.JargonVersion;
@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.emc.metalnx.controller.utils.LoggedUserUtils;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
@@ -29,7 +29,7 @@ import com.emc.metalnx.utils.EmcMetalnxVersion;
  * Class that will intercept HTTP responses to clients. Metalnx will use it to
  * close sessions in the grid and add objects pertinent to every response.
  */
-public class HttpResponseHandlerInterceptor extends HandlerInterceptorAdapter {
+public class HttpResponseHandlerInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private IRODSAccessObjectFactory irodsAccessObjectFactory;
@@ -46,7 +46,6 @@ public class HttpResponseHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	public final static Logger logger = LogManager.getLogger(HttpResponseHandlerInterceptor.class);
 
-	@Override
 	public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
 			final ModelAndView modelAndView) throws Exception {
 		

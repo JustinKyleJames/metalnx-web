@@ -3,7 +3,7 @@
  */
 package com.emc.metalnx.controller.api;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.irods.jargon.extensions.searchplugin.SearchIndexInventory;
 import org.irods.jargon.extensions.searchplugin.SearchIndexInventoryEntry;

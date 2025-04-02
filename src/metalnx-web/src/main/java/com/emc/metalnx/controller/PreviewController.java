@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.irods.jargon.core.exception.JargonException;
 import org.irods.jargon.datautils.filesampler.FileSamplerService;

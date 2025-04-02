@@ -1,6 +1,6 @@
 package org.irods.metalnx.jwt;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.irods.jargon.irodsext.jwt.AbstractJwtIssueService;
 import org.irods.jargon.irodsext.jwt.JwtIssueServiceImpl;
