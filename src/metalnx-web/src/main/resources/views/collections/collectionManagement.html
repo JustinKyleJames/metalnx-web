@@ -861,7 +861,10 @@
 	    		            });
 	    		          }
 				    },
-				    "order": [[ 1, 'asc' ]],
+                    // https://stackoverflow.com/questions/50355111/javascript-escape-double-square-brackets-for-thymeleaf/50355259
+				    "order": [
+                        [ 1, 'asc' ]
+                    ],
 				    "initComplete": function(settings){
 			            $('#'+ datatableId +' tbody td').each(function () {
 			            	$(this).attr('title', $(this).text().trim());
@@ -909,7 +912,10 @@
 	    		            });
 	    		          }
 				    },
-				    "order": [[ 2, 'asc' ], [1, 'asc']],
+				    "order": [
+                        [ 2, 'asc' ],
+                        [1, 'asc']
+                    ],
 				    "initComplete": function(settings){
 			            $('#'+ datatableId +' tbody td').each(function () {
 			            	$(this).attr('title', $(this).text().trim());

@@ -15,7 +15,7 @@
 			layout:fragment="content">
 
 			<div class="row">
-				<th:block th:include="collections/summary :: summaryView"></th:block>
+                <th:block th:include="~{collections/summary :: summaryView}"></th:block>
 			</div>
 
 			<div class="col-xs-12 tree-view-panel box">
@@ -45,7 +45,7 @@
 					<div class="tab-content"
 						style="border: 1px solid #ddd; background-color: #fff; padding-top: 15px;">
 						<div id="details" class="tab-pane active" role="tabpanel">
-							<th:block th:include="collections/details :: detailsView"></th:block>
+                            <th:block th:include="~{collections/details :: detailsView}"></th:block>
 						</div>
 						<div id="metadata" class="tab-pane" role="tabpanel"></div>
 						<div id="permission" class="tab-pane" role="tabpanel"></div>

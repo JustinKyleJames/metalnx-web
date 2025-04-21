@@ -1,4 +1,4 @@
-FROM tomcat:9.0.99-jdk21-temurin-noble
+FROM tomcat:10.1.24-jdk21-temurin-jammy
 LABEL organization="iRODS Consortium"
 LABEL description="Metalnx iRODS Browser"
 RUN apt update 

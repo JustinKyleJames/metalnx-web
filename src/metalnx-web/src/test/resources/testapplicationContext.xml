@@ -13,7 +13,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-6.4.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
@@ -63,7 +63,8 @@
 	</bean>
 
     <!-- use-expressions set to false for backward compatibility with spring 4. -->
-	<sec:http auto-config="true" create-session="always" use-expressions="false"
+    <!-- For spring security 6.4 use-authorization-manager must be set to false when using use-expressions set to false. -->
+	<sec:http auto-config="true" create-session="always" use-expressions="false" use-authorization-manager="false
 		entry-point-ref="ep403">
 
 		<!-- Login pages -->
@@ -159,16 +160,16 @@
 	<!-- **************************************************************** -->
 
 	<bean id="templateResolver"
-		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
 		<property name="prefix" value="classpath:views/" />
 		<property name="suffix" value=".html" />
 		<property name="characterEncoding" value="UTF-8" />
-		<property name="templateMode" value="HTML5" />
+        <property name="templateMode" value="HTML" />  <!-- HTML5 was removed in thymeleaf 3.1 -->
 		<property name="cacheable" value="false" />
 	</bean>
 
 	<bean id="templateEngine"
-		class="org.thymeleaf.spring4.SpringTemplateEngine">
+		class="org.thymeleaf.spring6.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
 		<property name="additionalDialects">
 			<set>
@@ -177,7 +178,7 @@
 		</property>
 	</bean>
 
-	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+	<bean class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
 		<property name="order" value="1" />
 	</bean>
@@ -215,6 +216,6 @@
 	<!-- **************************************************************** -->
 
 	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+        class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
 </beans>

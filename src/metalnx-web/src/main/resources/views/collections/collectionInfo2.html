@@ -10,7 +10,7 @@
 			layout:fragment="content">
 
 			<div class="row">
-				<th:block th:include="collections/summary :: summaryView"></th:block>
+                <th:block th:include="~{collections/summary :: summaryView}"></th:block>
 			</div>
 
 			
@@ -43,7 +43,7 @@
 				            </div>
 				        </div>
 						<div id="details" class="tab-pane fade active in" role="tabpanel">
-							<!-- <th:block th:include="collections/info :: infoView"></th:block> --></div>
+                        <!-- <th:block th:include="~{collections/info :: infoView"></th:block}> --></div>
 						<div id="metadata" class="tab-pane fade" role="tabpanel"></div>
 						<div id="permission" class="tab-pane fade" role="tabpanel"></div>
 					</div>

@@ -83,12 +83,12 @@
 
 	<div id="wrapper">
 
-		<th:block th:include="topnav :: topnav">
+        <th:block th:include="~{topnav :: topnav}">
 		</th:block>
 
 		<div class="page-nav-wrapper" id="page-nav-wrapper">
 			<aside class="navbar-default sidebar" role="navigation">
-				<th:block th:include="sidenav :: sidenav">
+                <th:block th:include="~{sidenav :: sidenav}">
 				</th:block>
 				<!-- sidenav extracted out to fragment -->
 			</aside>
