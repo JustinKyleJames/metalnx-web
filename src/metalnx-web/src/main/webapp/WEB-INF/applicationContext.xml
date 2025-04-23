@@ -176,16 +176,18 @@
 		class="org.thymeleaf.spring6.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
         <!--<property name="additionalDialects">
-			<set>
-				<bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
-			</set>
+		    <set>
+		    	<bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+            </set>
         </property>-->
-	</bean>
 
-	<bean class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
-		<property name="templateEngine" ref="templateEngine" />
-		<property name="order" value="1" />
-	</bean>
+    </bean>
+
+    <bean id="viewResolver" class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="order" value="1"/>  <!-- Set order if multiple view resolvers -->
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
 
 	<!-- **************************************************************** -->
 	<!-- I18N Configuration -->
