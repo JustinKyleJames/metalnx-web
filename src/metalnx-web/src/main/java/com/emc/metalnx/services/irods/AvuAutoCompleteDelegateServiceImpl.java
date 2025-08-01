@@ -1,9 +1,5 @@
 package com.emc.metalnx.services.irods;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.datautils.avuautocomplete.AvuAutocompleteService;
-import org.irods.jargon.datautils.avuautocomplete.AvuAutocompleteService.AvuTypeEnum;
-import org.irods.jargon.datautils.avuautocomplete.AvuSearchResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;

@@ -6,12 +6,6 @@ package com.emc.metalnx.services.irods;
 import java.util.List;
 import java.util.Map;
 
-import org.irods.jargon.core.exception.FileNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.exception.OperationNotSupportedByThisServerException;
-import org.irods.jargon.core.pub.EnvironmentalInfoAO;
-import org.irods.jargon.core.rule.IRODSRuleExecResult;
-import org.irods.jargon.core.rule.IRODSRuleExecResultOutputParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

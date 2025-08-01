@@ -5,7 +5,6 @@
 
 package com.emc.metalnx.services.interfaces;
 
-import org.irods.jargon.core.exception.JargonException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;

@@ -10,13 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.FilenameUtils;
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.CollectionAO;
-import org.irods.jargon.core.pub.Stream2StreamAO;
-import org.irods.jargon.core.pub.domain.Resource;
-import org.irods.jargon.core.pub.io.IRODSFile;
-import org.irods.jargon.core.pub.io.IRODSFileFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

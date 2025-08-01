@@ -2,7 +2,6 @@ package com.emc.metalnx.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.irods.jargon.core.exception.JargonException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Controller;

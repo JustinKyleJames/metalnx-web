@@ -3,12 +3,6 @@
  */
 package org.irodsext.datatyper;
 
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonRuntimeException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.extensions.datatyper.DataTypeResolutionService;
-import org.irods.jargon.extensions.datatyper.DataTypeResolutionServiceFactory;
-import org.irods.jargon.extensions.datatyper.DataTyperSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

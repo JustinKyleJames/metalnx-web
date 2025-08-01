@@ -1,15 +1,5 @@
 package com.emc.metalnx.controller.utils;
 
-import static org.irods.jargon.core.query.QueryConditionOperators.EQUAL;
-import static org.irods.jargon.core.query.QueryConditionOperators.GREATER_THAN;
-import static org.irods.jargon.core.query.QueryConditionOperators.LESS_THAN;
-import static org.irods.jargon.core.query.QueryConditionOperators.LIKE;
-import static org.irods.jargon.core.query.QueryConditionOperators.NOT_EQUAL;
-import static org.irods.jargon.core.query.QueryConditionOperators.NOT_LIKE;
-import static org.irods.jargon.core.query.QueryConditionOperators.NUMERIC_EQUAL;
-import static org.irods.jargon.core.query.QueryConditionOperators.NUMERIC_GREATER_THAN;
-import static org.irods.jargon.core.query.QueryConditionOperators.NUMERIC_LESS_THAN;
-
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,23 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.DataNotFoundException;
-import org.irods.jargon.core.exception.InvalidArgumentException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.pub.IRODSFileSystem;
-import org.irods.jargon.core.pub.IRODSGenQueryExecutor;
-import org.irods.jargon.core.query.GenQueryBuilderException;
-import org.irods.jargon.core.query.GenQueryField.SelectFieldTypes;
-import org.irods.jargon.core.query.IRODSGenQueryBuilder;
-import org.irods.jargon.core.query.IRODSGenQueryFromBuilder;
-import org.irods.jargon.core.query.IRODSQueryResultRow;
-import org.irods.jargon.core.query.IRODSQueryResultSet;
-import org.irods.jargon.core.query.JargonQueryException;
-import org.irods.jargon.core.query.QueryConditionOperators;
-import org.irods.jargon.core.query.RodsGenQueryEnum;
 
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.fasterxml.jackson.databind.JsonNode;

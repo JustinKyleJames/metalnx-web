@@ -5,15 +5,6 @@ package com.emc.metalnx.services.irods;
 
 import java.net.ConnectException;
 
-import org.irods.jargon.core.connection.AuthScheme;
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.connection.auth.AuthResponse;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.CollectionAndDataObjectListAndSearchAO;
-import org.irods.jargon.core.pub.DataObjectAO;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.pub.SpecificQueryAO;
-import org.irods.jargon.core.pub.UserAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

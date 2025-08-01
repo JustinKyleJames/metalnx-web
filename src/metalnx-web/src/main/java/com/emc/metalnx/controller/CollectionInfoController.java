@@ -5,12 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.irods.jargon.core.exception.FileNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.query.MetaDataAndDomainData;
-import org.irods.jargon.extensions.dataprofiler.DataProfile;
-import org.irods.jargon.extensions.dataprofiler.DataProfilerFactory;
-import org.irods.jargon.extensions.dataprofiler.DataProfilerSettings;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
