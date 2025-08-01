@@ -6,8 +6,6 @@ package com.emc.metalnx.services.irods;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.exception.OperationNotSupportedByThisServerException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.irods.jargon.core.exception.FileNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.domain.UserGroup;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

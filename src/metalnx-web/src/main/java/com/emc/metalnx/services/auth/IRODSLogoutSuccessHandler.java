@@ -13,8 +13,6 @@
  import javax.servlet.http.HttpServletResponse;
  
  import org.apache.commons.io.FileUtils;
- import org.irods.jargon.core.connection.IRODSAccount;
- import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.springframework.beans.factory.annotation.Autowired;

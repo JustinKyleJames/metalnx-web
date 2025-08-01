@@ -6,11 +6,6 @@ package com.emc.metalnx.services.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import org.irods.jargon.core.exception.FileNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.exception.OperationNotSupportedByThisServerException;
-import org.irods.jargon.core.rule.IRODSRuleExecResultOutputParameter;
-
 import com.emc.metalnx.core.domain.entity.DataGridResource;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;

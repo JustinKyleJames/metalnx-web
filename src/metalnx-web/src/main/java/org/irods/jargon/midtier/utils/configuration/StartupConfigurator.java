@@ -3,11 +3,6 @@
  */
 package org.irods.jargon.midtier.utils.configuration;
 
-import org.irods.jargon.core.connection.ClientServerNegotiationPolicy;
-import org.irods.jargon.core.connection.ClientServerNegotiationPolicy.SslNegotiationPolicy;
-import org.irods.jargon.core.connection.IRODSSession;
-import org.irods.jargon.core.connection.SettableJargonProperties;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

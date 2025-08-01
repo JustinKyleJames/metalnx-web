@@ -1,7 +1,5 @@
 package com.emc.metalnx.services.interfaces;
 
-import org.irods.jargon.core.exception.JargonException;
-
 /**
  * Exception in processing metadata templates
  * 

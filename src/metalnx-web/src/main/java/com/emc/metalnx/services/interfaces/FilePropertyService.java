@@ -7,8 +7,6 @@ package com.emc.metalnx.services.interfaces;
 
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridFilePropertySearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
