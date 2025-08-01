@@ -5,13 +5,6 @@ package com.emc.metalnx.services.irods;
 
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.SpecificQueryAO;
-import org.irods.jargon.core.pub.domain.ClientHints;
-import org.irods.jargon.core.pub.domain.SpecificQueryDefinition;
-import org.irods.jargon.core.query.JargonQueryException;
-import org.irods.jargon.core.query.SpecificQuery;
-import org.irods.jargon.core.query.SpecificQueryResultSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

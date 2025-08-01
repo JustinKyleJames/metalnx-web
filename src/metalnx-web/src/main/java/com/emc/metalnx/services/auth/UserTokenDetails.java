@@ -6,10 +6,6 @@
 package com.emc.metalnx.services.auth;
 
 import com.emc.metalnx.core.domain.entity.DataGridUser;
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.pub.IRODSFileSystem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

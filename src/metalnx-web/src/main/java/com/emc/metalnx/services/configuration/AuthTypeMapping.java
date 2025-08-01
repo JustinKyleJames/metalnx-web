@@ -3,8 +3,6 @@
  */
 package com.emc.metalnx.services.configuration;
 
-import org.irods.jargon.core.connection.AuthScheme;
-
 /**
  * Maps iRODS auth type to a configurable user-friendly display. In this way
  * "PAM" auth type can display as an option in login as "Joes Corporation

@@ -5,8 +5,6 @@ package com.emc.metalnx.services.interfaces;
 
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-
 import com.emc.metalnx.core.domain.entity.DataGridFilePermission;
 import com.emc.metalnx.core.domain.entity.DataGridGroupPermission;
 import com.emc.metalnx.core.domain.entity.DataGridUserPermission;

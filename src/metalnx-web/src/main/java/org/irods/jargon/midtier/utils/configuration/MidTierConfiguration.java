@@ -3,9 +3,6 @@
  */
 package org.irods.jargon.midtier.utils.configuration;
 
-import org.irods.jargon.core.connection.AuthScheme;
-import org.irods.jargon.core.connection.ClientServerNegotiationPolicy;
-
 /**
  * Pojo containing configuration information
  * 

@@ -5,8 +5,6 @@
 
 package com.emc.metalnx.core.domain.exceptions;
 
-import org.irods.jargon.core.exception.JargonException;
-
 /**
  * Top level Metalnx exception
  * 

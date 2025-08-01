@@ -3,9 +3,6 @@
  */
 package com.emc.metalnx.services.irods.utils;
 
-import org.irods.jargon.core.protovalues.IcatTypeEnum;
-import org.irods.jargon.core.pub.domain.ClientHints;
-
 import com.emc.metalnx.core.domain.exceptions.UnsupportedDataGridFeatureException;
 
 /**

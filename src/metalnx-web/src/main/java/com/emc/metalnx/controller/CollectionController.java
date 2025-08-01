@@ -9,9 +9,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.utils.CollectionAndPath;
-import org.irods.jargon.core.utils.MiscIRODSUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

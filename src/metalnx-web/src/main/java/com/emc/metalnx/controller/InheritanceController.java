@@ -3,7 +3,6 @@
 
 package com.emc.metalnx.controller;
 
-import org.irods.jargon.core.exception.JargonException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

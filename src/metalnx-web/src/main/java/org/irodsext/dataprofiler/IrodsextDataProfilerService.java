@@ -3,15 +3,6 @@
  */
 package org.irodsext.dataprofiler;
 
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.exception.JargonRuntimeException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.pub.domain.Collection;
-import org.irods.jargon.core.pub.domain.DataObject;
-import org.irods.jargon.extensions.dataprofiler.DataProfile;
-import org.irods.jargon.extensions.dataprofiler.DataProfilerService;
-import org.irods.jargon.extensions.dataprofiler.DataProfilerSettings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

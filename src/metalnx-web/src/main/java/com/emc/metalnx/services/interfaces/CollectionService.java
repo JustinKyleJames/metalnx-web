@@ -8,13 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.irods.jargon.core.exception.FileNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.domain.IRODSDomainObject;
-import org.irods.jargon.core.query.CollectionAndDataObjectListingEntry;
-import org.irods.jargon.extensions.dataprofiler.DataProfile;
-import org.irods.jargon.zipservice.api.exception.ZipServiceException;
-
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.entity.DataGridResource;

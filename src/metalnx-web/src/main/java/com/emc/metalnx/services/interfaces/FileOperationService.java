@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.irods.jargon.core.exception.JargonException;
-
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridChecksumException;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;

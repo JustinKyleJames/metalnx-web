@@ -5,11 +5,6 @@ package org.irods.metalnx.pluggablesearch;
 
 import javax.annotation.PostConstruct;
 
-import org.irods.jargon.extensions.searchplugin.SearchIndexInventory;
-import org.irods.jargon.extensions.searchplugin.SearchPluginDiscoveryService;
-import org.irods.jargon.extensions.searchplugin.SearchPluginRegistrationConfig;
-import org.irods.jargon.extensions.searchplugin.exception.SearchPluginUnavailableException;
-import org.irods.jargon.extensions.searchplugin.model.SearchAttributes;
 import org.irods.metalnx.jwt.JwtManagementWrapperService;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

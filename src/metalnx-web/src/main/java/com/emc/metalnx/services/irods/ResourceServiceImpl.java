@@ -12,10 +12,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.ResourceAO;
-import org.irods.jargon.core.pub.ZoneAO;
-import org.irods.jargon.core.pub.domain.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package org.irods.metalnx.pluggablesearch;
 
-import org.irods.jargon.extensions.searchplugin.model.SearchAttributes;
 import org.irods.metalnx.jwt.JwtManagementWrapperService;
 import org.junit.Assert;
 import org.junit.Test;

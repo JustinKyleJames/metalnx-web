@@ -6,7 +6,6 @@
 package com.emc.metalnx.services.interfaces;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
-import org.irods.jargon.core.exception.JargonException;
 
 import java.io.IOException;
 

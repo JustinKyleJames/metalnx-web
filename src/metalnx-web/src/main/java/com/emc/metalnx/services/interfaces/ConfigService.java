@@ -5,8 +5,6 @@ package com.emc.metalnx.services.interfaces;
 
 import java.util.List;
 
-import org.irods.jargon.core.connection.AuthScheme;
-
 import com.emc.metalnx.services.configuration.AuthTypeMapping;
 import com.emc.metalnx.services.configuration.GlobalConfig;
 

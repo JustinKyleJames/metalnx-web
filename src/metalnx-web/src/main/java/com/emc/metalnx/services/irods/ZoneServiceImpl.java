@@ -10,9 +10,6 @@ import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.RemoteExecutionService;
 import com.emc.metalnx.services.interfaces.ZoneService;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.ZoneAO;
-import org.irods.jargon.core.pub.domain.Zone;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,11 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
-import org.irods.jargon.core.exception.JargonException;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.irods.jargon.datautils.avuautocomplete.AvuAutocompleteService.AvuTypeEnum;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

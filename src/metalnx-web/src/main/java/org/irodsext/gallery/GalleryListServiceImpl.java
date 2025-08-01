@@ -3,18 +3,6 @@
  */
 package org.irodsext.gallery;
 
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.exception.JargonRuntimeException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.pub.RuleProcessingAO;
-import org.irods.jargon.core.rule.IRODSRuleExecResult;
-import org.irods.jargon.core.rule.IRODSRuleExecResultOutputParameter;
-import org.irods.jargon.core.rule.IrodsRuleInvocationTypeEnum;
-import org.irods.jargon.core.rule.RuleInvocationConfiguration;
-import org.irods.jargon.core.service.AbstractJargonService;
-import org.irods.jargon.extensions.thumbnail.GalleryListService;
-import org.irods.jargon.extensions.thumbnail.ThumbnailList;
 import org.irodsext.dataprofiler.IrodsextDataProfilerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

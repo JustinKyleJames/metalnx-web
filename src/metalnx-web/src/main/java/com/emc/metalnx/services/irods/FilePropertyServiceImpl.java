@@ -9,11 +9,6 @@ import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.CollectionAO;
-import org.irods.jargon.core.pub.DataObjectAO;
-import org.irods.jargon.core.pub.domain.UserFilePermission;
-import org.irods.jargon.core.query.SpecificQueryResultSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

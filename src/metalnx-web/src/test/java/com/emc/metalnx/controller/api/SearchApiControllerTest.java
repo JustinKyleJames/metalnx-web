@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.irods.jargon.extensions.searchplugin.SearchIndexInventory;
-import org.irods.jargon.extensions.searchplugin.SearchIndexInventoryEntry;
-import org.irods.jargon.extensions.searchplugin.model.IndexSchemaDescription;
-import org.irods.jargon.extensions.searchplugin.model.Indexes;
 import org.irods.metalnx.pluggablesearch.PluggableSearchWrapperService;
 import org.junit.Assert;
 import org.junit.Test;

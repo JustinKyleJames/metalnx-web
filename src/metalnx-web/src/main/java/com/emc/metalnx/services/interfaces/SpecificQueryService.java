@@ -7,7 +7,6 @@ package com.emc.metalnx.services.interfaces;
 
 import com.emc.metalnx.core.domain.entity.DataGridSpecificQuery;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
-import org.irods.jargon.core.query.SpecificQueryResultSet;
 
 import java.util.List;
 

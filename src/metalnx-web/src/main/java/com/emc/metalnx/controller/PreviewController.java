@@ -8,9 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.datautils.filesampler.FileSamplerService;
-import org.irods.jargon.extensions.dataprofiler.DataProfilerFactory;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

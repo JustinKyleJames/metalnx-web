@@ -5,20 +5,6 @@ package org.irodsext.datatyper;
 
 import java.io.IOException;
 
-import org.apache.tika.detect.Detector;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.mime.MediaType;
-import org.apache.tika.parser.AutoDetectParser;
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.DataNotFoundException;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.IRODSAccessObjectFactory;
-import org.irods.jargon.core.utils.LocalFileUtils;
-import org.irods.jargon.core.utils.MiscIRODSUtils;
-import org.irods.jargon.extensions.datatyper.DataType;
-import org.irods.jargon.extensions.datatyper.DataTypeResolutionService;
-import org.irods.jargon.extensions.datatyper.DataTyperSettings;
-import org.irods.jargon.extensions.datatyper.IrodsMimeTypes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

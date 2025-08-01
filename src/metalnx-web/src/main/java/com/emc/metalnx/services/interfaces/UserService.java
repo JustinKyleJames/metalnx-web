@@ -6,9 +6,6 @@ package com.emc.metalnx.services.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.core.pub.domain.UserGroup;
-
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.irods.jargon.testutils.TestConfigurationException;
-
 /**
  * Utilities to load testing properties from a properties file
  *

@@ -2,9 +2,6 @@ package org.irods.metalnx.jwt;
 
 import javax.annotation.PostConstruct;
 
-import org.irods.jargon.irodsext.jwt.AbstractJwtIssueService;
-import org.irods.jargon.irodsext.jwt.JwtIssueServiceImpl;
-import org.irods.jargon.irodsext.jwt.JwtServiceConfig;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;

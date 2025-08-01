@@ -9,7 +9,6 @@ import com.emc.metalnx.core.domain.entity.DataGridSpecificQuery;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.modelattribute.enums.URLMap;
 import com.emc.metalnx.services.interfaces.SpecificQueryService;
-import org.irods.jargon.core.query.SpecificQueryResultSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

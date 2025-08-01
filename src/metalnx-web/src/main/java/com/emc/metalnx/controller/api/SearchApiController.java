@@ -5,10 +5,6 @@ package com.emc.metalnx.controller.api;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.irods.jargon.extensions.searchplugin.SearchIndexInventory;
-import org.irods.jargon.extensions.searchplugin.SearchIndexInventoryEntry;
-import org.irods.jargon.extensions.searchplugin.model.IndexSchemaDescription;
-import org.irods.jargon.extensions.searchplugin.model.SearchAttributes;
 import org.irods.metalnx.pluggablesearch.PluggableSearchWrapperService;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

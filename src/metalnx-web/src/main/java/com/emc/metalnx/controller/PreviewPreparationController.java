@@ -1,9 +1,5 @@
 package com.emc.metalnx.controller;
 
-import org.irods.jargon.core.connection.IRODSAccount;
-import org.irods.jargon.core.exception.JargonException;
-import org.irods.jargon.extensions.datatyper.DataTypeResolutionService;
-import org.irods.jargon.extensions.datatyper.DataTypeResolutionServiceFactory;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
