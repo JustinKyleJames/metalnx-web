@@ -60,7 +60,7 @@ public class ResourceServiceImpl implements ResourceService {
 					}
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not find all resources: ", e);
 		}
 
@@ -205,7 +205,7 @@ public class ResourceServiceImpl implements ResourceService {
 			Resource irodsResource = resourceAO.findByName(resourceName);
 
 			return irodsResource.getImmediateChildren();
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get immediate children of resource " + resourceName + ": ", e);
 		}
 
@@ -242,7 +242,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 			return true;
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not create resource: ", e);
 		}
 
@@ -296,7 +296,7 @@ public class ResourceServiceImpl implements ResourceService {
 					resourceAO.removeChildFromResource(dgRescToRemove.getName(), childResource);
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not delete children from resource {}.", dgRescToRemove.getName());
 		}
 	}

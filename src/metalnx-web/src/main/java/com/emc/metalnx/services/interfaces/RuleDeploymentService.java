@@ -5,6 +5,7 @@
 
 package com.emc.metalnx.services.interfaces;
 
+import org.irods.irods4j.low_level.api.MetalnxException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
@@ -17,9 +18,9 @@ public interface RuleDeploymentService {
 	 * 
 	 * @param file
 	 *            rule file to deploy
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
-	void deployRule(MultipartFile file) throws DataGridException, JargonException;
+	void deployRule(MultipartFile file) throws DataGridException, MetalnxException;
 
 	/**
 	 * Finds the rule cache directory in the grid
@@ -40,8 +41,8 @@ public interface RuleDeploymentService {
 	 * Checks whether or not the rule cache directory already exists in the grid.
 	 * 
 	 * @return True, if /<zone>/.rulecache path exists. False, otherwise.
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridConnectionRefusedException
 	 */
-	boolean ruleCacheExists() throws DataGridConnectionRefusedException, JargonException;
+	boolean ruleCacheExists() throws DataGridConnectionRefusedException, MetalnxException;
 }

@@ -56,7 +56,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 		try {
 			query = specificQueryAO.findSpecificQueryByAlias(alias);
 			return createDataGridSpecificQuery(query);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not retrieve specific query with alias {}", alias, e);
 		}
 		return null;
@@ -87,7 +87,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 		try {
 			SpecificQuery query = SpecificQuery.instanceWithNoArguments(specificQuery.getQuery(), 0, zone);
 			return specificQueryAO.executeSpecificQueryUsingSql(query, 1000);
-		} catch (JargonException | JargonQueryException e) {
+		} catch (MetalnxException | JargonQueryException e) {
 			logger.error("Could not execute specific query {}", specificQuery.getAlias(), e);
 		}
 		
@@ -103,7 +103,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 			SpecificQueryDefinition newQuery = new SpecificQueryDefinition(specificQuery.getAlias(), specificQuery.getQuery());
 			specificQueryAO.addSpecificQuery(newQuery);
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not create specific query {}", specificQuery.getAlias(), e);
 		}
 		
@@ -122,7 +122,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 			specificQueryAO.removeSpecificQueryByAlias(specificQuery.getAlias());
 			this.createSpecificQuery(specificQuery);
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not create specific query {}", specificQuery.getAlias(), e);
 		}
 		return false;
@@ -136,7 +136,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 		try {
 			specificQueryAO.removeSpecificQueryByAlias(specificQuery.getAlias());
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not remove specific query {}", specificQuery.getAlias(), e);
 		}
 		return false;

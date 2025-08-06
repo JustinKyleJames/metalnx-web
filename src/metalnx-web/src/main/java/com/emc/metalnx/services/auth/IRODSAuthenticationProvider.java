@@ -97,7 +97,7 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 			try {
 				irodsUser = this.irodsAccessObjectFactory.getUserAO(this.irodsAccount).findByName(username);
 				logger.debug("irodsUser:{}", irodsUser);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not find user: " + e.getMessage());
 			}
 
@@ -132,7 +132,7 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 		} catch (InvalidUserException | org.irods.jargon.core.exception.AuthenticationException e) {
 			logger.error("Could not authenticate user:{}", username, e);
 			throw new DataGridAuthenticationException("could not authenticate user", e);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Server not responding", e);
 			throw new DataGridServerException("exception", e);
 		}
@@ -146,7 +146,7 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 	}
 
 	private AuthResponse authenticateAgainstIRODS(String username, String password, AuthScheme authScheme)
-			throws JargonException {
+			throws MetalnxException {
 
 		logger.info("authenticateAgainstIRODS()");
 

@@ -54,7 +54,7 @@ public class ZoneServiceImpl implements ZoneService {
                 dataGridZones.add(dataGridZone);
             }
         }
-        catch (JargonException e) {
+        catch (MetalnxException e) {
             logger.info("Could not find all zones ", e);
         }
 

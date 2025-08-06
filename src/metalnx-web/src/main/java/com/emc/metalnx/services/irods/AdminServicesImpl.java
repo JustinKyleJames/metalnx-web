@@ -39,7 +39,7 @@ public class AdminServicesImpl implements AdminServices {
 			// Returning UserAO instance
 			return irodsAccessObjectFactory.getUserAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not instantiate UserAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -55,7 +55,7 @@ public class AdminServicesImpl implements AdminServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getSpecificQueryAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -71,7 +71,7 @@ public class AdminServicesImpl implements AdminServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -90,7 +90,7 @@ public class AdminServicesImpl implements AdminServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getCollectionAndDataObjectListAndSearchAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {

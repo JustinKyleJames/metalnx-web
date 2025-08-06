@@ -6,7 +6,7 @@ package com.emc.metalnx.services.interfaces;
  * @author conwaymc
  *
  */
-public class MetadataTemplateException extends JargonException {
+public class MetadataTemplateException extends MetalnxException {
 
 	private static final long serialVersionUID = 408138518224024455L;
 

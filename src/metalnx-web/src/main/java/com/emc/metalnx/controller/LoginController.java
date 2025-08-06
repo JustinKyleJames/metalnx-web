@@ -151,7 +151,7 @@ public class LoginController {
 		// If this runs before login the auth will be an instance of
 		// AnonymousAuthenticationToken. In that case we do not want to redirect to
 		// metalnx/browse/home.  In addition getLoggedDataGridUser() returns the
-		// "JargonException: IRODSAccount is null" because there is no longer an admin
+		// "MetalnxException: IRODSAccount is null" because there is no longer an admin
 		// account logged in at startup so we need to skip that call.
 		if (auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
 		    DataGridUser loggedInUser = loggedUserUtils.getLoggedDataGridUser();

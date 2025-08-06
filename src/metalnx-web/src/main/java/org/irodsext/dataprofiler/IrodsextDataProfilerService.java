@@ -31,66 +31,66 @@ public class IrodsextDataProfilerService extends DataProfilerService {
 
 	@Override
 	protected void addStarringDataToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 	}
 
 	@Override
 	protected void addStarringDataToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 	}
 
 	@Override
 	protected void addTaggingAndCommentsToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("tagging not yet implemented");
 
 	}
 
 	@Override
 	protected void addTaggingAndCommentsToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("tagging not yet implemented");
 
 	}
 
 	@Override
 	protected void addSharingToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("sharing not yet implemented");
 
 	}
 
 	@Override
 	protected void addSharingToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("sharing not yet implemented");
 
 	}
 
 	@Override
 	protected void addTicketsToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("tickets not yet implemented");
 
 	}
 
 	@Override
 	protected void addTicketsToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("tickets not yet implemented");
 
 	}
 
 	@Override
 	protected void addMetadataTemplatesToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("templates not yet implemented");
 
 	}
 
 	@Override
 	protected void addMetadataTemplatesToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws MetalnxException {
 		log.warn("templates not yet implemented");
 
 	}

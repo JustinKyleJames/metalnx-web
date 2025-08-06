@@ -54,7 +54,7 @@ public class RuleDeploymentServiceImpl implements RuleDeploymentService {
 	private CollectionService collectionService;
 
 	@Override
-	public void deployRule(MultipartFile file) throws DataGridException, JargonException {
+	public void deployRule(MultipartFile file) throws DataGridException, MetalnxException {
 		logger.info("Deploying rule");
 
 		if (file == null) {
@@ -96,7 +96,7 @@ public class RuleDeploymentServiceImpl implements RuleDeploymentService {
 
 			String ruleNameWithoutExtension = FilenameUtils.removeExtension(ruleName);
 			ruleService.execDeploymentRule(host, ruleNameWithoutExtension, ruleVaultPath);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			if (targetFile != null)
 				fos.deleteDataObject(targetFile.getPath(), true);
 			logger.error("Upload stream failed from Metalnx to the data grid. {}", e.getMessage());
@@ -136,7 +136,7 @@ public class RuleDeploymentServiceImpl implements RuleDeploymentService {
 			collectionAO.setAccessPermissionInherit("", ruleCachePath, true);
 			logger.info("created!");
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.debug("Could not create a rule cache collection in the data grid: {}", e.getMessage());
 			throw new DataGridException(e.getMessage());
 		}
@@ -144,7 +144,7 @@ public class RuleDeploymentServiceImpl implements RuleDeploymentService {
 	}
 
 	@Override
-	public boolean ruleCacheExists() throws JargonException {
+	public boolean ruleCacheExists() throws MetalnxException {
 		logger.info("ruleCacheExists()");
 		// This option is only available for admin accounts
 		IRODSAccount adminAccount = irodsServices.getCollectionAO().getIRODSAccount();
@@ -157,7 +157,7 @@ public class RuleDeploymentServiceImpl implements RuleDeploymentService {
 			IRODSFile newFile = irodsFileFactory.instanceIRODSFile(ruleCachePath);
 			return newFile.exists();
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not create a rule cache collection in the data grid: {}", e.getMessage());
 			throw new DataGridException(e.getMessage());
 		}

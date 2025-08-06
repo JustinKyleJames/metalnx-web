@@ -35,14 +35,14 @@ public interface RuleService {
 	 * @param host
 	 *            server's hostname
 	 * @return List of MSIs on the server that resource is.
-	 * @throws JargonException
-	 *             {@link JargonException} for general errors
+	 * @throws MetalnxException
+	 *             {@link MetalnxException} for general errors
 	 * @throws OperationNotSupportedByThisServerException
 	 *             {@link OperationNotSupportedByThisServerException} if
 	 *             microservice listing not available on this server version
 	 */
 	List<String> execGetMSIsRule(String host) throws DataGridConnectionRefusedException, DataGridRuleException,
-			OperationNotSupportedByThisServerException, JargonException;
+			OperationNotSupportedByThisServerException, MetalnxException;
 
 	/**
 	 * Executes the get version MSI.
@@ -158,11 +158,11 @@ public interface RuleService {
 	 *             if rule exection failed.
 	 * @throws DataGridConnectionRefusedException
 	 *             if Metalnx cannot connect to the data grid
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws FileNotFoundException
 	 */
 	void execManifestFileRule(String host, String targetPath, String objPath, String filePath)
-			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, JargonException;
+			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, MetalnxException;
 
 	/**
 	 * Execute metadata extraction from Illumina files rule.
