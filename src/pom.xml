@@ -113,7 +113,14 @@
 	</repositories>
 
 	<dependencyManagement>
-		<dependencies>
+        <dependencies>
+
+            <!-- irods4j -->
+            <dependency>
+                <groupId>org.irods</groupId>
+                <artifactId>irods4j</artifactId>
+                <version>0.2.0-java8</version>
+            </dependency>
 
 			<!-- Spring libraries -->
 			<dependency>

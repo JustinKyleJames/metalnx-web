@@ -26,14 +26,14 @@ public class IrodsextDataTypeResolutionService extends DataTypeResolutionService
 	}
 
 	@Override
-	public DataType resolveDataType(String irodsAbsolutePath) throws DataNotFoundException, JargonException {
+	public DataType resolveDataType(String irodsAbsolutePath) throws DataNotFoundException, MetalnxException {
 		log.info("resolveDataType()");
 
 		return resolveDataType(irodsAbsolutePath, this.getDefaultDataTyperSettings());
 
 	}
 
-	private String determineMimeTypeViaTika(String irodsAbsolutePath) throws JargonException {
+	private String determineMimeTypeViaTika(String irodsAbsolutePath) throws MetalnxException {
 		AutoDetectParser parser = new AutoDetectParser();
 		Detector detector = parser.getDetector();
 		Metadata md = new Metadata();
@@ -44,14 +44,14 @@ public class IrodsextDataTypeResolutionService extends DataTypeResolutionService
 		try {
 			mediaType = detector.detect(null, md);
 		} catch (IOException e) {
-			throw new JargonException("io exception determining file type by extension", e);
+			throw new MetalnxException("io exception determining file type by extension", e);
 		}
 		return mediaType.toString();
 	}
 
 	@Override
 	public DataType resolveDataType(String irodsAbsolutePath, DataTyperSettings dataTyperSettings)
-			throws DataNotFoundException, JargonException {
+			throws DataNotFoundException, MetalnxException {
 		log.info("resolveDataType()");
 
 		if (irodsAbsolutePath == null || irodsAbsolutePath.isEmpty()) {
@@ -109,7 +109,7 @@ public class IrodsextDataTypeResolutionService extends DataTypeResolutionService
 	}
 
 	@Override
-	public String quickMimeType(String irodsAbsolutePath) throws DataNotFoundException, JargonException {
+	public String quickMimeType(String irodsAbsolutePath) throws DataNotFoundException, MetalnxException {
 		log.info("quickMimeType()");
 
 		if (irodsAbsolutePath == null || irodsAbsolutePath.isEmpty()) {

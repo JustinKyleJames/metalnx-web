@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean createUser(DataGridUser user, String password)
-			throws JargonException, DataGridConnectionRefusedException {
+			throws MetalnxException, DataGridConnectionRefusedException {
 
 		logger.info("createUser()");
 
@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
 			}
 
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error modifying user:{}", modifyUser, e);
 			throw new DataGridException("unable to modify user", e);
 		}
@@ -236,7 +236,7 @@ public class UserServiceImpl implements UserService {
 
 			// Returning results
 			return ids;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not find group list for user [" + user.getUsername() + "], ", e);
 		}
 
@@ -349,7 +349,7 @@ public class UserServiceImpl implements UserService {
 			}
 			removeAccessPermissionForUserAsAdmin(user, removeCollectionsToRead);
 			readPermissionsUpdated = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set read permission:", e);
 		}
 
@@ -384,7 +384,7 @@ public class UserServiceImpl implements UserService {
 
 			removeAccessPermissionForUserAsAdmin(user, removeCollectionsToWrite);
 			writePermissionsUpdated = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set write permission:", e);
 		}
 
@@ -418,7 +418,7 @@ public class UserServiceImpl implements UserService {
 
 			removeAccessPermissionForUserAsAdmin(user, removeCollectionsToOwn);
 			ownPermissionsUpdated = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set ownership permission:", e);
 		}
 
@@ -438,7 +438,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void removeAccessPermissionForUserAsAdmin(DataGridUser user, Map<String, Boolean> paths)
-			throws JargonException, DataGridConnectionRefusedException {
+			throws MetalnxException, DataGridConnectionRefusedException {
 
 		if (paths == null || paths.isEmpty()) {
 			return;

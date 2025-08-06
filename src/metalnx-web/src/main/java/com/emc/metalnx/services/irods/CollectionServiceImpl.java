@@ -75,7 +75,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public boolean isFileInCollection(String filename, String collectionPath)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 		logger.info("isFileInCollection()");
 		if (filename == null || collectionPath == null)
 			return false;
@@ -91,7 +91,7 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 
 	@Override
-	public boolean isPathValid(String path) throws DataGridConnectionRefusedException, JargonException {
+	public boolean isPathValid(String path) throws DataGridConnectionRefusedException, MetalnxException {
 		logger.info("isPathValid()");
 
 		boolean isValid = false;
@@ -101,7 +101,7 @@ public class CollectionServiceImpl implements CollectionService {
 			isValid = true;
 		} catch (FileNotFoundException fnf) {
 			logger.warn("path not found:{}", path);
-		} catch (JargonException e1) {
+		} catch (MetalnxException e1) {
 			logger.error("error obtaining objStat for path:{}", path, e1);
 			throw e1;
 		}
@@ -110,7 +110,7 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 
 	@Override
-	public boolean isCollection(String path) throws DataGridConnectionRefusedException, JargonException {
+	public boolean isCollection(String path) throws DataGridConnectionRefusedException, MetalnxException {
 		logger.info("isCollection()");
 
 		if (path == null || path.isEmpty())
@@ -122,7 +122,7 @@ public class CollectionServiceImpl implements CollectionService {
 			ObjStat objStat = irodsServices.getCollectionAndDataObjectListAndSearchAO().retrieveObjectStatForPath(path);
 			logger.debug("objStat:{}", objStat);
 			return objStat.isSomeTypeOfCollection();
-		} catch (JargonException je) {
+		} catch (MetalnxException je) {
 			logger.error("error getting objStat", je);
 			throw je;
 		}
@@ -130,7 +130,7 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 
 	@Override
-	public boolean isDataObject(String path) throws DataGridConnectionRefusedException, JargonException {
+	public boolean isDataObject(String path) throws DataGridConnectionRefusedException, MetalnxException {
 		logger.info("isDataObject()");
 
 		return !isCollection(path);
@@ -231,7 +231,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 		} catch (FileNotFoundException e) {
 			logger.error("Could not find path: {}", e.getMessage());
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get permission for path: {}", e.getMessage());
 		}
 
@@ -257,7 +257,7 @@ public class CollectionServiceImpl implements CollectionService {
 		// getting total number of replicas
 		try {
 			totalNumberOfRepls = dataObjectAO.getTotalNumberOfReplsForDataObject(parentPath, dataObjectName);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get number of replicas of a data obj: {}", e.getMessage());
 			throw new DataGridException(e.getMessage());
 		}
@@ -289,7 +289,7 @@ public class CollectionServiceImpl implements CollectionService {
 				DataGridResource dataGridResource = resourceService.find(replica.getResourceName());
 				map.put(dataGridCollectionAndDataObject, dataGridResource);
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not list replicas by resource for " + path);
 		}
 
@@ -298,7 +298,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public List<DataGridCollectionAndDataObject> getSubCollectionsAndDataObjectsUnderPath(String parent)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 
 		logger.info("getSubCollectionsAndDataObjectsUnderPath()");
 
@@ -323,7 +323,7 @@ public class CollectionServiceImpl implements CollectionService {
 		} catch (FileNotFoundException e) {
 			logger.error("Could not locate file: ", e);
 			throw e;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error: ", e);
 			throw e;
 		}
@@ -349,7 +349,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 		} catch (FileNotFoundException e) {
 			logger.error("Could not locate file: ", e);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error: ", e);
 		}
 
@@ -387,7 +387,7 @@ public class CollectionServiceImpl implements CollectionService {
 				collectionAO.setAccessPermissionToNotInherit(zoneName, collection.getPath(), false);
 			}
 			collCreated = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.debug("Could not create a collection in the data grid: {}", e.getMessage());
 			throw new DataGridException(e.getMessage());
 		}
@@ -413,7 +413,7 @@ public class CollectionServiceImpl implements CollectionService {
 			dataGridCollectionAndDataObjects = this
 					.mapListingEntryToDataGridCollectionAndDataObject(collectionAndDataObjects);
 			return dataGridCollectionAndDataObjects;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not search collections: {}", e.getMessage());
 		}
 		return null;
@@ -441,7 +441,7 @@ public class CollectionServiceImpl implements CollectionService {
 		} catch (FileNotFoundException fnf) {
 			logger.warn("file not found for path:{}", path);
 			throw fnf;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.debug("error finding collection/data object by name: {}", path);
 			throw new DataGridException("Could not find path " + path);
 		}
@@ -495,7 +495,7 @@ public class CollectionServiceImpl implements CollectionService {
 				}
 
 			}
-		} catch (JargonException je) {
+		} catch (MetalnxException je) {
 			throw new DataGridException(je);
 		}
 
@@ -556,7 +556,7 @@ public class CollectionServiceImpl implements CollectionService {
 				}
 			}
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not edit Collection/DataObject {} to {}: ", previousPath, newPath, e);
 		}
 		return false;
@@ -619,7 +619,7 @@ public class CollectionServiceImpl implements CollectionService {
 				}
 			}
 			return collections;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get collections with inheritance option enabled: ", e);
 			throw new DataGridException("exception getting inheritance", e);
 		}
@@ -641,7 +641,7 @@ public class CollectionServiceImpl implements CollectionService {
 			}
 
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set inheritance: ", e);
 		}
 
@@ -656,7 +656,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 		try {
 			return collectionAO.countAllFilesUnderneathTheGivenCollection(IRODS_PATH_SEPARATOR);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not count all files in the data grid: ", e);
 		}
 
@@ -665,7 +665,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public Set<String> listWritePermissionsForPathAndGroupRecursive(String path, String groupName)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 
 		logger.info("listWritePermissionsForPathAndGroupRecursive()");
 
@@ -682,7 +682,7 @@ public class CollectionServiceImpl implements CollectionService {
 						list.add(child.getPath());
 					}
 				}
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not list write permissions for path " + path + "and group: " + groupName, e);
 			}
 		}
@@ -699,14 +699,14 @@ public class CollectionServiceImpl implements CollectionService {
 	 */
 
 	@Override
-	public String prepareFilesForDownload(String[] paths) throws IOException, DataGridException, JargonException {
+	public String prepareFilesForDownload(String[] paths) throws IOException, DataGridException, MetalnxException {
 		logger.info("prepareFilesForDownload()");
 
 		return prepareFilesForDownload(Arrays.asList(paths));
 	}
 
 	@Override
-	public String prepareFilesForDownload(List<String> sourcePaths) throws IOException, JargonException {
+	public String prepareFilesForDownload(List<String> sourcePaths) throws IOException, MetalnxException {
 		logger.info("prepareFilesForDownload()");
 		logger.info("Preparing files for download");
 
@@ -750,7 +750,7 @@ public class CollectionServiceImpl implements CollectionService {
 					logger.info("bundled collection path: {}", path);
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("jargon exception", e);
 			throw new DataGridException(e);
 		}
@@ -760,7 +760,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 	@Override
 	public boolean getInheritanceOptionForCollection(String collPath)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 		logger.info("getInheritanceOptionForCollection()");
 
 		if (collPath == null || collPath.isEmpty()) {
@@ -774,7 +774,7 @@ public class CollectionServiceImpl implements CollectionService {
 			return collectionAO.isCollectionSetForPermissionInheritance(collPath);
 		} catch (FileNotFoundException e) {
 			logger.warn("Collection {} does not exist: {}", collPath, e.getMessage());
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not retrieve inheritance option value for", collPath, e.getMessage());
 			throw e;
 		}
@@ -792,7 +792,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 		try {
 			dataObject = dataObjectAO.findByAbsolutePath(path);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not find a data object matching " + path, e);
 		}
 
@@ -813,7 +813,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 		try {
 			dataObject = dataObjectAO.findByAbsolutePath(path);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not find a data object matching " + path, e);
 		}
 
@@ -906,7 +906,7 @@ public class CollectionServiceImpl implements CollectionService {
 	 * @param resource
 	 * @return
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
 	/*
 	 * private boolean compressTempFolderIntoDataGrid(String filePathToBeBundled,
@@ -922,7 +922,7 @@ public class CollectionServiceImpl implements CollectionService {
 	 * bulkFileOperationsAO.
 	 * createABundleFromIrodsFilesAndStoreInIrodsWithForceOption(
 	 * bundleFilePathTobeCreated, filePathToBeBundled, resource);
-	 * isZipFileCreatedSuccessfully = true; } catch (JargonException e) {
+	 * isZipFileCreatedSuccessfully = true; } catch (MetalnxException e) {
 	 * logger.error("Could not compress temporary folder: {}", e.getMessage()); }
 	 * 
 	 * return isZipFileCreatedSuccessfully; }
@@ -999,13 +999,13 @@ public class CollectionServiceImpl implements CollectionService {
 			// Mapping spec query results to DataGrid* objects
 			itemsListingEntries = DataGridUtils.mapCollectionQueryResultSetToDataGridObjects(queryResultSet);
 			dataGridItemsList = DataGridUtils.mapListingEntryToDataGridCollectionAndDataObject(itemsListingEntries);
-		} catch (JargonException | JargonQueryException e) {
+		} catch (MetalnxException | JargonQueryException e) {
 			logger.error("Could not execute specific query to find collections matching a search text. ", e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(sqlQueryAlias);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not remove specific query {}: ", sqlQueryAlias, e.getMessage());
 			}
 		}
@@ -1080,13 +1080,13 @@ public class CollectionServiceImpl implements CollectionService {
 			dataGridList = DataGridUtils.mapQueryResultSetToDataGridObjectsForSearch(queryResultSet);
 			dataGridCollectionAndDataObjects
 					.addAll(DataGridUtils.mapListingEntryToDataGridCollectionAndDataObject(dataGridList));
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not execute specific query for listing data objects that match a search text", e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(sqlAlias);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not remove specific query {}: ", sqlAlias, e.getMessage());
 			}
 		}
@@ -1102,7 +1102,7 @@ public class CollectionServiceImpl implements CollectionService {
 	 * @param searchText term to be matched
 	 * @return total number of collections matching the given search text
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DuplicateDataException
 	 * @throws JargonQueryException
 	 */
@@ -1149,13 +1149,13 @@ public class CollectionServiceImpl implements CollectionService {
 			SpecificQueryResultSet queryResultSet = specificQueryAO.executeSpecificQueryUsingAlias(specQuery,
 					MAX_RESULTS_PER_PAGE, 0);
 			totalNumberOfItems = DataGridUtils.mapCountQueryResultSetToInteger(queryResultSet);
-		} catch (JargonException | JargonQueryException e) {
+		} catch (MetalnxException | JargonQueryException e) {
 			logger.error("Could not execute specific query to find collections matching a search text. ", e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(sqlQueryAlias);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not remove specific query {}: ", sqlQueryAlias, e.getMessage());
 			}
 		}
@@ -1213,7 +1213,7 @@ public class CollectionServiceImpl implements CollectionService {
 
 			// Mapping spec query results to DataGrid* objects
 			totalNumberOfItems = DataGridUtils.mapCountQueryResultSetToInteger(queryResultSet);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error(
 					"Could not execute specific query to get the total number of data objects matching a search text.",
 					e);
@@ -1221,7 +1221,7 @@ public class CollectionServiceImpl implements CollectionService {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(sqlAlias);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not remove specific query {}: ", sqlAlias, e.getMessage());
 			}
 		}
@@ -1311,7 +1311,7 @@ public class CollectionServiceImpl implements CollectionService {
 					}
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get permissions: ", e);
 		}
 		return collections;
@@ -1422,7 +1422,7 @@ public class CollectionServiceImpl implements CollectionService {
 			 */
 			return dataProfile;
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not retrieve collection/dataobject from path: {}", path, e);
 			throw new DataGridException(e.getMessage());
 		}
@@ -1475,7 +1475,7 @@ public class CollectionServiceImpl implements CollectionService {
 		} catch (FileNotFoundException fnf) {
 			logger.warn("no access to file");
 			return false;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("exception obtaining objStat", e);
 			throw new DataGridException(e);
 		}

@@ -15,7 +15,14 @@
 
 	<artifactId>metalnx-web</artifactId>
 	<packaging>war</packaging>
-	<dependencies>
+    <dependencies>
+
+        <!-- irods4j -->
+        <dependency>
+            <groupId>org.irods</groupId>
+            <artifactId>irods4j</artifactId>
+            <version>0.2.0-java8</version>
+        </dependency>
 	
 		<dependency>
 			<groupId>javax.servlet</groupId>
