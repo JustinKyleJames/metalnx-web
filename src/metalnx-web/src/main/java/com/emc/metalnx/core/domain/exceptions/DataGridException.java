@@ -11,7 +11,7 @@ package com.emc.metalnx.core.domain.exceptions;
  * @author Mike Conway - NIEHS
  *
  */
-public class DataGridException extends JargonException {
+public class DataGridException extends MetalnxException {
 
 	private static final long serialVersionUID = 1L;
 

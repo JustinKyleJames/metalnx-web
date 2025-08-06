@@ -47,8 +47,8 @@ public class UserDaoImpl implements UserDao {
 		} catch (DataNotFoundException e) {
 			// not found - return empty list
 			return userList;
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to find user {}: {}", username, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to find user {}: {}", username, e);
 			return userList;
 		}
 		
@@ -145,8 +145,8 @@ public class UserDaoImpl implements UserDao {
 			dataGridUser.setZone(u.getZone());
 			logger.info("findByUsernameAndZone: dataGridUser.id=[{}] dataGridUser.dataGridId=[{}]", dataGridUser.getId(), dataGridUser.getDataGridId());
 			return dataGridUser;
-		} catch (JargonException e) {
-			logger.error("JargonException encounted when attempting to find by user name and zone - username=[{}] zone=[{}]: {}", username, zone, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException encounted when attempting to find by user name and zone - username=[{}] zone=[{}]: {}", username, zone, e);
 			e.printStackTrace();
 			return null;
 		}
@@ -167,8 +167,8 @@ public class UserDaoImpl implements UserDao {
 			userAO.deleteUser(username);
 		} catch (InvalidUserException e) {
 			return false;
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to delete user {}: {}", username, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to delete user {}: {}", username, e);
 			return false;
 		}
 		
@@ -242,8 +242,8 @@ public class UserDaoImpl implements UserDao {
 				userList.add(dataGridUser);
 			}
 			return userList;
-		} catch (JargonException e) {
-			logger.error("JargonException encountered when finding users by query string {}: {}", query, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException encountered when finding users by query string {}: {}", query, e);
 			e.printStackTrace();
 			return userList;
 		}
@@ -275,8 +275,8 @@ public class UserDaoImpl implements UserDao {
 			} catch (DataNotFoundException e) {
 				// not found - return empty list
 				continue;
-			} catch (JargonException e) {
-				logger.error("JargonException when attempting to find user by id {}: {}", id, e);
+			} catch (MetalnxException e) {
+				logger.error("MetalnxException when attempting to find user by id {}: {}", id, e);
 				continue;
 			}
 			
@@ -309,8 +309,8 @@ public class UserDaoImpl implements UserDao {
 		} catch (DataNotFoundException e) {
 			// not found - return null;
 			return null;
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to find user by id {}: {}", id, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to find user by id {}: {}", id, e);
 			return null;
 		}
 		
@@ -341,16 +341,16 @@ public class UserDaoImpl implements UserDao {
 		} catch (DataNotFoundException e) {
 			// not found - return empty list
 			return false;
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to delete user by id {}: {}", id, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to delete user by id {}: {}", id, e);
 			return false;
 		}
 		try {
 			userAO.deleteUser(u.getName());
 		} catch (InvalidUserException e) {
 			return false;
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to delete user by id {}: {}", id, e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to delete user by id {}: {}", id, e);
 			return false;
 		}
 		
@@ -374,8 +374,8 @@ public class UserDaoImpl implements UserDao {
 		List<User> userList;
 		try {
 			userList = userAO.findAll();
-		} catch (JargonException e) {
-			logger.error("JargonException when attempting to find all users: {}", e);
+		} catch (MetalnxException e) {
+			logger.error("MetalnxException when attempting to find all users: {}", e);
 			e.printStackTrace();
 			return dataGridUserList;
 		}

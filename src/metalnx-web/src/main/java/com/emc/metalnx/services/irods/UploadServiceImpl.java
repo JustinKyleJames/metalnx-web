@@ -132,7 +132,7 @@ public class UploadServiceImpl implements UploadService {
 		} catch (DataGridFileAlreadyExistsException e) {
 			logger.warn("File already exists..will rethrow.");
 			throw e;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			fos.deleteDataObject(targetFile.getPath(), true);
 			logger.error("Upload stream failed from Metalnx to the data grid. {}", e.getMessage());
 			throw new DataGridException("Upload failed. Resource(s) might be full.");
@@ -159,13 +159,13 @@ public class UploadServiceImpl implements UploadService {
 	 * @param destResc
 	 * @param targetFile
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws IOException
 	 * @throws DataGridRuleException
 	 * @throws FileNotFoundException
 	 */
 	private void processUploadRules(String targetPath, String destResc, IRODSFile targetFile)
-			throws DataGridConnectionRefusedException, JargonException, IOException, DataGridRuleException,
+			throws DataGridConnectionRefusedException, MetalnxException, IOException, DataGridRuleException,
 			FileNotFoundException {
 		// Getting list of resources for upload
 		HashMap<String, String> resourceMap = null;

@@ -301,7 +301,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("duplicateUser",
 					ExceptionEnum.USERS_DATA_DUPLICATE_EXCEPTION.getCode());
 			logger.error("Could not create user: ", e);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			redirectAttributes.addFlashAttribute("error", ExceptionEnum.JARGON_EXCEPTION.getCode());
 			logger.error("Could not create user: ", e);
 		}

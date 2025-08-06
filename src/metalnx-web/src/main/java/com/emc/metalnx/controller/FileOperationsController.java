@@ -88,7 +88,7 @@ public class FileOperationsController {
 	@RequestMapping(value = "/move", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public String move(final Model model, @RequestParam("targetPath") final String targetPath,
-			@RequestParam("paths[]") final String[] paths) throws DataGridException, JargonException {
+			@RequestParam("paths[]") final String[] paths) throws DataGridException, MetalnxException {
 
 		List<String> failedMoves = new ArrayList<>();
 		String fileMoved = "";
@@ -119,7 +119,7 @@ public class FileOperationsController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public String copy(final Model model, @RequestParam("targetPath") final String targetPath,
 			@RequestParam("copyWithMetadata") final boolean copyWithMetadata,
-			@RequestParam("paths[]") final String[] paths) throws DataGridException, JargonException {
+			@RequestParam("paths[]") final String[] paths) throws DataGridException, MetalnxException {
 
 		logger.info("copy()");
 		logger.info("model:{}", model);
@@ -278,7 +278,7 @@ public class FileOperationsController {
 			prepareFileStatusJSONobj.put("downloadLimitInMB", configService.getDownloadLimit());
 			prepareFileStatusJSONobj.put("message", "File bundle size too large"); // TODO: internationalize message
 
-		} catch (IOException | JargonException e) {
+		} catch (IOException | MetalnxException e) {
 			boolean isFileSizeError = false;
 			Throwable cause = e.getCause();
 			while (null != cause) {
@@ -309,7 +309,7 @@ public class FileOperationsController {
 
 	@RequestMapping(value = "/download/", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public void download(final Model model, final HttpServletResponse response)
-			throws DataGridConnectionRefusedException, JargonException, IOException {
+			throws DataGridConnectionRefusedException, MetalnxException, IOException {
 
 		if (filePathToDownload != null) {
 			logger.info("Coll/Obj to be downloaded at: {}", filePathToDownload);
@@ -329,7 +329,7 @@ public class FileOperationsController {
 	@RequestMapping(value = "/delete/", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	public String deleteCollectionAndDataObject(final Model model, @RequestParam("paths[]") final String[] paths)
-			throws DataGridException, JargonException {
+			throws DataGridException, MetalnxException {
 		boolean forceRemove;
 		List<String> failedDeletions = new ArrayList<>();
 		String fileDeleted = null;
@@ -383,7 +383,7 @@ public class FileOperationsController {
 	}
 
 	@RequestMapping(value = "emptyTrash/", method = RequestMethod.POST)
-	public ResponseEntity<String> emptyTrash() throws DataGridConnectionRefusedException, JargonException {
+	public ResponseEntity<String> emptyTrash() throws DataGridConnectionRefusedException, MetalnxException {
 		String trashForCurrentPath = collectionService.getTrashForPath(browseController.getCurrentPath());
 		DataGridUser loggedUser = loggedUserUtils.getLoggedDataGridUser();
 		if (fileOperationService.emptyTrash(loggedUser, trashForCurrentPath)) {
@@ -399,11 +399,11 @@ public class FileOperationsController {
 	 * @param model MVC model
 	 * @return collectionForm with fields set
 	 * @throws DataGridException if item cannot be modified
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
 	@RequestMapping(value = "modify/", method = RequestMethod.GET)
 	public String showModifyForm(final Model model, @RequestParam("path") final String path)
-			throws DataGridException, JargonException {
+			throws DataGridException, MetalnxException {
 		String currentPath = browseController.getCurrentPath();
 		String parentPath = browseController.getParentPath();
 

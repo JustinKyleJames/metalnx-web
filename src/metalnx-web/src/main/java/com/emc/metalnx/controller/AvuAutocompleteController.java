@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.apache.logging.log4j.Logger;
+import org.irods.irods4j.low_level.api.MetalnxException;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -48,7 +49,7 @@ public class AvuAutocompleteController {
 	private static final Logger logger = LogManager.getLogger(AvuAutocompleteController.class);
 
 	@RequestMapping(value = "/getMetadataAttrs", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody String getMetadataAttr(final HttpServletResponse response) throws JargonException {
+	public @ResponseBody String getMetadataAttr(final HttpServletResponse response) throws MetalnxException {
 
 		logger.info("controller: /getMetadataAttrs ");
 		
@@ -59,7 +60,7 @@ public class AvuAutocompleteController {
 	}
 	
 	@RequestMapping(value = "/getMetadataValues", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody String getMetadataValues(final HttpServletResponse response, @RequestParam("attributeName") final String attributeName) throws JargonException {
+	public @ResponseBody String getMetadataValues(final HttpServletResponse response, @RequestParam("attributeName") final String attributeName) throws MetalnxException {
 
 		logger.info("controller: /getMetadataValues for :: " + attributeName);
 		
@@ -70,7 +71,7 @@ public class AvuAutocompleteController {
 	}
 	
 	@RequestMapping(value = "/getMetadataAttrMock", method = RequestMethod.GET , produces="application/json")
-	public @ResponseBody JSONArray getMetadataAttrMock(final Model model, final HttpServletResponse response) throws JargonException {
+	public @ResponseBody JSONArray getMetadataAttrMock(final Model model, final HttpServletResponse response) throws MetalnxException {
 		 JSONParser parser = new JSONParser();
 		 Object obj;
 		 JSONArray attributes = null;

@@ -38,7 +38,7 @@ public class UserTokenDetails {
 	public IRODSFileSystem getIrodsFileSystem() {
 		try {
 			return IRODSFileSystem.instance();
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get instance of IRODSFileSystem: ", e);
 		}
 		return null;
@@ -50,7 +50,7 @@ public class UserTokenDetails {
 	public IRODSAccessObjectFactory getIrodsAccessObjectFactory() {
 		try {
 			return this.getIrodsFileSystem().getIRODSAccessObjectFactory();
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get Access Object Factory from IRODS: ", e);
 		}
 		return null;

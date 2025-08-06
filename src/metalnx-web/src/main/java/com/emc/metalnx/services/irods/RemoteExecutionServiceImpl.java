@@ -26,7 +26,7 @@ public class RemoteExecutionServiceImpl implements RemoteExecutionService {
 	//private static final Logger logger = LogManager.getLogger(RemoteExecutionServiceImpl.class);
 	
 	@Override
-	public String execute(String command) throws JargonException, IOException, 
+	public String execute(String command) throws MetalnxException, IOException, 
 		DataGridConnectionRefusedException {
 		
 			

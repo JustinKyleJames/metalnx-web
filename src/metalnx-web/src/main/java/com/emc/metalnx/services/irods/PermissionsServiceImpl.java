@@ -88,7 +88,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 
 	@Override
 	public List<DataGridFilePermission> getPathPermissionDetails(String path, String username)
-			throws JargonException, DataGridConnectionRefusedException {
+			throws MetalnxException, DataGridConnectionRefusedException {
 
 		logger.debug("Getting permissions details for object {}", path);
 		List<UserFilePermission> filePermissionList = this.getFilePermissionListForObject(path, username);
@@ -97,7 +97,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 
 	@Override
 	public List<DataGridFilePermission> getPathPermissionDetails(String path)
-			throws JargonException, DataGridConnectionRefusedException {
+			throws MetalnxException, DataGridConnectionRefusedException {
 
 		logger.info("Getting permissions details for object {}", path);
 		List<UserFilePermission> filePermissionList = this.getFilePermissionListForObject(path);
@@ -210,7 +210,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 					operationResult = chmodDataObject(permType, path, uName, inAdminMode);
 				}
 				logger.info("Permission {} for user {} on path {} set successfully", permType, uName, paths);
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not set {} permission on path {} for user/group {}", permType, path, uName, e);
 				operationResult = false;
 			}
@@ -236,7 +236,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 				collectionAO.setAccessPermissionAsAdmin(currentZone, path, uName, recursive, filePermission);
 			}
 			isPermissionSet = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set {} permission on path {} for user/group {}", permType, path, uName, e);
 		}
 
@@ -262,7 +262,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 			}
 
 			isPermissionSet = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set {} permission on path {} for user/group {}", permType, path, uName, e);
 		}
 
@@ -318,7 +318,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 			logger.info("obtaining acls list for object:{}", irodsAbsolutePath);
 			acl = getFilePermissionListForObject(irodsAbsolutePath);
 			logger.info("acl:{}", acl);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("jargon exception getting permission listing", e);
 			throw new DataGridException("error getting permission listing", e);
 		}
@@ -373,11 +373,11 @@ public class PermissionsServiceImpl implements PermissionsService {
 	 * @param path the path to the object
 	 * @return list of {@link UserFilePermission}
 	 * @throws FileNotFoundException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridConnectionRefusedException
 	 */
 	private List<UserFilePermission> getFilePermissionListForObject(String path)
-			throws JargonException, DataGridConnectionRefusedException {
+			throws MetalnxException, DataGridConnectionRefusedException {
 
 		return this.getFilePermissionListForObject(path, "");
 	}
@@ -392,11 +392,11 @@ public class PermissionsServiceImpl implements PermissionsService {
 	 *                 provided
 	 * @return list of {@link UserFilePermission}
 	 * @throws FileNotFoundException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridConnectionRefusedException
 	 */
 	private List<UserFilePermission> getFilePermissionListForObject(String path, String username)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 		Object obj = irodsServices.getCollectionAndDataObjectListAndSearchAO().getFullObjectForType(path);
 
 		List<UserFilePermission> filePermissionList = new ArrayList<UserFilePermission>();

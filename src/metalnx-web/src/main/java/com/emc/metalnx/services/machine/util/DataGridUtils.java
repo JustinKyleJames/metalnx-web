@@ -25,10 +25,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of collections
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<DataGridCollectionAndDataObject> mapMetadataResultSetToDataGridCollections(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
 
         List<DataGridCollectionAndDataObject> colls = new ArrayList<>();
 
@@ -65,10 +65,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of data objects
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<DataGridCollectionAndDataObject> mapMetadataResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
 
         List<DataGridCollectionAndDataObject> objs = new ArrayList<DataGridCollectionAndDataObject>();
 
@@ -110,10 +110,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of data objects
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<DataGridCollectionAndDataObject> mapPropertiesResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
 
         List<DataGridCollectionAndDataObject> dataGridCollectionAndDataObjects = new ArrayList<DataGridCollectionAndDataObject>();
 
@@ -174,9 +174,9 @@ public class DataGridUtils {
      * @param queryResultSet
      *            result set returned from a query
      * @return list of data grid objects
-     * @throws JargonException
+     * @throws MetalnxException
      */
-    public static int mapCountQueryResultSetToInteger(SpecificQueryResultSet queryResultSet) throws JargonException {
+    public static int mapCountQueryResultSetToInteger(SpecificQueryResultSet queryResultSet) throws MetalnxException {
         int totalNumberOfItems = 0;
 
         if (queryResultSet != null && !queryResultSet.getResults().isEmpty()) {
@@ -195,10 +195,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            result set returned from a query
      * @return list of data grid objects
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<CollectionAndDataObjectListingEntry> mapCollectionQueryResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();
@@ -226,10 +226,10 @@ public class DataGridUtils {
      *
      * @param queryResultSet
      * @return
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<CollectionAndDataObjectListingEntry> mapQueryResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();
@@ -256,10 +256,10 @@ public class DataGridUtils {
      *
      * @param queryResultSet
      * @return
-     * @throws JargonException
+     * @throws MetalnxException
      */
     public static List<CollectionAndDataObjectListingEntry> mapQueryResultSetToDataGridObjectsForSearch(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws MetalnxException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();

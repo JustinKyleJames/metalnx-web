@@ -101,7 +101,7 @@ public class FilePropertiesController {
                          @RequestParam("draw") final int draw,
                          @RequestParam("start") final int start,
                          @RequestParam("length") final int length)
-        throws DataGridConnectionRefusedException, JargonException
+        throws DataGridConnectionRefusedException, MetalnxException
     {
         if (jsonFilePropertySearch != null) {
             this.jsonFilePropertySearch = jsonFilePropertySearch;
@@ -142,28 +142,28 @@ public class FilePropertiesController {
             logger.error("data grid error in search", e);
             throw e;
         }
-        catch (JargonException e) {
+        catch (MetalnxException e) {
             logger.error("Could not search by metadata: ", e);
             throw e;
         }
         catch (JsonProcessingException e) {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new MetalnxException(e);
         }
         catch (GenQueryBuilderException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new MetalnxException(e);
         }
         catch (JargonQueryException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new MetalnxException(e);
         }
         catch (ParseException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new MetalnxException(e);
         }
 
         try {
@@ -171,7 +171,7 @@ public class FilePropertiesController {
         }
         catch (JsonProcessingException e) {
             logger.error("Could not parse hashmap in file properties search to json: {}", e.getMessage());
-            throw new JargonException(e);
+            throw new MetalnxException(e);
         }
 
         return jsonString;
@@ -253,7 +253,7 @@ public class FilePropertiesController {
             }
             while (!searchOutput.objects.isEmpty());
         }
-        catch (GenQueryBuilderException | JargonException | JargonQueryException | ParseException e) {
+        catch (GenQueryBuilderException | MetalnxException | JargonQueryException | ParseException e) {
             logger.error("CSV export failed.", e);
             throw e;
         }

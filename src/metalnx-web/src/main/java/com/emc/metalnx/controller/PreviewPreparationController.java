@@ -45,7 +45,7 @@ public class PreviewPreparationController {
 	 * @param model
 	 * @return the collection management template
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridException
 	 */
 
@@ -72,7 +72,7 @@ public class PreviewPreparationController {
 				redirectAttributes.addAttribute("mimeType", mimeType);
 				
 				return "redirect:/preview/templateByMimeType";
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not retrieve data from path: {}", path, e);
 				throw new DataGridException(e.getMessage());
 			} catch (Exception e) {
@@ -106,7 +106,7 @@ public class PreviewPreparationController {
 	 * irodsAccount);
 	 * 
 	 * try { mimeType = dataTypeResolutionService.quickMimeType(path);
-	 * logger.info("mimetype :: " +mimeType); } catch (JargonException e) {
+	 * logger.info("mimetype :: " +mimeType); } catch (MetalnxException e) {
 	 * logger.error("Could not retrieve data from path: {}", path, e); throw new
 	 * DataGridException(e.getMessage()); }
 	 * 
@@ -146,7 +146,7 @@ public class PreviewPreparationController {
 	 * irodsAccount);
 	 * 
 	 * try { mimeType = dataTypeResolutionService.quickMimeType(path);
-	 * logger.info("mimetype :: " +mimeType); } catch (JargonException e) {
+	 * logger.info("mimetype :: " +mimeType); } catch (MetalnxException e) {
 	 * logger.error("Could not retrieve data from path: {}", path, e); throw new
 	 * DataGridException(e.getMessage()); }
 	 * 

@@ -34,7 +34,7 @@ public interface PermissionsService {
 	 * @return list of {@link DataGridFilePermission} instances
 	 */
 	List<DataGridFilePermission> getPathPermissionDetails(String path, String username)
-			throws JargonException, DataGridConnectionRefusedException;
+			throws MetalnxException, DataGridConnectionRefusedException;
 
 	/**
 	 * Retrieves all the permissions information about a given object that can be a
@@ -45,7 +45,7 @@ public interface PermissionsService {
 	 * @return list of {@link DataGridFilePermission} instances
 	 */
 	List<DataGridFilePermission> getPathPermissionDetails(String path)
-			throws JargonException, DataGridConnectionRefusedException;
+			throws MetalnxException, DataGridConnectionRefusedException;
 
 	/**
 	 * Gets all the groups with some kind of permission on the permissions list

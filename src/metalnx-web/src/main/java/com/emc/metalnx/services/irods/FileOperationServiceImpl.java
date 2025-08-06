@@ -60,7 +60,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 				dstPath = String.format("%s/%s", dstPath, objName);
 				metadataService.copyMetadata(sourcePath, dstPath);
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not copy item from " + sourcePath + " to " + dstPath + ": ", e.getMessage());
 		}
 
@@ -117,7 +117,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 
 			itemDeleted = true;
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not delete item " + path + ": ", e);
 		}
 
@@ -138,7 +138,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 				irodsFileSystemAO.directoryDeleteNoForce(collectionToBeRemoved);
 			}
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not delete collection: ", e.getMessage());
 		}
 
@@ -162,7 +162,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 			}
 
 			dataObjDeleted = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not delete data object: {}", e.getMessage());
 		}
 
@@ -181,7 +181,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 			deleteSuccess = true;
 		} catch (DataNotFoundException e) {
 			logger.error("Data object could not be found: " + e.toString());
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Delete replica operation failed: " + e.toString());
 		}
 		return deleteSuccess;
@@ -189,7 +189,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 
 	@Override
 	public boolean download(String path, HttpServletResponse response, boolean removeTempCollection)
-			throws DataGridException, JargonException {
+			throws DataGridException, MetalnxException {
 
 		logger.debug("Downloading file path: {}", path);
 
@@ -219,7 +219,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 
 	@Override
 	public boolean emptyTrash(DataGridUser user, String collectionPath)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 
 		logger.info("emptyTrash()");
 		if (user == null || collectionPath == null || collectionPath.isEmpty()) {
@@ -245,7 +245,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 			trashOperationsAO.emptyTrashAtPathForLoggedInUser(collectionPath, irodsServices.getCurrentUserZone(), 0);
 			itemsDeleted = true;
 			/* } */
-		} catch (JargonException je) {
+		} catch (MetalnxException je) {
 			logger.error("jargon exception emptying trash", je);
 			throw je;
 		}
@@ -272,7 +272,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 			dataTransferOperations.move(source, target);
 
 			return true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not move item from " + sourcePath + " to " + targetPath + ": ", e.getMessage());
 		}
 
@@ -286,7 +286,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 		try {
 			DataObjectAO dataObjectAO = irodsServices.getDataObjectAO();
 			dataObjectAO.replicateIrodsDataObject(path, targetResource);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.info("File replication failed ({}) into the resource {} [admin mode: {}]", path, targetResource,
 					inAdminMode);
 			throw new DataGridException("File replication failed.");
@@ -308,7 +308,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 		try {
 			file = irodsFileFactory.instanceIRODSFile(path, filename);
 			dataObjectAO.computeMD5ChecksumOnDataObject(file);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not calculate checksum: {}", e.getMessage());
 			throw new DataGridChecksumException("Could not calculate checksum.");
 		}
@@ -364,7 +364,7 @@ public class FileOperationServiceImpl implements FileOperationService {
 		} catch (IOException e) {
 			logger.error("Could not put the file in the Http response ", e);
 			isCopySuccessFul = false;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not copy file in the Http response: ", e.getMessage());
 			isCopySuccessFul = false;
 		} catch (NullPointerException e) {

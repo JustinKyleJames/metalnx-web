@@ -61,7 +61,7 @@ public class CollectionInfoController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(final Model model, HttpServletRequest request, @RequestParam("path") final String path)
-			throws DataGridException, JargonException {
+			throws DataGridException, MetalnxException {
 
 		logger.info("index()");
 		if (path == null || path.isEmpty()) {

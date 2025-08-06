@@ -35,7 +35,7 @@ public class GalleryListServiceImpl extends AbstractJargonService implements Gal
 	}
 
 	@Override
-	public ThumbnailList list(String irodsFileAbsolutePath, int offset, int length) throws JargonException {
+	public ThumbnailList list(String irodsFileAbsolutePath, int offset, int length) throws MetalnxException {
 		log.info("list()");
 
 		if (irodsFileAbsolutePath == null || irodsFileAbsolutePath.isEmpty()) {
@@ -105,7 +105,7 @@ public class GalleryListServiceImpl extends AbstractJargonService implements Gal
 			return thumbnailListEntry;
 		} catch (JsonProcessingException e) {
 			log.error("error parsing thumbnail response", e);
-			throw new JargonException("Invalid listing response", e);
+			throw new MetalnxException("Invalid listing response", e);
 		}
 
 	}

@@ -119,10 +119,10 @@ public interface FileOperationService {
 	 *             if an error happen in the data grid
 	 * @throws IOException
 	 *             cannot create the tar ball file
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
 	boolean download(String path, HttpServletResponse httpResponse, boolean removeTempCollection)
-			throws DataGridException, IOException, JargonException;
+			throws DataGridException, IOException, MetalnxException;
 
 	/**
 	 * Removes all items existing in the trash folder of a given user.
@@ -134,10 +134,10 @@ public interface FileOperationService {
 	 * @return True, if all trash items were removed. False, otherwise.
 	 * @throws DataGridConnectionRefusedException
 	 *             if Metalnx cannot connect to the data grid
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
 	boolean emptyTrash(DataGridUser user, String currentPath)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, MetalnxException;
 
 	/**
 	 * Move a file or collection between two locations in the data grid.

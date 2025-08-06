@@ -46,7 +46,7 @@ public class TicketServiceImpl implements TicketService {
 
         try {
             tickets = tas.listAllTickets(OFFSET);
-        } catch (JargonException e) {
+        } catch (MetalnxException e) {
             logger.info("Could not list all tickets in the grid: {}.", e.getMessage());
             tickets = new ArrayList<>();
         }
@@ -71,7 +71,7 @@ public class TicketServiceImpl implements TicketService {
 
         try {
             ticketDeleted = tas.deleteTicket(ticketString);
-        } catch (JargonException e) {
+        } catch (MetalnxException e) {
             logger.info("Could not delete ticket {}: {}.", ticketString, e.getMessage());
         }
 
@@ -128,7 +128,7 @@ public class TicketServiceImpl implements TicketService {
             dgTicket.setTicketString(ticketString); // set ticket string created by the grid
 
             modify(dgTicket);
-        } catch (JargonException e) {
+        } catch (MetalnxException e) {
             logger.error("Could not create a ticket: {}", e);
             throw new DataGridTicketException(e.getMessage());
         }
@@ -154,7 +154,7 @@ public class TicketServiceImpl implements TicketService {
             dgTicket.setGroups(tas.listAllGroupRestrictionsForSpecifiedTicket(ticketId, OFFSET));
         } catch (DataNotFoundException e) {
             throw new DataGridTicketNotFoundException("Ticket does not exist");
-        } catch (JargonException e) {
+        } catch (MetalnxException e) {
             logger.error("Could not find ticket with string: {}", ticketId);
         }
 
@@ -190,7 +190,7 @@ public class TicketServiceImpl implements TicketService {
             dgTicket.setHosts(tas.listAllHostRestrictionsForSpecifiedTicket(ticketString, OFFSET));
             dgTicket.setUsers(tas.listAllUserRestrictionsForSpecifiedTicket(ticketString, OFFSET));
             dgTicket.setGroups(tas.listAllGroupRestrictionsForSpecifiedTicket(ticketString, OFFSET));
-        } catch (JargonException e) {
+        } catch (MetalnxException e) {
             logger.error("Could not modify ticket");
             throw new DataGridTicketException(e.getMessage());
         }
@@ -198,7 +198,7 @@ public class TicketServiceImpl implements TicketService {
         return dgTicket;
     }
 
-    private void updateHostRestrictions(DataGridTicket t) throws JargonException,
+    private void updateHostRestrictions(DataGridTicket t) throws MetalnxException,
             DataGridConnectionRefusedException {
         logger.info("Update host restrictions for ticket {}", t.getTicketString());
         String ticketString = t.getTicketString();
@@ -216,7 +216,7 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
-    private void updateUserRestrictions(DataGridTicket t) throws JargonException,
+    private void updateUserRestrictions(DataGridTicket t) throws MetalnxException,
             DataGridConnectionRefusedException {
         logger.info("Update user restrictions for ticket {}", t.getTicketString());
         String ticketString = t.getTicketString();
@@ -234,7 +234,7 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
-    private void updateGroupRestrictions(DataGridTicket t) throws JargonException,
+    private void updateGroupRestrictions(DataGridTicket t) throws MetalnxException,
             DataGridConnectionRefusedException {
         logger.info("Update group restrictions for ticket {}", t.getTicketString());
         String ticketString = t.getTicketString();

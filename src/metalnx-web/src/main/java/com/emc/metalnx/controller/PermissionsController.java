@@ -111,7 +111,7 @@ public class PermissionsController {
 	 * @param path
 	 * @return
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws FileNotFoundException
 	 */
 	@RequestMapping(value = "/getPermissionDetails/", method = RequestMethod.POST)
@@ -208,7 +208,7 @@ public class PermissionsController {
 	@ResponseBody
 	public String changePermisionForGroup(@RequestParam("permissionData") final String permissionData,
 			@RequestParam("recursive") final boolean recursive)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 		return changePermissionForUserOrGroupOnPath(permissionData, recursive);
 	}
 
@@ -216,7 +216,7 @@ public class PermissionsController {
 	@ResponseBody
 	public String changePermisionForUser(@RequestParam("permissionData") final String permissionData,
 			@RequestParam("recursive") final boolean recursive)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 		return changePermissionForUserOrGroupOnPath(permissionData, recursive);
 	}
 
@@ -318,7 +318,7 @@ public class PermissionsController {
 	 * @param permissionData
 	 * @return
 	 * @throws FileNotFoundException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridConnectionRefusedException
 	 */
 	private String changePermissionForUserOrGroupOnPath(final String permissionData, final boolean recursive)

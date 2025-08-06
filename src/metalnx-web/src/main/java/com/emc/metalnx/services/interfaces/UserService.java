@@ -35,7 +35,7 @@ public interface UserService {
 	 * @throws DataGridConnectionRefusedException
 	 */
 	public boolean createUser(DataGridUser user, String password)
-			throws JargonException, DataGridConnectionRefusedException;
+			throws MetalnxException, DataGridConnectionRefusedException;
 
 	/**
 	 * Delete user by username
@@ -177,10 +177,10 @@ public interface UserService {
 	 *                  lose access
 	 * @param recursive flag that says whether or not the permission is applied
 	 *                  recursively
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridConnectionRefusedException
 	 */
 	void removeAccessPermissionForUserAsAdmin(DataGridUser user, Map<String, Boolean> paths)
-			throws JargonException, DataGridConnectionRefusedException;
+			throws MetalnxException, DataGridConnectionRefusedException;
 
 }

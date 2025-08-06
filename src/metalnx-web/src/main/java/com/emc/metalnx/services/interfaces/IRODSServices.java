@@ -196,9 +196,9 @@ public interface IRODSServices {
 	 * 
 	 * @return {@link TrashOperationsAO}
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
-	TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, JargonException;
+	TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, MetalnxException;
 
 	/**
 	 * 
@@ -211,19 +211,19 @@ public interface IRODSServices {
 	 * Return an instance of the autocomplete service from Jargon
 	 * 
 	 * @return {@link AvuAutocompleteService}
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
-	AvuAutocompleteService getAvuAutocompleteService() throws JargonException;
+	AvuAutocompleteService getAvuAutocompleteService() throws MetalnxException;
 
-	ShoppingCartService getShoppingCartService() throws JargonException;
+	ShoppingCartService getShoppingCartService() throws MetalnxException;
 
 	/**
 	 * Return an instance of the JargonZipService that handles bundles
 	 * 
 	 * @return {@link JargonZipService}
-	 * @throws JargonException {@link JargonException}
+	 * @throws MetalnxException {@link MetalnxException}
 	 */
-	JargonZipService getJargonZipService() throws JargonException;
+	JargonZipService getJargonZipService() throws MetalnxException;
 
 	/**
 	 * Handy method to determine if the logged in user is acting in the role of
@@ -237,9 +237,9 @@ public interface IRODSServices {
 	 * Get a service for gallery views and browse
 	 * 
 	 * @return {@link GalleryListService}
-	 * @throws JargonException {@link JargonException}
+	 * @throws MetalnxException {@link MetalnxException}
 	 */
-	GalleryListService getGalleryListService() throws JargonException;
+	GalleryListService getGalleryListService() throws MetalnxException;
 
 	void setIrodsAccessObjectFactory(IRODSAccessObjectFactory irodsAccessObjectFactory);
 
