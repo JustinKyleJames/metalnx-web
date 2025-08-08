@@ -18,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.emc.metalnx.controller.utils.LoggedUserUtils;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 

@@ -43,6 +43,7 @@ import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.entity.DataGridZone;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.modelattribute.enums.ExceptionEnum;
 import com.emc.metalnx.modelattribute.enums.URLMap;
 import com.emc.metalnx.modelattribute.user.UserForm;

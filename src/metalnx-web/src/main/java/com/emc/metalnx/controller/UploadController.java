@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.irods.jargon.core.exception.MetalnxException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridReplicateException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.UploadService;
 
 @Controller

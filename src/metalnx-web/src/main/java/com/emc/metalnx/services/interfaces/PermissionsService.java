@@ -11,6 +11,7 @@ import com.emc.metalnx.core.domain.entity.DataGridUserPermission;
 import com.emc.metalnx.core.domain.entity.enums.DataGridPermType;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
 public interface PermissionsService {
 

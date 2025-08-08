@@ -5,6 +5,7 @@ package com.emc.metalnx.services.interfaces;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
 /**
  * Service that allows the user to get an instance of each iRODS AO by session.

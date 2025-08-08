@@ -1,5 +1,7 @@
 package com.emc.metalnx.services.interfaces;
 
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
+
 /**
  * Exception in processing metadata templates
  * 

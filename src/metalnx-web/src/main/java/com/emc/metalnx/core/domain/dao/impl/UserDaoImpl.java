@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.emc.metalnx.core.domain.dao.UserDao;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 
 @SuppressWarnings("unchecked")
@@ -98,14 +99,9 @@ public class UserDaoImpl implements UserDao {
 			irodsQuery = IRODSGenQuery.instance(userQueryString, DEFAULT_REC_COUNT);
 
 
-			IRODSQueryResultSetInterface resultSet;
-			try {
-				resultSet = irodsGenQueryExecutorImpl.executeIRODSQueryAndCloseResultInZone(irodsQuery, 0, zone);
-			} catch (JargonQueryException e) {
-				logger.error("query exception for user query:{}", userQueryString, e);
-				return null;
-			} 
-
+			
+			resultSet = irodsGenQueryExecutorImpl.executeIRODSQueryAndCloseResultInZone(irodsQuery, 0, zone);
+			
 			if (resultSet.getResults().size() == 0) {
 				StringBuilder messageBuilder = new StringBuilder();
 				messageBuilder.append("user not found for username:");
@@ -213,12 +209,8 @@ public class UserDaoImpl implements UserDao {
 			irodsQuery = IRODSGenQuery.instance(userQueryString, DEFAULT_REC_COUNT);
 
 			IRODSQueryResultSetInterface resultSet;
-			try {
-				resultSet = irodsGenQueryExecutorImpl.executeIRODSQueryAndCloseResult(irodsQuery, 0);
-			} catch (JargonQueryException e) {
-				logger.error("query exception for user query:{}", userQueryString, e);
-				return userList;
-			} 
+			resultSet = irodsGenQueryExecutorImpl.executeIRODSQueryAndCloseResult(irodsQuery, 0);
+			
 
 			if (resultSet.getResults().size() == 0) {
 				// nothing found - just return empty userList

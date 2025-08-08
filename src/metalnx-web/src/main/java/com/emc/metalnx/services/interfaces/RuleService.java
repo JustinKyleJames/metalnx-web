@@ -9,6 +9,7 @@ import java.util.Map;
 import com.emc.metalnx.core.domain.entity.DataGridResource;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
 public interface RuleService {
 

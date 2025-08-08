@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class GenQuerySearchUtil
@@ -89,7 +90,7 @@ public class GenQuerySearchUtil
     }
     
     public static SearchOutput search(SearchInput _input)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         SearchInput searchInput = new SearchInput(_input);
         SearchOutput output = null;
@@ -139,31 +140,31 @@ public class GenQuerySearchUtil
     }
 
     public static SearchOutput findDataObjects(IRODSGenQueryExecutor executor, SearchInput _input)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         return findObjectsImpl(executor, _input, false /* isCollection */);
     }
 
     public static SearchOutput findCollections(IRODSGenQueryExecutor executor, SearchInput _input)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         return findObjectsImpl(executor, _input, true /* isCollection */);
     }
 
     public static int countDataObjects(IRODSGenQueryExecutor executor, SearchInput _input)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         return countObjectsImpl(executor, _input, RodsGenQueryEnum.COL_DATA_NAME, false /* isCollection */);
     }
 
     public static int countCollections(IRODSGenQueryExecutor executor, SearchInput _input)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         return countObjectsImpl(executor, _input, RodsGenQueryEnum.COL_COLL_NAME, true /* isCollection */);
     }
 
     private static SearchOutput findObjectsImpl(IRODSGenQueryExecutor executor, SearchInput _input, boolean _isCollection)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         final boolean distinct = true;
         final boolean computeTotalRowCount = true;
@@ -212,7 +213,7 @@ public class GenQuerySearchUtil
     }
 
     private static int countObjectsImpl(IRODSGenQueryExecutor executor, SearchInput _input, RodsGenQueryEnum _columnToCount, boolean _isCollection)
-        throws GenQueryBuilderException, MetalnxException, JargonQueryException, ParseException
+        throws MetalnxException, ParseException
     {
         final boolean distinct = true;
         final boolean computeTotalRowCount = true;

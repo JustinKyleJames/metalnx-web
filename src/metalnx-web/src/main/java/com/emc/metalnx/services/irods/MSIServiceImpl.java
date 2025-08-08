@@ -20,6 +20,7 @@ import com.emc.metalnx.core.domain.entity.DataGridResource;
 import com.emc.metalnx.core.domain.entity.DataGridServer;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.core.domain.utils.DataGridCoreUtils;
 import com.emc.metalnx.services.interfaces.ConfigService;
 import com.emc.metalnx.services.interfaces.IRODSServices;

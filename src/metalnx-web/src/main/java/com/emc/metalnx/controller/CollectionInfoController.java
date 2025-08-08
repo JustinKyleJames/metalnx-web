@@ -20,6 +20,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.emc.metalnx.core.domain.entity.IconObject;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.FileNotFoundException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.modelattribute.breadcrumb.DataGridBreadcrumb;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.ConfigService;
@@ -43,16 +45,10 @@ public class CollectionInfoController {
 	PermissionsService permissionsService;
 
 	@Autowired
-	DataProfilerFactory dataProfilerFactory;
-
-	@Autowired
 	IRODSServices irodsServices;
 
 	@Autowired
 	IconService iconService;
-
-	@Autowired
-	DataProfilerSettings dataProfilerSettings;
 
 	@Autowired
 	ConfigService configService;
@@ -158,28 +154,12 @@ public class CollectionInfoController {
 
 	}
 
-	public DataProfilerFactory getDataProfilerFactory() {
-		return dataProfilerFactory;
-	}
-
-	public void setDataProfilerFactory(DataProfilerFactory dataProfilerFactory) {
-		this.dataProfilerFactory = dataProfilerFactory;
-	}
-
 	public IRODSServices getIrodsServices() {
 		return irodsServices;
 	}
 
 	public void setIrodsServices(IRODSServices irodsServices) {
 		this.irodsServices = irodsServices;
-	}
-
-	public DataProfilerSettings getDataProfilerSettings() {
-		return dataProfilerSettings;
-	}
-
-	public void setDataProfilerSettings(DataProfilerSettings dataProfilerSettings) {
-		this.dataProfilerSettings = dataProfilerSettings;
 	}
 
 	public ConfigService getConfigService() {

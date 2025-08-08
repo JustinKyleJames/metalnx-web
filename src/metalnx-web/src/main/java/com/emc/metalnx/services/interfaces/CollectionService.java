@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.irods.irods4j.low_level.api.MetalnxException;
-
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.entity.DataGridResource;
@@ -20,6 +18,7 @@ import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridQueryException;
 import com.emc.metalnx.core.domain.exceptions.FileNotFoundException;
 import com.emc.metalnx.core.domain.exceptions.FileSizeTooLargeException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
 public interface CollectionService {
 

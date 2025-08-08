@@ -8,6 +8,7 @@ package com.emc.metalnx.services.irods;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketDownloadException;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketInvalidUserException;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketUploadException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.auth.UserTokenDetails;
 import com.emc.metalnx.services.interfaces.ConfigService;
 import com.emc.metalnx.services.interfaces.TicketClientService;
