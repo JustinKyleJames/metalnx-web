@@ -31,7 +31,9 @@ import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException
 import com.emc.metalnx.core.domain.exceptions.DataGridDataNotFoundException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridQueryException;
+import com.emc.metalnx.core.domain.exceptions.FileNotFoundException;
 import com.emc.metalnx.core.domain.exceptions.FileSizeTooLargeException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.AdminServices;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.ConfigService;
@@ -201,9 +203,6 @@ public class CollectionServiceImpl implements CollectionService {
 		} catch (DataNotFoundException e) {
 			logger.error("Could not find items under path: {}", e.getMessage());
 			throw new DataGridDataNotFoundException(e.getMessage());
-		} catch (JargonQueryException e) {
-			logger.error("Could not query catalog for items under path: {}", e.getMessage());
-			throw new DataGridQueryException(e.getMessage());
 		}
 		return dataGridCollectionAndDataObjects;
 	}
@@ -1002,7 +1001,7 @@ public class CollectionServiceImpl implements CollectionService {
 			// Mapping spec query results to DataGrid* objects
 			itemsListingEntries = DataGridUtils.mapCollectionQueryResultSetToDataGridObjects(queryResultSet);
 			dataGridItemsList = DataGridUtils.mapListingEntryToDataGridCollectionAndDataObject(itemsListingEntries);
-		} catch (MetalnxException | JargonQueryException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not execute specific query to find collections matching a search text. ", e);
 		} finally {
 			try {
@@ -1031,7 +1030,7 @@ public class CollectionServiceImpl implements CollectionService {
 	 */
 	private List<DataGridCollectionAndDataObject> listDataObjectsUnderPathThatMatchSearchText(String parentPath,
 			String searchText, int offset, int limit, int orderColumn, String orderDir)
-			throws DataNotFoundException, JargonQueryException, DataGridConnectionRefusedException {
+			throws DataNotFoundException, DataGridConnectionRefusedException {
 
 		logger.info("listDataObjectsUnderPathThatMatchSearchText()");
 
@@ -1107,7 +1106,6 @@ public class CollectionServiceImpl implements CollectionService {
 	 * @throws DataGridConnectionRefusedException
 	 * @throws MetalnxException
 	 * @throws DuplicateDataException
-	 * @throws JargonQueryException
 	 */
 	private int getTotalCollectionsUnderPathThatMatchSearchText(String parentPath, String searchText)
 			throws DataGridConnectionRefusedException {
@@ -1152,7 +1150,7 @@ public class CollectionServiceImpl implements CollectionService {
 			SpecificQueryResultSet queryResultSet = specificQueryAO.executeSpecificQueryUsingAlias(specQuery,
 					MAX_RESULTS_PER_PAGE, 0);
 			totalNumberOfItems = DataGridUtils.mapCountQueryResultSetToInteger(queryResultSet);
-		} catch (MetalnxException | JargonQueryException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not execute specific query to find collections matching a search text. ", e);
 		} finally {
 			try {
@@ -1176,7 +1174,7 @@ public class CollectionServiceImpl implements CollectionService {
 	 * @throws DataGridConnectionRefusedException
 	 */
 	private int getTotalDataObjectsUnderPathThatMatchSearchText(String parentPath, String searchText)
-			throws DataNotFoundException, JargonQueryException, DataGridConnectionRefusedException {
+			throws DataNotFoundException, DataGridConnectionRefusedException {
 
 		logger.info("getTotalCollectionsUnderPathThatMatchSearchText()");
 

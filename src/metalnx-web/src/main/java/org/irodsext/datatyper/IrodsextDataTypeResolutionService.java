@@ -8,6 +8,8 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
+
 /**
  * Data type resolution service to determine MIME and info types of a file. Note
  * that this is at first a very basic service that will need to evolve over

@@ -5,11 +5,11 @@
 
 package com.emc.metalnx.services.interfaces;
 
-import org.irods.irods4j.low_level.api.MetalnxException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
 public interface RuleDeploymentService {
 

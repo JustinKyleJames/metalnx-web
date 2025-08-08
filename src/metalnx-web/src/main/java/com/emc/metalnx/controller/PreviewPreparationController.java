@@ -45,7 +45,6 @@ public class PreviewPreparationController {
 	 * @param model
 	 * @return the collection management template
 	 * @throws DataGridConnectionRefusedException
-	 * @throws MetalnxException
 	 * @throws DataGridException
 	 */
 

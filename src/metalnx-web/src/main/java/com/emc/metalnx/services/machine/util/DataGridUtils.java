@@ -7,6 +7,7 @@ package com.emc.metalnx.services.machine.util;
 
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridResource;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.auth.UserTokenDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
