@@ -10,6 +10,7 @@ package com.emc.metalnx.services.irods;
 
 import com.emc.metalnx.core.domain.entity.DataGridSpecificQuery;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.SpecificQueryService;
 import org.apache.logging.log4j.LogManager;
@@ -87,7 +88,7 @@ public class SpecificQueryServiceImpl implements SpecificQueryService {
 		try {
 			SpecificQuery query = SpecificQuery.instanceWithNoArguments(specificQuery.getQuery(), 0, zone);
 			return specificQueryAO.executeSpecificQueryUsingSql(query, 1000);
-		} catch (MetalnxException | JargonQueryException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not execute specific query {}", specificQuery.getAlias(), e);
 		}
 		

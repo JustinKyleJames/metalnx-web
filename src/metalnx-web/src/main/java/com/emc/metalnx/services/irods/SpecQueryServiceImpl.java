@@ -15,6 +15,7 @@ import com.emc.metalnx.core.domain.entity.DataGridFilePropertySearch;
 import com.emc.metalnx.core.domain.entity.DataGridMetadataSearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.core.domain.exceptions.UnsupportedDataGridFeatureException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.SpecQueryService;
@@ -120,9 +121,6 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 		} catch (MetalnxException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
-		} catch (JargonQueryException e) {
-			logger.error("Could not get specific query: ", e);
-			throw new MetalnxException(e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
@@ -183,9 +181,6 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 		} catch (MetalnxException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
-		} catch (JargonQueryException e) {
-			logger.error("Could not get specific query: ", e);
-			throw new MetalnxException(e);
 		}
 
 		return totalItems;
@@ -246,9 +241,6 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 		} catch (MetalnxException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
-		} catch (JargonQueryException e) {
-			logger.error("Could not get specific query: ", e);
-			throw new MetalnxException(e);
 		}
 
 		return totalItems;
@@ -288,9 +280,6 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 		} catch (MetalnxException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
-		} catch (JargonQueryException e) {
-			logger.error("Could not get specific query: ", e);
-			throw new MetalnxException(e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database

@@ -31,6 +31,7 @@ import com.emc.metalnx.controller.utils.LoggedUserUtils;
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.FilePropertyService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
@@ -150,22 +151,11 @@ public class FilePropertiesController {
             logger.error("Could not search by metadata: ", e);
             throw new MetalnxException(e);
         }
-        catch (GenQueryBuilderException e)
-        {
-            logger.error("Could not search by metadata: ", e);
-            throw new MetalnxException(e);
-        }
-        catch (JargonQueryException e)
-        {
-            logger.error("Could not search by metadata: ", e);
-            throw new MetalnxException(e);
-        }
         catch (ParseException e)
         {
             logger.error("Could not search by metadata: ", e);
             throw new MetalnxException(e);
         }
-
         try {
             jsonString = mapper.writeValueAsString(jsonResponse);
         }
@@ -253,7 +243,7 @@ public class FilePropertiesController {
             }
             while (!searchOutput.objects.isEmpty());
         }
-        catch (GenQueryBuilderException | MetalnxException | JargonQueryException | ParseException e) {
+        catch (MetalnxException | ParseException e) {
             logger.error("CSV export failed.", e);
             throw e;
         }

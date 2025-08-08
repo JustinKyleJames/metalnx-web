@@ -21,6 +21,7 @@ import com.emc.metalnx.core.domain.entity.DataGridMetadataSearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.MetadataService;
 import com.emc.metalnx.services.interfaces.PermissionsService;
@@ -177,8 +178,6 @@ public class MetadataServiceImpl implements MetadataService {
 			}
 
 			Collections.sort(dataGridMetadataList);
-		} catch (JargonQueryException e) {
-			logger.error("Error getting metadata info from collection", e);
 		} catch (MetalnxException e) {
 			logger.error("Error getting metadata info from dataobject", e);
 		}

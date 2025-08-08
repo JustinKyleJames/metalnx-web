@@ -27,6 +27,7 @@ import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridAuthenticationException;
 import com.emc.metalnx.core.domain.exceptions.DataGridDatabaseException;
 import com.emc.metalnx.core.domain.exceptions.DataGridServerException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.AuthenticationProviderService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 

@@ -25,6 +25,7 @@ import com.emc.metalnx.core.domain.entity.enums.DataGridResourceTypeEnum;
 import com.emc.metalnx.core.domain.entity.enums.DataGridServerType;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridServerException;
+import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.MachineInfoService;
 import com.emc.metalnx.services.interfaces.ResourceService;
