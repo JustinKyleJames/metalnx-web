@@ -5,6 +5,7 @@
 
 package com.emc.metalnx.services.auth;
 
+import com.emc.metalnx.core.connection.IRODSAccount;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
