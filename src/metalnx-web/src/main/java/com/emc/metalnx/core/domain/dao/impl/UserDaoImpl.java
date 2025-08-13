@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emc.metalnx.core.connection.IRODSAccount;
 import com.emc.metalnx.core.domain.dao.UserDao;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
