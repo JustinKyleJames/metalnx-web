@@ -22,29 +22,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.irods.jargon</groupId>
-			<artifactId>jargon-extensions-if</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.irods.jargon</groupId>
-			<artifactId>jargon-data-utils</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.irods.jargon</groupId>
-			<artifactId>jargon-zipservice</artifactId>
-			<version>${jargon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.irods.jargon</groupId>
-			<artifactId>jargon-ticket</artifactId>
-			<version>${jargon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.irods</groupId>
-			<artifactId>irodsext-jwt-service</artifactId>
-			<version>${jargon.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 		</dependency>
