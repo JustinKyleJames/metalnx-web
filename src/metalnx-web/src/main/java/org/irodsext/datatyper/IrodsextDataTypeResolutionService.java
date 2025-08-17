@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.jargon.core.exception.DataNotFoundException;
 
 import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 
