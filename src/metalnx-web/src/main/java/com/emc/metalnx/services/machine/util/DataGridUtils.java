@@ -11,6 +11,7 @@ import com.emc.metalnx.core.domain.exceptions.MetalnxException;
 import com.emc.metalnx.services.auth.UserTokenDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.jargon.core.pub.domain.DataObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

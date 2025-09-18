@@ -5,6 +5,8 @@ package org.irodsext.dataprofiler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.jargon.core.pub.domain.Collection;
+import org.irods.jargon.core.pub.domain.DataObject;
 
 import com.emc.metalnx.core.connection.IRODSAccount;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
