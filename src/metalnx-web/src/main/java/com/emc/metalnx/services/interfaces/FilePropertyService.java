@@ -28,10 +28,10 @@ public interface FilePropertyService {
 	 *            max number of items to display in a page
 	 * @return list of collections and data objects
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 */
 	public List<DataGridCollectionAndDataObject> findByFileProperties(List<DataGridFilePropertySearch> searchList,
 			DataGridPageContext pageContext, int pageNum, int pageSize)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, MetalnxException;
 
 }

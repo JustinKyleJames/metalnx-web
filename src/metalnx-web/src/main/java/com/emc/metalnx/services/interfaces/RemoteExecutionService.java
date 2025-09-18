@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public interface RemoteExecutionService {
 
-	String execute(String command) throws JargonException, IOException, 
+	String execute(String command) throws MetalnxException, IOException, 
 		DataGridConnectionRefusedException ;
 	
 }

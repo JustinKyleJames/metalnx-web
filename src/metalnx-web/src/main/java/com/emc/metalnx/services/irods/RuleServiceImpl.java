@@ -116,7 +116,7 @@ public class RuleServiceImpl implements RuleService {
 
 	@Override
 	public void execManifestFileRule(String host, String targetPath, String objPath, String filePath)
-			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, JargonException {
+			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, MetalnxException {
 		if (!DataGridCoreUtils.isPrideXMLManifestFile(objPath))
 			return;
 
@@ -135,7 +135,7 @@ public class RuleServiceImpl implements RuleService {
 
 	@Override
 	public List<String> execGetMSIsRule(String host)
-			throws OperationNotSupportedByThisServerException, JargonException {
+			throws OperationNotSupportedByThisServerException, MetalnxException {
 		logger.info("Get Microservices Rule called");
 		/* delegate to Jargon to get MSI list */
 
@@ -221,7 +221,7 @@ public class RuleServiceImpl implements RuleService {
 		try {
 			IRODSRuleExecResult result = is.getRuleProcessingAO().executeRule(rule);
 			ruleResultMap = result.getOutputParameterResults();
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			String error = String.format("Could not execute rule %s: %s", rule, e.getMessage());
 			logger.error(error);
 			throw new DataGridRuleException(error);

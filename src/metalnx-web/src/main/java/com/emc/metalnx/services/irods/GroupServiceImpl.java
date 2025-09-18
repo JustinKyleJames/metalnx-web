@@ -42,7 +42,7 @@ public class GroupServiceImpl implements GroupService {
 			UserGroupAO groupAO = irodsServices.getGroupAO();
 			List<UserGroup> groups = groupAO.findAll();
 			return groups;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error finding groups", e);
 			throw new DataGridException(e);
 		}
@@ -57,7 +57,7 @@ public class GroupServiceImpl implements GroupService {
 		UserGroupAO userGroupAO = irodsServices.getGroupAO();
 		try {
 			return userGroupAO.find(groupId);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error finding group by id:{}", groupId, e);
 			throw new DataGridException("error finding group", e);
 		}
@@ -69,7 +69,7 @@ public class GroupServiceImpl implements GroupService {
 			UserGroupAO userGroupAO = irodsServices.getGroupAO();
 			List<UserGroup> groups = userGroupAO.findUserGroups(groupname);
 			return groups;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error finding groups", e);
 			throw new DataGridException(e);
 		}
@@ -104,7 +104,7 @@ public class GroupServiceImpl implements GroupService {
 			UserGroup group = userGroupAO.findByName(sb.toString());
 
 			return group;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error finding groups", e);
 			throw new DataGridException(e);
 		}
@@ -127,7 +127,7 @@ public class GroupServiceImpl implements GroupService {
 		} catch (DuplicateDataException e) {
 			logger.error("UserGroup " + newGroup.getUserGroupName() + " already exists: ", e);
 			return false;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not execute createGroup() on UserGroupAO class: ", e);
 			throw new DataGridException("error creating group", e);
 		}
@@ -148,7 +148,7 @@ public class GroupServiceImpl implements GroupService {
 		UserGroupAO groupAO = irodsServices.getGroupAO();
 		try {
 			groupAO.removeUserGroup(userGroup);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("exception removing user group", e);
 			throw new DataGridException("error removing user group", e);
 		}
@@ -285,7 +285,7 @@ public class GroupServiceImpl implements GroupService {
 			logger.warn("invalid user, ignored", e);
 		} catch (InvalidGroupException e) {
 			logger.warn("invalid group, ignored", e);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error adding user to group", e);
 			throw new DataGridException("error removing user from group", e);
 		}
@@ -305,7 +305,7 @@ public class GroupServiceImpl implements GroupService {
 		try {
 			groupAO.addUserToGroup(group.getUserGroupName(), dataGridUser.getUsername(),
 					dataGridUser.getZone());
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("error adding user to group", e);
 			throw new DataGridException("error adding user to group", e);
 		}
@@ -351,7 +351,7 @@ public class GroupServiceImpl implements GroupService {
 				dataGridIds[i] = groupMembers.get(i).getId();
 			}
 			return dataGridIds;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not get members list for group ", e);
 			throw new DataGridException("error listing group members", e);
 		}
@@ -399,7 +399,7 @@ public class GroupServiceImpl implements GroupService {
 					dataObjectAO.setAccessPermissionReadInAdminMode(group.getZone(), path, group.getUserGroupName());
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set read permission:", e);
 			throw new DataGridException("exception setting permission", e);
 		}
@@ -448,7 +448,7 @@ public class GroupServiceImpl implements GroupService {
 							group.getUserGroupName());
 				}
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set read permission:", e);
 			throw new DataGridException("error setting read permission", e);
 		}
@@ -497,7 +497,7 @@ public class GroupServiceImpl implements GroupService {
 				}
 			}
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not set ownership:", e);
 			throw new DataGridException("error setting own permission", e);
 

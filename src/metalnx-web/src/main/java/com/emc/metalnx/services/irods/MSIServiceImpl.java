@@ -89,7 +89,7 @@ public class MSIServiceImpl implements MSIService {
 			throw new DataGridException("general exception getting msis for server", e);
 		} catch (OperationNotSupportedByThisServerException e) {
 			logger.warn("msi information not supported by this server version, will ignore");
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("general jargon exception getting msis for server", e);
 			throw new DataGridException(e);
 		}

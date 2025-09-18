@@ -72,13 +72,13 @@ public class PreviewController {
 	 *
 	 * @param model
 	 * @return the collection management template
-	 * @throws JargonException
+	 * @throws MetalnxException
 	 * @throws DataGridException
 	 */
 
 	@RequestMapping(value = "/templateByMimeType", method = RequestMethod.GET)
 	public String getTemplate(final HttpServletResponse response, @ModelAttribute("path") String path,
-			@ModelAttribute("mimeType") String mimeType) throws JargonException {
+			@ModelAttribute("mimeType") String mimeType) throws MetalnxException {
 
 		previewFilePath = URLDecoder.decode(path);
 		previewMimeType = mimeType;
@@ -90,19 +90,19 @@ public class PreviewController {
 	}
 
 	@RequestMapping(value = "/dataObjectPreview", method = RequestMethod.GET)
-	public void getPreview(final HttpServletResponse response) throws JargonException {
+	public void getPreview(final HttpServletResponse response) throws MetalnxException {
 		previewService.filePreview(previewFilePath, previewMimeType, response);
 	}
 	
 	@RequestMapping(value = "/permissionType", method = RequestMethod.GET, produces = "text/plain")
 	@ResponseBody
-	public String getPermission() throws JargonException {
+	public String getPermission() throws MetalnxException {
 		String permissionType = cs.getPermissionsForPath(previewFilePath);
 		return permissionType;
 	}
 
 	@RequestMapping(value = "/save" , method = RequestMethod.POST)
-	public String save(final Model model , @RequestParam("data") final String data) throws JargonException, 
+	public String save(final Model model , @RequestParam("data") final String data) throws MetalnxException, 
 	DataGridConnectionRefusedException {
 			
 		logger.info("saving file chnage for :: " +previewFilePath+ " , and data :: " +data);	
@@ -114,7 +114,7 @@ public class PreviewController {
 	}
 	
 	@RequestMapping(value = "/saveCsv" , method = RequestMethod.POST)
-	public String saveCsv(final Model model , @RequestBody String data) throws JargonException, 
+	public String saveCsv(final Model model , @RequestBody String data) throws MetalnxException, 
 	DataGridConnectionRefusedException {
 			
 		logger.info("saving file chnage for :: " +previewFilePath+ " , and data :: " +data);	

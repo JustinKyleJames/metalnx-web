@@ -179,7 +179,7 @@ public class MetadataServiceImpl implements MetadataService {
 			Collections.sort(dataGridMetadataList);
 		} catch (JargonQueryException e) {
 			logger.error("Error getting metadata info from collection", e);
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error getting metadata info from dataobject", e);
 		}
 
@@ -209,7 +209,7 @@ public class MetadataServiceImpl implements MetadataService {
 			}
 
 			isMetadataAdded = true;
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error trying to add metadata: " + e);
 		}
 		return isMetadataAdded;
@@ -256,7 +256,7 @@ public class MetadataServiceImpl implements MetadataService {
 				CollectionAO collectionAO = irodsServices.getCollectionAO();
 				collectionAO.modifyAVUMetadata(path, oldAVUData, newAVUData);
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error trying to modify metadata: " + e.toString());
 			return false;
 		}
@@ -280,7 +280,7 @@ public class MetadataServiceImpl implements MetadataService {
 				CollectionAO collectionAO = irodsServices.getCollectionAO();
 				collectionAO.deleteAVUMetadata(path, avuData);
 			}
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Error trying to delete metadata: " + e.toString());
 			return false;
 		}

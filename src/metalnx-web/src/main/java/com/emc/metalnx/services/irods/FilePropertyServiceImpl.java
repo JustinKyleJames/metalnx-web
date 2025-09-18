@@ -51,7 +51,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 	@Override
 	public List<DataGridCollectionAndDataObject> findByFileProperties(List<DataGridFilePropertySearch> searchList,
 			DataGridPageContext pageContext, int pageNum, int pageSize)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, MetalnxException {
 
 		List<DataGridCollectionAndDataObject> dataGridCollectionAndDataObjects = null;
 		List<DataGridCollectionAndDataObject> dataGridObjects = null;
@@ -122,7 +122,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 						pageContext.getStartItemNumber() + endIndexForDataObjs + dataGridCollections.size() - 1);
 			}
 
-		} catch (JargonException e) {
+		} catch (MetalnxException e) {
 			logger.error("Could not find data objects by metadata. ", e);
 			if (e.getCause() instanceof ConnectException) {
 				throw new DataGridConnectionRefusedException();
@@ -150,7 +150,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 				} else {
 					permissions = dataObjectAO.listPermissionsForDataObject(obj.getPath());
 				}
-			} catch (JargonException e) {
+			} catch (MetalnxException e) {
 				logger.error("Could not get permission list for object {}", obj.getPath(), e);
 			}
 
