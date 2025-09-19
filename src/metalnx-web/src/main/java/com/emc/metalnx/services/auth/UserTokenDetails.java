@@ -8,6 +8,7 @@ package com.emc.metalnx.services.auth;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.irods4j.high_level.administration.IRODSUsers.User;
 
 /**
  * The object that is encapsulated in the user session
@@ -16,20 +17,20 @@ import org.apache.logging.log4j.Logger;
 public class UserTokenDetails {
 
 	private DataGridUser user;
-	private IRODSAccount irodsAccount;
+	private User irodsAccount;
 	
 	private static final Logger logger = LogManager.getLogger(UserTokenDetails.class);
 	
 	/**
 	 * @return the irodsAccount
 	 */
-	public IRODSAccount getIrodsAccount() {
+	public User getIrodsAccount() {
 		return irodsAccount;
 	}
 	/**
 	 * @param irodsAccount the irodsAccount to set
 	 */
-	public void setIrodsAccount(IRODSAccount irodsAccount) {
+	public void setIrodsAccount(User irodsAccount) {
 		this.irodsAccount = irodsAccount;
 	}
 	/**

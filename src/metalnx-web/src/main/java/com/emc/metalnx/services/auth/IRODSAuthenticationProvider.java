@@ -6,11 +6,19 @@ package com.emc.metalnx.services.auth;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.irods4j.authentication.NativeAuthPlugin;
+import org.irods.irods4j.authentication.PamPasswordAuthPlugin;
+import org.irods.irods4j.high_level.administration.IRODSUsers;
+import org.irods.irods4j.high_level.administration.IRODSUsers.User;
+import org.irods.irods4j.high_level.administration.IRODSUsers.UserType;
+import org.irods.irods4j.high_level.connection.IRODSConnection;
+import org.irods.irods4j.high_level.connection.QualifiedUsername;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,9 +43,6 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 
 	@Autowired
 	UserDao userDao;
-
-	@Autowired
-	IRODSAccessObjectFactory irodsAccessObjectFactory;
 	
 	@Autowired
 	private IRODSServices irodsServices;
@@ -50,8 +55,6 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 	private String irodsAuthScheme;
 
 	// Instance variables to be set to UserTokenDetails instance.
-	private IRODSAccount irodsAccount;
-
 	private DataGridUser user;
 
 	private static final Logger logger = LogManager.getLogger(IRODSAuthenticationProvider.class);
@@ -63,47 +66,50 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 		logger.info("authenticate()");
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
-		AuthResponse authResponse;
 		UsernamePasswordAuthenticationToken authObject;
 
 		RequestAttributes attribs = RequestContextHolder.getRequestAttributes();
-		AuthScheme authSchemeEnum = null;
+		
+		String authScheme = "";
 
 		if (RequestContextHolder.getRequestAttributes() != null) {
 			HttpServletRequest request = ((ServletRequestAttributes) attribs).getRequest();
-			String authScheme = request.getParameter("authScheme");
+			authScheme = request.getParameter("authScheme");
 			logger.info("authScheme:{}", authScheme);
-			authSchemeEnum = AuthScheme.findTypeByString(authScheme);
-			logger.info("authSchemeEnum found:{}", authSchemeEnum);
 		}
 
-		if (authSchemeEnum == null) {
-			logger.error("cannot find auth scheme in request");
-			throw new DataGridAuthenticationException("no auth scheme found in request");
+		if (!"STANDARD".equals(authScheme) && !"PAM".equals(authScheme)) {
+			String error_msg = String.format("invalid authScheme %s", authScheme);
+			logger.error(error_msg);
+			throw new DataGridAuthenticationException(error_msg);
 		}
 
 		logger.debug("Setting username {}", username);
 
 		try {
-			authResponse = this.authenticateAgainstIRODS(username, password, authSchemeEnum);
-
-			// Settings iRODS account
-			this.irodsAccount = authResponse.getAuthenticatedIRODSAccount();
-
-			// Retrieving logging user
-			User irodsUser = new User();
-
-			try {
-				irodsUser = this.irodsAccessObjectFactory.getUserAO(this.irodsAccount).findByName(username);
-				logger.debug("irodsUser:{}", irodsUser);
-			} catch (JargonException e) {
-				logger.error("Could not find user: " + e.getMessage());
+			
+			IRODSConnection conn = new IRODSConnection();
+			conn.connect(this.irodsHost, Integer.parseInt(this.irodsPort), new QualifiedUsername(username, this.irodsZoneName));
+			
+			if ("STANDARD".equals(authScheme)) {
+				// NATIVE
+				conn.authenticate(new NativeAuthPlugin(), password);
+			} else {
+				// PAM
+				conn.authenticate(new PamPasswordAuthPlugin(true), password);
 			}
 
+			// Retrieving logging user
+			
+			// TODO get user type and set grantedAuth appropriately
+			User irodsAccount = new User(username, Optional.of(this.irodsZoneName));
+			
+			Optional<UserType> currentUserType = IRODSUsers.type(conn.getRcComm(), irodsAccount);
+
 			GrantedAuthority grantedAuth;
-			if (irodsUser.getUserType().equals(UserTypeEnum.RODS_ADMIN)) {
+			if (currentUserType.equals(UserType.RODSADMIN)) {
 				grantedAuth = new IRODSAdminGrantedAuthority();
-			} else if (irodsUser.getUserType().equals(UserTypeEnum.GROUP_ADMIN)) {
+			} else if (currentUserType.equals(UserType.GROUPADMIN)) {
 				grantedAuth = new IRODSGroupadminGrantedAuthority();
 			} else {
 				grantedAuth = new IRODSUserGrantedAuthority();
@@ -120,7 +126,7 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 
 			// Creating UserTokenDetails instance for the current authenticated user
 			UserTokenDetails userDetails = new UserTokenDetails();
-			userDetails.setIrodsAccount(this.irodsAccount);
+			userDetails.setIrodsAccount(irodsAccount);
 			userDetails.setUser(this.user);
 
 			// Settings the user details object into the authentication object
@@ -128,12 +134,10 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 		} catch (TransactionException e) {
 			logger.error("Database not responding");
 			throw new DataGridDatabaseException("database not responding", e);
-		} catch (InvalidUserException | org.irods.jargon.core.exception.AuthenticationException e) {
-			logger.error("Could not authenticate user:{}", username, e);
-			throw new DataGridAuthenticationException("could not authenticate user", e);
-		} catch (JargonException e) {
-			logger.error("Server not responding", e);
-			throw new DataGridServerException("exception", e);
+		} catch (Exception e) {
+			logger.error("Exception when authenticating", e);
+			throw new DataGridServerException("Exception when authenticating", e);
+			
 		}
 
 		return authObject;
@@ -142,102 +146,6 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
-	}
-
-	private AuthResponse authenticateAgainstIRODS(String username, String password, AuthScheme authScheme)
-			throws JargonException {
-
-		logger.info("authenticateAgainstIRODS()");
-
-		if (username == null || username.isEmpty() || password == null) {
-			logger.error("null or empty username");
-			throw new DataGridAuthenticationException("Username or password invalid: null or empty value(s) provided");
-		}
-
-		/*
-		 * add if ladder so that if anon is allowed...let it happen
-		 */
-
-		if (authScheme == null) {
-			logger.error("authScheme is null");
-			throw new DataGridAuthenticationException("authScheme is null");
-		}
-
-		logger.info("username:{}", username);
-		logger.info("authScheme:{}", authScheme);
-
-		AuthResponse authResponse;
-
-		// Getting iRODS protocol set
-		logger.debug("Creating IRODSAccount object.");
-		this.irodsAccount = IRODSAccount.instance(this.irodsHost, Integer.parseInt(this.irodsPort), username, password,
-				"", this.irodsZoneName, "");
-		this.irodsAccount.setAuthenticationScheme(authScheme);
-		logger.info("set irodsAccount auth scheme to :{}", irodsAccount.getAuthenticationScheme());
-
-		logger.debug(
-				"Authenticating IRODSAccount:\n\tusername: {}\n\tpassword: ***********\n\tirodsHost: {}\n\tirodsZone: {}",
-				username, this.irodsHost, this.irodsZoneName);
-		authResponse = this.irodsAccessObjectFactory.authenticateIRODSAccount(this.irodsAccount);
-		logger.debug("Done.");
-
-		if (authResponse.isSuccessful()) {
-
-			logger.info("auth is successful");
-			if (authResponse.getAuthMessage().isEmpty()) {
-				logger.debug("AuthMessage: {}", authResponse.getAuthMessage());
-			}
-
-			// Settings iRODS account
-			this.irodsAccount = authResponse.getAuthenticatingIRODSAccount();
-			logger.debug("authenticating irodsAccount:{}", this.irodsAccount);
-			
-			// Save iRODS account to AdminServices 
-			irodsServices.setIrodsAccount(this.irodsAccount);
-			
-
-			// Retrieving logging user
-			UserAO userAO = this.irodsAccessObjectFactory.getUserAO(this.irodsAccount);
-			User irodsUser = userAO.findByName(username);
-
-			// If the user is found
-			if (irodsUser.getUserType().equals(UserTypeEnum.RODS_ADMIN)
-					|| irodsUser.getUserType().equals(UserTypeEnum.GROUP_ADMIN)
-					|| irodsUser.getUserType().equals(UserTypeEnum.RODS_USER)) {
-
-				// If the user is not yet persisted in our database
-				DataGridUser user = this.userDao.findByUsernameAndZone(irodsUser.getName(), irodsUser.getZone());
-
-				if (user == null) {
-					user = new DataGridUser();
-					user.setUsername(irodsUser.getName());
-					user.setZone(irodsUser.getZone());
-					user.setDataGridId(Long.parseLong(irodsUser.getId()));
-					user.setEnabled(true);
-					if (irodsUser.getUserType().equals(UserTypeEnum.RODS_ADMIN)) {
-						logger.debug("setting user type admin:{}", irodsUser.getUserType());
-						user.setUserType(UserTypeEnum.RODS_ADMIN.getTextValue());
-					} else if (irodsUser.getUserType().equals(UserTypeEnum.GROUP_ADMIN)) {
-						logger.debug("setting user type groupadmin:{}", irodsUser.getUserType());
-						user.setUserType(UserTypeEnum.GROUP_ADMIN.getTextValue());
-					} else {
-						logger.debug("setting user type rodsuser:{}", irodsUser.getUserType());
-						user.setUserType(UserTypeEnum.RODS_USER.getTextValue());
-					}
-				} else {
-					// check for an update of user type
-
-					if (user.getUserType() != irodsUser.getUserType().getTextValue()) {
-						logger.info("updating user type based on iRODS current value");
-						user.setUserType(irodsUser.getUserType().getTextValue());
-					}
-				}
-
-				this.user = user;
-			}
-		}
-
-		return authResponse;
 	}
 
 	/**
