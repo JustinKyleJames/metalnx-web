@@ -15,15 +15,15 @@
  import org.apache.commons.io.FileUtils;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
- import org.springframework.beans.factory.annotation.Autowired;
+import org.irods.irods4j.high_level.administration.IRODSUsers.User;
+import org.irods.irods4j.high_level.connection.IRODSConnection;
+import org.irods.irods4j.low_level.api.IRODSApi;
+import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.security.core.Authentication;
  import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
  import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
  
  public class IRODSLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
- 
-	 @Autowired
-	 IRODSAccessObjectFactory irodsAccessObjectFactory;
  
 	 private static final Logger logger = LogManager.getLogger(IRODSLogoutSuccessHandler.class);
  
@@ -34,12 +34,13 @@
 		 logger.info("Logging out...");
  
 		 try {
-			 IRODSAccount irodsAccount = ((UserTokenDetails) authentication.getDetails()).getIrodsAccount();
-			 String username = irodsAccount.getUserName();
+			 UserTokenDetails userTokenDetails = (UserTokenDetails) authentication.getDetails();
+			 User irodsAccount = userTokenDetails.getIrodsAccount();
+			 IRODSConnection conn = userTokenDetails.getiRODSConnection();
+			 String username = irodsAccount.name;
  
 			 logger.info("Closing session and eating all exceptions");
-			 irodsAccessObjectFactory.closeSessionAndEatExceptions(irodsAccount);
-			 irodsAccessObjectFactory.closeSessionAndEatExceptions();
+			 conn.disconnect();
  
 			 logger.debug("Removing current session temporary directory for file upload");
 			 try {

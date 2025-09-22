@@ -128,6 +128,9 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 			UserTokenDetails userDetails = new UserTokenDetails();
 			userDetails.setIrodsAccount(irodsAccount);
 			userDetails.setUser(this.user);
+			
+			// TODO is there a better place to store the connection?
+			userDetails.setiRODSConnection(conn);
 
 			// Settings the user details object into the authentication object
 			authObject.setDetails(userDetails);
