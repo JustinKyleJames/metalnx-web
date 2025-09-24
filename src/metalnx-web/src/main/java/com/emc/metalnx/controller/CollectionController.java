@@ -98,7 +98,7 @@ public class CollectionController {
 	 *
 	 * @param model
 	 * @return the collection management template
-	 * @throws JargonException
+	 * @throws DataGridException
 	 * @throws DataGridException
 	 */
 
@@ -171,7 +171,7 @@ public class CollectionController {
 			model.addAttribute("resources", resourceService.findAll());
 			model.addAttribute("overwriteFileOption", loggedUser != null && loggedUser.isForceFileOverwriting());
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 
 			logger.error("error establishing collection location", e);
 			model.addAttribute("unexpectedError", true);
@@ -230,7 +230,7 @@ public class CollectionController {
 			cameFromMetadataSearch = false;
 			cameFromFilePropertiesSearch = false;
 			cameFromBookmarks = false;
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not respond to request for collections: {}", e);
 			model.addAttribute("unexpectedError", true);
 		}

@@ -6,12 +6,13 @@
 package com.emc.metalnx.services.interfaces;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 
 import java.io.IOException;
 
 public interface RemoteExecutionService {
 
-	String execute(String command) throws JargonException, IOException, 
+	String execute(String command) throws DataGridException, IOException, 
 		DataGridConnectionRefusedException ;
 	
 }

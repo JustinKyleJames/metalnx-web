@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import com.emc.metalnx.controller.utils.LoggedUserUtils;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.AvuAutoCompleteDelegateService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.PermissionsService;
@@ -48,7 +49,7 @@ public class AvuAutocompleteController {
 	private static final Logger logger = LogManager.getLogger(AvuAutocompleteController.class);
 
 	@RequestMapping(value = "/getMetadataAttrs", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody String getMetadataAttr(final HttpServletResponse response) throws JargonException {
+	public @ResponseBody String getMetadataAttr(final HttpServletResponse response) throws DataGridException {
 
 		logger.info("controller: /getMetadataAttrs ");
 		
@@ -59,7 +60,7 @@ public class AvuAutocompleteController {
 	}
 	
 	@RequestMapping(value = "/getMetadataValues", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody String getMetadataValues(final HttpServletResponse response, @RequestParam("attributeName") final String attributeName) throws JargonException {
+	public @ResponseBody String getMetadataValues(final HttpServletResponse response, @RequestParam("attributeName") final String attributeName) throws DataGridException {
 
 		logger.info("controller: /getMetadataValues for :: " + attributeName);
 		
@@ -70,7 +71,7 @@ public class AvuAutocompleteController {
 	}
 	
 	@RequestMapping(value = "/getMetadataAttrMock", method = RequestMethod.GET , produces="application/json")
-	public @ResponseBody JSONArray getMetadataAttrMock(final Model model, final HttpServletResponse response) throws JargonException {
+	public @ResponseBody JSONArray getMetadataAttrMock(final Model model, final HttpServletResponse response) throws DataGridException {
 		 JSONParser parser = new JSONParser();
 		 Object obj;
 		 JSONArray attributes = null;

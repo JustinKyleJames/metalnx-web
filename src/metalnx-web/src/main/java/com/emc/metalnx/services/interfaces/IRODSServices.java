@@ -3,6 +3,8 @@
 
 package com.emc.metalnx.services.interfaces;
 
+import org.irods.irods4j.high_level.administration.IRODSUsers.User;
+
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
 
@@ -196,9 +198,9 @@ public interface IRODSServices {
 	 * 
 	 * @return {@link TrashOperationsAO}
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
-	TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, JargonException;
+	TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * 
@@ -211,19 +213,19 @@ public interface IRODSServices {
 	 * Return an instance of the autocomplete service from Jargon
 	 * 
 	 * @return {@link AvuAutocompleteService}
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
-	AvuAutocompleteService getAvuAutocompleteService() throws JargonException;
+	AvuAutocompleteService getAvuAutocompleteService() throws DataGridException;
 
-	ShoppingCartService getShoppingCartService() throws JargonException;
+	ShoppingCartService getShoppingCartService() throws DataGridException;
 
 	/**
 	 * Return an instance of the JargonZipService that handles bundles
 	 * 
 	 * @return {@link JargonZipService}
-	 * @throws JargonException {@link JargonException}
+	 * @throws DataGridException {@link DataGridException}
 	 */
-	JargonZipService getJargonZipService() throws JargonException;
+	JargonZipService getJargonZipService() throws DataGridException;
 
 	/**
 	 * Handy method to determine if the logged in user is acting in the role of
@@ -237,12 +239,12 @@ public interface IRODSServices {
 	 * Get a service for gallery views and browse
 	 * 
 	 * @return {@link GalleryListService}
-	 * @throws JargonException {@link JargonException}
+	 * @throws DataGridException {@link DataGridException}
 	 */
-	GalleryListService getGalleryListService() throws JargonException;
+	GalleryListService getGalleryListService() throws DataGridException;
 
 	void setIrodsAccessObjectFactory(IRODSAccessObjectFactory irodsAccessObjectFactory);
 
-	void setIrodsAccount(IRODSAccount irodsAccount);
+	void setIrodsAccount(User irodsAccount);
 
 }

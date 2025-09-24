@@ -49,13 +49,13 @@ public class InheritanceController {
 	 * @param inherit
 	 * @param recursive
 	 * @throws DataGridException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	// @ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<?> modify(Model model, @RequestParam("path") final String targetPath,
 			@RequestParam("inherit") final boolean inherit, @RequestParam("recursive") final boolean recursive)
-			throws DataGridException, JargonException {
+			throws DataGridException, DataGridException {
 
 		logger.info("modify()");
 

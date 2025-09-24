@@ -19,6 +19,7 @@ import org.irods.irods4j.high_level.administration.IRODSUsers.User;
 import org.irods.irods4j.high_level.administration.IRODSUsers.UserType;
 import org.irods.irods4j.high_level.connection.IRODSConnection;
 import org.irods.irods4j.high_level.connection.QualifiedUsername;
+import org.irods.jargon.core.connection.AuthScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -70,16 +71,17 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 
 		RequestAttributes attribs = RequestContextHolder.getRequestAttributes();
 		
-		String authScheme = "";
+		AuthScheme authSchemeEnum = null;
 
 		if (RequestContextHolder.getRequestAttributes() != null) {
 			HttpServletRequest request = ((ServletRequestAttributes) attribs).getRequest();
-			authScheme = request.getParameter("authScheme");
+			String authScheme = request.getParameter("authScheme");
+			authSchemeEnum = AuthScheme.findTypeByString(authScheme);
 			logger.info("authScheme:{}", authScheme);
 		}
 
-		if (!"STANDARD".equals(authScheme) && !"PAM".equals(authScheme)) {
-			String error_msg = String.format("invalid authScheme %s", authScheme);
+		if (authSchemeEnum == null) {
+			String error_msg = String.format("no authScheme found in request");
 			logger.error(error_msg);
 			throw new DataGridAuthenticationException(error_msg);
 		}
@@ -91,7 +93,7 @@ public class IRODSAuthenticationProvider implements AuthenticationProviderServic
 			IRODSConnection conn = new IRODSConnection();
 			conn.connect(this.irodsHost, Integer.parseInt(this.irodsPort), new QualifiedUsername(username, this.irodsZoneName));
 			
-			if ("STANDARD".equals(authScheme)) {
+			if (authSchemeEnum == AuthScheme.STANDARD) {
 				// NATIVE
 				conn.authenticate(new NativeAuthPlugin(), password);
 			} else {

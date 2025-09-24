@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.irods.jargon.core.exception.JargonException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,11 +135,6 @@ public class UploadController {
 			logger.error("DataGridException uploading file", e);
 			logger.warn("DataGridException uplaoding file, will pass back as warning", e);
 			// throw e;
-		} catch (JargonException e) {
-			uploadMessage = e.getMessage();
-			errorType = FATAL;
-			logger.error("JargonException uploading file", e);
-			logger.warn("JargonException uplaoding file, will pass back as warning", e);
 		} catch (Throwable t) {
 			logger.error("unexpected exception in upload", t);
 			errorType = FATAL;

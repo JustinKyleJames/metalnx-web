@@ -8,6 +8,7 @@ import java.net.ConnectException;
 import org.irodsext.gallery.GalleryListServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.irods.irods4j.high_level.administration.IRODSUsers.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -33,7 +34,7 @@ public class IRODSServicesImpl implements IRODSServices {
 	MidTierConfiguration midTierConfiguration;
 
 	private UserTokenDetails userTokenDetails;
-	private IRODSAccount irodsAccount;
+	private User irodsAccount;
 
 	private static final Logger logger = LogManager.getLogger(IRODSServicesImpl.class);
 
@@ -52,7 +53,7 @@ public class IRODSServicesImpl implements IRODSServices {
 		}
 	}
 
-	public IRODSServicesImpl(IRODSAccount acct) {
+	public IRODSServicesImpl(User acct) {
 		this.irodsAccount = acct;
 	}
 
@@ -63,7 +64,7 @@ public class IRODSServicesImpl implements IRODSServices {
 		try {
 			TicketServiceFactory tsf = new TicketServiceFactoryImpl(irodsAccessObjectFactory);
 			tas = tsf.instanceTicketAdminService(irodsAccount);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate ticket admin service: ", e.getMessage());
 
 			if (e.getCause() instanceof ConnectException) {
@@ -75,7 +76,7 @@ public class IRODSServicesImpl implements IRODSServices {
 	}
 
 	@Override
-	public TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, JargonException {
+	public TrashOperationsAO getTrashOperationsAO() throws DataGridConnectionRefusedException, DataGridException {
 		return irodsAccessObjectFactory.getTrashOperationsAO(irodsAccount);
 		// return (TrashOperationsAO)
 		// irodsAccessObjectFactory.getBulkFileOperationsAO(irodsAccount);
@@ -89,7 +90,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			EnvironmentalInfoAO envInfoAO = irodsAccessObjectFactory.getEnvironmentalInfoAO(irodsAccount);
 			IrodsVersion iv = envInfoAO.getIRODSServerPropertiesFromIRODSServer().getIrodsVersion();
 			version = String.format("%s.%s.%s", iv.getMajorAsString(), iv.getMinorAsString(), iv.getPatchAsString());
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not find iRODS version: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -101,7 +102,7 @@ public class IRODSServicesImpl implements IRODSServices {
 	}
 
 	@Override
-	public JargonZipService getJargonZipService() throws JargonException {
+	public JargonZipService getJargonZipService() throws DataGridException {
 
 		logger.info("getJargonZipService()");
 		ZipServiceConfiguration zipServiceConfiguration = new ZipServiceConfiguration();
@@ -117,7 +118,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning UserAO instance
 			bulkFileOperationsAO = irodsAccessObjectFactory.getBulkFileOperationsAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate UserAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -130,12 +131,12 @@ public class IRODSServicesImpl implements IRODSServices {
 
 	@Override
 	public String getCurrentUser() {
-		return irodsAccount.getUserName();
+		return irodsAccount.name;
 	}
 
 	@Override
 	public String getCurrentUserZone() {
-		return irodsAccount.getZone();
+		return irodsAccount.zone;
 	}
 
 	@Override
@@ -144,7 +145,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning UserAO instance
 			return irodsAccessObjectFactory.getUserAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate UserAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -161,7 +162,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning UserAO instance
 			return irodsAccessObjectFactory.getUserGroupAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate UserAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -178,7 +179,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAO instance
 			return irodsAccessObjectFactory.getCollectionAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -207,7 +208,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getCollectionAndDataObjectListAndSearchAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			throw new DataGridConnectionRefusedException(e.getMessage());
@@ -224,7 +225,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getIRODSFileSystemAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -241,7 +242,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getIRODSFileFactory(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate IRODSFileFactory: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -258,7 +259,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getDataTransferOperations(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate DataTransferOperations: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -276,7 +277,7 @@ public class IRODSServicesImpl implements IRODSServices {
 
 			return irodsAccessObjectFactory.getStream2StreamAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate Stream2StreamAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -294,7 +295,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getSpecificQueryAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -311,7 +312,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getRemoteExecutionOfCommandsAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate RemoteExecutionOfCommandsAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -328,7 +329,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getResourceAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -339,13 +340,13 @@ public class IRODSServicesImpl implements IRODSServices {
 	}
 
 	@Override
-	public AvuAutocompleteService getAvuAutocompleteService() throws JargonException {
+	public AvuAutocompleteService getAvuAutocompleteService() throws DataGridException {
 		// Returning AvuAutocompleteServiceImpl instance
 		return new AvuAutocompleteServiceImpl(irodsAccessObjectFactory, irodsAccount);
 	}
 
 	@Override
-	public ShoppingCartService getShoppingCartService() throws JargonException {
+	public ShoppingCartService getShoppingCartService() throws DataGridException {
 		// TODO Auto-generated method stub
 
 		IRODSFileSystem irodsFileSystem = IRODSFileSystem.instance();
@@ -362,7 +363,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getZoneAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -380,7 +381,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning CollectionAndDataObjectListAndSearchAO instance
 			return irodsAccessObjectFactory.getDataObjectAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate CollectionAndDataObjectListAndSearchAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -397,7 +398,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			// Returning RuleProcessingAO instance
 			return irodsAccessObjectFactory.getRuleProcessingAO(irodsAccount);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate RuleProcessingAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -418,7 +419,7 @@ public class IRODSServicesImpl implements IRODSServices {
 	}
 
 	@Override
-	public GalleryListService getGalleryListService() throws JargonException {
+	public GalleryListService getGalleryListService() throws DataGridException {
 
 		GalleryListService galleryListService = new GalleryListServiceImpl(irodsAccessObjectFactory, this.irodsAccount);
 		return galleryListService;
@@ -430,7 +431,7 @@ public class IRODSServicesImpl implements IRODSServices {
 
 		try {
 			env = irodsAccessObjectFactory.getEnvironmentalInfoAO(this.irodsAccount);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not instantiate EnvironmentalInfoAO: ", e);
 
 			if (e.getCause() instanceof ConnectException) {
@@ -448,7 +449,7 @@ public class IRODSServicesImpl implements IRODSServices {
 			EnvironmentalInfoAO env = irodsAccessObjectFactory.getEnvironmentalInfoAO(this.irodsAccount);
 			if (env != null)
 				isAtLeastIrods420 = env.getIRODSServerPropertiesFromIRODSServer().isAtLeastIrods420();
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get environmental information from grid: {}", e.getMessage());
 		}
 
@@ -473,11 +474,11 @@ public class IRODSServicesImpl implements IRODSServices {
 		this.userTokenDetails = userTokenDetails;
 	}
 
-	public IRODSAccount getIrodsAccount() {
+	public User getIrodsAccount() {
 		return irodsAccount;
 	}
 
-	public void setIrodsAccount(IRODSAccount irodsAccount) {
+	public void setIrodsAccount(User irodsAccount) {
 		this.irodsAccount = irodsAccount;
 	}
 

@@ -12,6 +12,7 @@ import com.emc.metalnx.core.domain.entity.DataGridFilePropertySearch;
 import com.emc.metalnx.core.domain.entity.DataGridMetadataSearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.UnsupportedDataGridFeatureException;
 
 public interface SpecQueryService {
@@ -28,11 +29,11 @@ public interface SpecQueryService {
 	 * @param limit              max number of items shown in a page
 	 * @return Query result set from a metadata search
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	public SpecificQueryResultSet searchByMetadata(List<DataGridMetadataSearch> metadataSearch, String zone,
 			boolean searchAgainstColls, DataGridPageContext pageContext, int offset, int limit)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Searches data objects or collections by file properties.
@@ -47,11 +48,11 @@ public interface SpecQueryService {
 	 * @param limit              max number of items shown in a page
 	 * @return Query result set from a file properties search
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	public SpecificQueryResultSet searchByFileProperties(List<DataGridFilePropertySearch> filePropertySearch,
 			String zone, boolean searchAgainstColls, DataGridPageContext pageContext, int offset, int limit)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Removes a specific query from the data grid by its alias
@@ -68,10 +69,10 @@ public interface SpecQueryService {
 	 * @param zone           zone to be looking for collections
 	 * @return total number of collections matching a metadata search criteria
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	public int countCollectionsMatchingMetadata(List<DataGridMetadataSearch> metadataSearch, String zone)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Counts the total number of data objects matching a specific metadata
@@ -81,10 +82,10 @@ public interface SpecQueryService {
 	 * @param zone           zone to be looking for data objects
 	 * @return total number of data objects matching a metadata search criteria
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	public int countDataObjectsMatchingMetadata(List<DataGridMetadataSearch> metadataSearch, String zone)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Counts the total number of Collections matching a specific file properties
@@ -96,12 +97,12 @@ public interface SpecQueryService {
 	 * @return total number of collections matching a file properties search
 	 *         criteria
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 * @throws UnsupportedDataGridFeatureException
 	 */
 	public int countCollectionsMatchingFileProperties(List<DataGridFilePropertySearch> filePropertiesSearch,
 			String zone)
-			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, JargonException;
+			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, DataGridException;
 
 	/**
 	 * Counts the total number of data objects matching a specific file properties
@@ -113,12 +114,12 @@ public interface SpecQueryService {
 	 * @return total number of data objects matching a file properties search
 	 *         criteria
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 * @throws UnsupportedDataGridFeatureException
 	 */
 	public int countDataObjectsMatchingFileProperties(List<DataGridFilePropertySearch> filePropertiesSearch,
 			String zone)
-			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, JargonException;
+			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, DataGridException;
 
 	/**
 	 * @param irodsServices the irodsServices to set

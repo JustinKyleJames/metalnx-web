@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -58,7 +59,7 @@ public class GalleryApiController {
                        @RequestParam("offset") int offset,
                        @RequestParam("limit") int limit,
                        @RequestParam("policyComposed") Optional<Boolean> policyComposed)
-        throws JargonException
+        throws DataGridException
     {
         log.info("list()");
         log.info("path:{}", path);
@@ -93,7 +94,7 @@ public class GalleryApiController {
     }
     
     private String listThumbnailInfo(String path, int offset, int limit)
-        throws DataGridConnectionRefusedException, JargonException
+        throws DataGridConnectionRefusedException, DataGridException
     {
         IRODSAccessObjectFactory aof = irodsServices.getIrodsAccessObjectFactory();
 
@@ -126,14 +127,14 @@ public class GalleryApiController {
 
             return (String) outParam.getResultObject();
         }
-        catch (JargonException e) {
+        catch (DataGridException e) {
             log.error("error executing rule", e);
             return newErrorObjectAsJson();
         }
     }
 
     private String listThumbnailInfoPolicyComposed(String _path, int _offset, int _limit)
-        throws DataGridConnectionRefusedException, JargonException
+        throws DataGridConnectionRefusedException, DataGridException
     {
         IRODSAccessObjectFactory aof = irodsServices.getIrodsAccessObjectFactory();
         
@@ -161,7 +162,7 @@ public class GalleryApiController {
             params.add(new IRODSRuleParameter("*config", objectMapper.writeValueAsString(jsonConfig)));
         }
         catch (JsonProcessingException e) {
-            throw new JargonException("unable to serialize error object", e);
+            throw new DataGridException("unable to serialize error object", e);
         }
 
         // TODO There is probably a better way to get the underlying iRODS account.
@@ -182,13 +183,13 @@ public class GalleryApiController {
 
             return (String) outParam.getResultObject();
         }
-        catch (JargonException e) {
+        catch (DataGridException e) {
             log.error("error executing rule", e);
             return newErrorObjectAsJson();
         }
     }
     
-    private String newErrorObjectAsJson() throws JargonException
+    private String newErrorObjectAsJson() throws DataGridException
     {
         // The presence of this property is an indicator to the caller that
         // something went wrong. This property will not exist in rules that
@@ -199,7 +200,7 @@ public class GalleryApiController {
             return objectMapper.writeValueAsString(new Error());
         }
         catch (JsonProcessingException e) {
-            throw new JargonException("unable to serialize error object", e);
+            throw new DataGridException("unable to serialize error object", e);
         }
     }
 

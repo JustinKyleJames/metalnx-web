@@ -24,6 +24,7 @@ import com.emc.metalnx.core.domain.entity.DataGridServer;
 import com.emc.metalnx.core.domain.entity.enums.DataGridResourceTypeEnum;
 import com.emc.metalnx.core.domain.entity.enums.DataGridServerType;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridServerException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.MachineInfoService;
@@ -60,7 +61,7 @@ public class ResourceServiceImpl implements ResourceService {
 					}
 				}
 			}
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not find all resources: ", e);
 		}
 
@@ -205,7 +206,7 @@ public class ResourceServiceImpl implements ResourceService {
 			Resource irodsResource = resourceAO.findByName(resourceName);
 
 			return irodsResource.getImmediateChildren();
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get immediate children of resource " + resourceName + ": ", e);
 		}
 
@@ -242,7 +243,7 @@ public class ResourceServiceImpl implements ResourceService {
 
 			return true;
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not create resource: ", e);
 		}
 
@@ -296,7 +297,7 @@ public class ResourceServiceImpl implements ResourceService {
 					resourceAO.removeChildFromResource(dgRescToRemove.getName(), childResource);
 				}
 			}
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not delete children from resource {}.", dgRescToRemove.getName());
 		}
 	}

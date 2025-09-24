@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.emc.metalnx.core.domain.entity.DataGridUser;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 
 /**
  * IRODS-EXT base implementation of a data profiler that can summarize a data
@@ -31,66 +32,66 @@ public class IrodsextDataProfilerService extends DataProfilerService {
 
 	@Override
 	protected void addStarringDataToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 	}
 
 	@Override
 	protected void addStarringDataToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 	}
 
 	@Override
 	protected void addTaggingAndCommentsToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("tagging not yet implemented");
 
 	}
 
 	@Override
 	protected void addTaggingAndCommentsToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("tagging not yet implemented");
 
 	}
 
 	@Override
 	protected void addSharingToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("sharing not yet implemented");
 
 	}
 
 	@Override
 	protected void addSharingToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("sharing not yet implemented");
 
 	}
 
 	@Override
 	protected void addTicketsToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("tickets not yet implemented");
 
 	}
 
 	@Override
 	protected void addTicketsToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("tickets not yet implemented");
 
 	}
 
 	@Override
 	protected void addMetadataTemplatesToDataObject(DataProfile<DataObject> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("templates not yet implemented");
 
 	}
 
 	@Override
 	protected void addMetadataTemplatesToCollection(DataProfile<Collection> dataProfile,
-			DataProfilerSettings dataProfilerSettings) throws JargonException {
+			DataProfilerSettings dataProfilerSettings) throws DataGridException {
 		log.warn("templates not yet implemented");
 
 	}

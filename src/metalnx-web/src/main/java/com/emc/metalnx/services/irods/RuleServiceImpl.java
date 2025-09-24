@@ -19,6 +19,7 @@ import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridResource;
 import com.emc.metalnx.core.domain.entity.DataGridRule;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;
 import com.emc.metalnx.core.domain.utils.DataGridCoreUtils;
 import com.emc.metalnx.services.interfaces.CollectionService;
@@ -116,7 +117,7 @@ public class RuleServiceImpl implements RuleService {
 
 	@Override
 	public void execManifestFileRule(String host, String targetPath, String objPath, String filePath)
-			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, JargonException {
+			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, DataGridException {
 		if (!DataGridCoreUtils.isPrideXMLManifestFile(objPath))
 			return;
 
@@ -135,7 +136,7 @@ public class RuleServiceImpl implements RuleService {
 
 	@Override
 	public List<String> execGetMSIsRule(String host)
-			throws OperationNotSupportedByThisServerException, JargonException {
+			throws OperationNotSupportedByThisServerException, DataGridException {
 		logger.info("Get Microservices Rule called");
 		/* delegate to Jargon to get MSI list */
 
@@ -221,7 +222,7 @@ public class RuleServiceImpl implements RuleService {
 		try {
 			IRODSRuleExecResult result = is.getRuleProcessingAO().executeRule(rule);
 			ruleResultMap = result.getOutputParameterResults();
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			String error = String.format("Could not execute rule %s: %s", rule, e.getMessage());
 			logger.error(error);
 			throw new DataGridRuleException(error);

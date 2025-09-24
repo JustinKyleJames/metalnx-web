@@ -7,6 +7,7 @@ package com.emc.metalnx.services.machine.util;
 
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridResource;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.auth.UserTokenDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,10 +26,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of collections
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<DataGridCollectionAndDataObject> mapMetadataResultSetToDataGridCollections(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
 
         List<DataGridCollectionAndDataObject> colls = new ArrayList<>();
 
@@ -65,10 +66,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of data objects
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<DataGridCollectionAndDataObject> mapMetadataResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
 
         List<DataGridCollectionAndDataObject> objs = new ArrayList<DataGridCollectionAndDataObject>();
 
@@ -110,10 +111,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            sql result set returned from the execution of a specific query
      * @return List of data objects
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<DataGridCollectionAndDataObject> mapPropertiesResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
 
         List<DataGridCollectionAndDataObject> dataGridCollectionAndDataObjects = new ArrayList<DataGridCollectionAndDataObject>();
 
@@ -174,9 +175,9 @@ public class DataGridUtils {
      * @param queryResultSet
      *            result set returned from a query
      * @return list of data grid objects
-     * @throws JargonException
+     * @throws DataGridException
      */
-    public static int mapCountQueryResultSetToInteger(SpecificQueryResultSet queryResultSet) throws JargonException {
+    public static int mapCountQueryResultSetToInteger(SpecificQueryResultSet queryResultSet) throws DataGridException {
         int totalNumberOfItems = 0;
 
         if (queryResultSet != null && !queryResultSet.getResults().isEmpty()) {
@@ -195,10 +196,10 @@ public class DataGridUtils {
      * @param queryResultSet
      *            result set returned from a query
      * @return list of data grid objects
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<CollectionAndDataObjectListingEntry> mapCollectionQueryResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();
@@ -226,10 +227,10 @@ public class DataGridUtils {
      *
      * @param queryResultSet
      * @return
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<CollectionAndDataObjectListingEntry> mapQueryResultSetToDataGridObjects(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();
@@ -256,10 +257,10 @@ public class DataGridUtils {
      *
      * @param queryResultSet
      * @return
-     * @throws JargonException
+     * @throws DataGridException
      */
     public static List<CollectionAndDataObjectListingEntry> mapQueryResultSetToDataGridObjectsForSearch(SpecificQueryResultSet queryResultSet)
-            throws JargonException {
+            throws DataGridException {
         List<CollectionAndDataObjectListingEntry> dataGridCollectionAndDataObjects = new ArrayList<CollectionAndDataObjectListingEntry>();
 
         List<IRODSQueryResultRow> results = queryResultSet.getResults();

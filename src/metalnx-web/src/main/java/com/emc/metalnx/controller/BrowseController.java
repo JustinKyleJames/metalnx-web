@@ -41,6 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
 
 import com.emc.metalnx.controller.utils.LoggedUserUtils;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.modelattribute.breadcrumb.DataGridBreadcrumb;
 import com.emc.metalnx.modelattribute.collection.CollectionOrDataObjectForm;
 import com.emc.metalnx.services.interfaces.CollectionService;
@@ -217,11 +218,11 @@ public class BrowseController {
      * @return treeView template that renders all nodes of certain path (parent)
      * @throws DataGridException if Metalnx cannot find collections and objects
      *                           inside the path
-     * @throws JargonException
+     * @throws DataGridException
      */
     @RequestMapping(value = "/getSubDirectories/", method = RequestMethod.POST)
     public String getSubDirectories(final Model model, @RequestParam("path") String path)
-            throws DataGridException, JargonException {
+            throws DataGridException, DataGridException {
 
         logger.info("getSubDirectories()");
         logger.info("model:{}", model);
@@ -326,14 +327,14 @@ public class BrowseController {
      *                  listed
      * @return
      * @throws DataGridConnectionRefusedException
-     * @throws JargonException
+     * @throws DataGridException
      * @throws FileNotFoundException
      */
     @RequestMapping(value = "/getDirectoriesAndFilesForGroupForm")
     public String getDirectoriesAndFilesForGroupForm(final Model model, @RequestParam("path") String path,
             @RequestParam("groupName") final String groupName,
             @RequestParam("retrievePermissions") final boolean retrievePermissions)
-            throws DataGridConnectionRefusedException, FileNotFoundException, JargonException {
+            throws DataGridConnectionRefusedException, FileNotFoundException, DataGridException {
         if (path == null || path == "") {
             path = MiscIRODSUtils.buildPathZoneAndHome(irodsServices.getCurrentUserZone());
         }
@@ -382,14 +383,14 @@ public class BrowseController {
      * @param username user who all collections and files permissions will be listed
      * @return the template that will render the tree
      * @throws DataGridConnectionRefusedException
-     * @throws JargonException
+     * @throws DataGridException
      * @throws FileNotFoundException
      */
     @RequestMapping(value = "/getDirectoriesAndFilesForUser")
     public String getDirectoriesAndFilesForUser(final Model model, @RequestParam("path") final String path,
             @RequestParam("username") final String username,
             @RequestParam("retrievePermissions") final boolean retrievePermissions)
-            throws DataGridConnectionRefusedException, FileNotFoundException, JargonException {
+            throws DataGridConnectionRefusedException, FileNotFoundException, DataGridException {
 
         logger.info("getDirectoriesAndFilesForUser()");
 
@@ -714,7 +715,7 @@ public class BrowseController {
      *                parameters passed in request
      * @return json with collections and data objects
      * @throws DataGridConnectionRefusedException
-     * @throws JargonException
+     * @throws DataGridException
      */
     @RequestMapping(value = "getPaginatedJSONObjs/")
     @ResponseBody
@@ -888,7 +889,7 @@ public class BrowseController {
      * @throws DataGridConnectionRefusedException if Metalnx cannot connect to the
      *                                            grid.
      */
-    private String getCollBrowserView(final Model model, String path) throws JargonException, DataGridException {
+    private String getCollBrowserView(final Model model, String path) throws DataGridException, DataGridException {
         logger.info("getCollBrowserView()");
 
         logger.info("model:{}", model);

@@ -7,6 +7,7 @@ package com.emc.metalnx.services.irods;
 
 import com.emc.metalnx.core.domain.entity.DataGridZone;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.RemoteExecutionService;
 import com.emc.metalnx.services.interfaces.ZoneService;
@@ -54,7 +55,7 @@ public class ZoneServiceImpl implements ZoneService {
                 dataGridZones.add(dataGridZone);
             }
         }
-        catch (JargonException e) {
+        catch (DataGridException e) {
             logger.info("Could not find all zones ", e);
         }
 

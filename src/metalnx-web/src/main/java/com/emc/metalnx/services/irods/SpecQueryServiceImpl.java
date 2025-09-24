@@ -15,6 +15,7 @@ import com.emc.metalnx.core.domain.entity.DataGridFilePropertySearch;
 import com.emc.metalnx.core.domain.entity.DataGridMetadataSearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.UnsupportedDataGridFeatureException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.SpecQueryService;
@@ -40,13 +41,13 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 
 	@Override
 	public int countCollectionsMatchingMetadata(List<DataGridMetadataSearch> metadataSearch, String zone)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, DataGridException {
 		return countItemsMatchingMetadata(metadataSearch, zone, true);
 	}
 
 	@Override
 	public int countDataObjectsMatchingMetadata(List<DataGridMetadataSearch> metadataSearch, String zone)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, DataGridException {
 		return countItemsMatchingMetadata(metadataSearch, zone, false);
 	}
 
@@ -59,7 +60,7 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 			specificQueryAO = irodsServices.getSpecificQueryAO();
 
 			specificQueryAO.removeSpecificQueryByAlias(specQueryAlias);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get specific query: ", e.getMessage());
 		}
 	}
@@ -67,7 +68,7 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	@Override
 	public SpecificQueryResultSet searchByMetadata(final List<DataGridMetadataSearch> metadataSearch, final String zone,
 			final boolean searchAgainstColls, final DataGridPageContext pageContext, final int offset, final int limit)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, DataGridException {
 
 		logger.info("searchByMetadata()");
 
@@ -117,17 +118,17 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 			logger.info("Specific query: {}", query.toString());
 
 			queryResultSet = specificQueryAO.executeSpecificQueryUsingAlias(specQuery, limit, offset);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
 		} catch (JargonQueryException e) {
 			logger.error("Could not get specific query: ", e);
-			throw new JargonException(e);
+			throw new DataGridException(e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(userSQLAlias);
-			} catch (JargonException e) {
+			} catch (DataGridException e) {
 				logger.error("Could not remove specific query {}: ", userSQLAlias, e.getMessage());
 			}
 		}
@@ -144,10 +145,10 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	 *                           false when searching data data objects
 	 * @return total number of items matching a metadata search criteria
 	 * @throws DataGridConnectionRefusedException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	private int countItemsMatchingMetadata(List<DataGridMetadataSearch> metadataSearch, String zone,
-			boolean searchAgainstColls) throws DataGridConnectionRefusedException, JargonException {
+			boolean searchAgainstColls) throws DataGridConnectionRefusedException, DataGridException {
 
 		int totalItems = 0;
 
@@ -180,12 +181,12 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 			specificQueryAO.removeSpecificQueryByAlias(userSQLAlias);
 
 			totalItems = DataGridUtils.mapCountQueryResultSetToInteger(queryResultSet);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
 		} catch (JargonQueryException e) {
 			logger.error("Could not get specific query: ", e);
-			throw new JargonException(e);
+			throw new DataGridException(e);
 		}
 
 		return totalItems;
@@ -201,11 +202,11 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	 * @return total number of items matching a file properties search criteria
 	 * @throws DataGridConnectionRefusedException
 	 * @throws UnsupportedDataGridFeatureException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	private int countItemsMatchingFileProperties(List<DataGridFilePropertySearch> filePropertiesSearch, String zone,
 			boolean searchAgainstColls)
-			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, JargonException {
+			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, DataGridException {
 
 		logger.info("countItemsMatchingFileProperties()");
 		int totalItems = 0;
@@ -243,12 +244,12 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 
 			totalItems = DataGridUtils.mapCountQueryResultSetToInteger(queryResultSet);
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
 		} catch (JargonQueryException e) {
 			logger.error("Could not get specific query: ", e);
-			throw new JargonException(e);
+			throw new DataGridException(e);
 		}
 
 		return totalItems;
@@ -257,7 +258,7 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	@Override
 	public SpecificQueryResultSet searchByFileProperties(List<DataGridFilePropertySearch> filePropertySearch,
 			String zone, boolean searchAgainstColls, DataGridPageContext pageContext, int offset, int limit)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, DataGridException {
 
 		SpecificQueryAO specificQueryAO = null;
 		SpecificQuery specQuery = null;
@@ -285,17 +286,17 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 			logger.info("Specific query: {}", query);
 
 			queryResultSet = specificQueryAO.executeSpecificQueryUsingAlias(specQuery, MAX_QUERY_ROWS, 0);
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not get specific query: ", e);
 			throw e;
 		} catch (JargonQueryException e) {
 			logger.error("Could not get specific query: ", e);
-			throw new JargonException(e);
+			throw new DataGridException(e);
 		} finally {
 			try {
 				// after running the user specific query, we need to remove from the database
 				specificQueryAO.removeSpecificQueryByAlias(userSQLAlias);
-			} catch (JargonException e) {
+			} catch (DataGridException e) {
 				logger.error("Could not remove specific query {}: ", userSQLAlias, e.getMessage());
 			}
 		}
@@ -306,7 +307,7 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	@Override
 	public int countCollectionsMatchingFileProperties(List<DataGridFilePropertySearch> filePropertiesSearch,
 			String zone)
-			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, JargonException {
+			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, DataGridException {
 
 		return countItemsMatchingFileProperties(filePropertiesSearch, zone, true);
 	}
@@ -314,7 +315,7 @@ public class SpecQueryServiceImpl implements SpecQueryService {
 	@Override
 	public int countDataObjectsMatchingFileProperties(List<DataGridFilePropertySearch> filePropertiesSearch,
 			String zone)
-			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, JargonException {
+			throws DataGridConnectionRefusedException, UnsupportedDataGridFeatureException, DataGridException {
 
 		return countItemsMatchingFileProperties(filePropertiesSearch, zone, false);
 	}

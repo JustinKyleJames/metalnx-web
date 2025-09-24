@@ -80,7 +80,7 @@ public class PreviewServiceImpl implements PreviewService {
 			response.setContentType(mimeType);
 			FileCopyUtils.copy(irodsFileInputStream, response.getOutputStream());
 
-		} catch (IOException | JargonException e) {
+		} catch (IOException | DataGridException e) {
 			e.printStackTrace();
 			isCopySuccessFul = false;
 		}

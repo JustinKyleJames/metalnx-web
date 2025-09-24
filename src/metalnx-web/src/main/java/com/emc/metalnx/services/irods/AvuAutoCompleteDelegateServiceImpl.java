@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.AvuAutoCompleteDelegateService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,7 +23,7 @@ public class AvuAutoCompleteDelegateServiceImpl implements AvuAutoCompleteDelega
 	private static final Logger logger = LogManager.getLogger(AvuAutoCompleteDelegateServiceImpl.class);
 
 	@Override
-	public String getMetadataAttrs(final String prefix, final int offset, final AvuTypeEnum avuTypeEnum) throws JargonException {
+	public String getMetadataAttrs(final String prefix, final int offset, final AvuTypeEnum avuTypeEnum) throws DataGridException {
 
 		logger.info("getMetadataAttrs()");
 		logger.info("prefix: {}", prefix);
@@ -46,7 +47,7 @@ public class AvuAutoCompleteDelegateServiceImpl implements AvuAutoCompleteDelega
 			jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
 			logger.info("java pojo to jsonInString: {}", jsonInString);
 
-		} catch (JargonException e) {			
+		} catch (DataGridException e) {			
 			throw e;			
 		}
 		catch (JsonProcessingException e) {
@@ -57,7 +58,7 @@ public class AvuAutoCompleteDelegateServiceImpl implements AvuAutoCompleteDelega
 
 	@Override
 	public String getAvailableValues(String forAttribute, String prefix, int offset, AvuTypeEnum avuTypeEnum)
-			throws JargonException {
+			throws DataGridException {
 		
 		logger.info("getMetadataAttrs()");
 		logger.info("prefix: {}", prefix);
@@ -81,7 +82,7 @@ public class AvuAutoCompleteDelegateServiceImpl implements AvuAutoCompleteDelega
 			jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
 			logger.info("java pojo to jsonInString: {}", jsonInString);
 
-		} catch (JargonException e) {			
+		} catch (DataGridException e) {			
 			throw e;			
 		}
 		catch (JsonProcessingException e) {

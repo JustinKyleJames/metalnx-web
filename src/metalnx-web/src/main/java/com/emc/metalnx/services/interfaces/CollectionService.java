@@ -16,6 +16,7 @@ import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException
 import com.emc.metalnx.core.domain.exceptions.DataGridDataNotFoundException;
 import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridQueryException;
+import com.emc.metalnx.core.domain.exceptions.FileNotFoundException;
 import com.emc.metalnx.core.domain.exceptions.FileSizeTooLargeException;
 
 public interface CollectionService {
@@ -30,10 +31,10 @@ public interface CollectionService {
 	 *         False, otherwise.
 	 * @throws DataGridConnectionRefusedException if Metalnx cannot connect to the
 	 *                                            data grid.
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	boolean isFileInCollection(String filename, String collectionPath)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Checks whether a path is valid in the grid or not.
@@ -41,10 +42,10 @@ public interface CollectionService {
 	 * @param path file or collection path to be validated
 	 * @return True, if the path exists in the grid (path is a file or collection).
 	 *         False, otherwise.
-	 * @throws JargonException
+	 * @throws DataGridException
 	 * @throws DataGridConnectionRefusedException
 	 */
-	boolean isPathValid(String path) throws DataGridConnectionRefusedException, JargonException;
+	boolean isPathValid(String path) throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Checks whether or not a given path is a path for a collection.
@@ -52,9 +53,9 @@ public interface CollectionService {
 	 * @param path
 	 * @return True, if the given path is a collection path. False, otherwise.
 	 * @throws DataGridException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
-	boolean isCollection(String path) throws DataGridException, JargonException;
+	boolean isCollection(String path) throws DataGridException, DataGridException;
 
 	/**
 	 * Checks whether or not a given path is a path for a data object.
@@ -62,9 +63,9 @@ public interface CollectionService {
 	 * @param path
 	 * @return True, if the given path is a data object path. False, otherwise.
 	 * @throws DataGridException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
-	boolean isDataObject(String path) throws DataGridException, JargonException;
+	boolean isDataObject(String path) throws DataGridException, DataGridException;
 
 	/**
 	 * Retrieves all collections and data objects that match a search term. All
@@ -136,10 +137,10 @@ public interface CollectionService {
 	 * @return list of collections and data objects existing under a path
 	 * @throws DataGridConnectionRefusedException
 	 * @throws FileNotFoundException
-	 * @throws JargonException
+	 * @throws DataGridException
 	 */
 	List<DataGridCollectionAndDataObject> getSubCollectionsAndDataObjectsUnderPath(String path)
-			throws DataGridConnectionRefusedException, FileNotFoundException, JargonException;
+			throws DataGridConnectionRefusedException, FileNotFoundException, DataGridException;
 
 	/**
 	 * Create a collection in iRODS
@@ -301,10 +302,10 @@ public interface CollectionService {
 	 * @param groupName {@code String} with the group name
 	 * @return {@code Set} of {@code String}
 	 * @throws DataGridConnectionRefusedException {@link DataGridConnectionRefusedException}
-	 * @throws JargonException                    {@link JargonException}
+	 * @throws DataGridException                    {@link DataGridException}
 	 */
 	Set<String> listWritePermissionsForPathAndGroupRecursive(String path, String groupName)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Prepares files to be downloaded by compressing them into a single file.
@@ -313,9 +314,9 @@ public interface CollectionService {
 	 *              downloaded
 	 * @return Path to the compressed file, if any. Empty string, otherwise.
 	 * @throws DataGridException {@link DataGridException}
-	 * @throws JargonException   {@link JargonException}
+	 * @throws DataGridException   {@link DataGridException}
 	 */
-	String prepareFilesForDownload(String[] paths) throws IOException, DataGridException, JargonException;
+	String prepareFilesForDownload(String[] paths) throws IOException, DataGridException, DataGridException;
 
 	/**
 	 * Prepares files to be downloaded by compressing them into a single file.
@@ -327,11 +328,11 @@ public interface CollectionService {
 	 * @throws IOException               {@link IOException}
 	 * @throws DataGridException         {@link DataGridException}
 	 * @throws ZipServiceException       {@link ZipServiceException}
-	 * @throws JargonException           {@link JargonException}
+	 * @throws DataGridException           {@link DataGridException}
 	 * 
 	 */
 	String prepareFilesForDownload(List<String> sourcePaths)
-			throws FileSizeTooLargeException, IOException, DataGridException, JargonException;
+			throws FileSizeTooLargeException, IOException, DataGridException, DataGridException;
 
 	/**
 	 * Returns the inheritance option value for a given collection
@@ -339,10 +340,10 @@ public interface CollectionService {
 	 * @param collPath
 	 * @return the boolean
 	 * @throws DataGridConnectionRefusedException {@link DataGridConnectionRefusedException}
-	 * @throws JargonException                    {@link JargonException}
+	 * @throws DataGridException                    {@link DataGridException}
 	 */
 	boolean getInheritanceOptionForCollection(String collPath)
-			throws DataGridConnectionRefusedException, JargonException;
+			throws DataGridConnectionRefusedException, DataGridException;
 
 	/**
 	 * Gets the replica number of a collection or data object in the grid.

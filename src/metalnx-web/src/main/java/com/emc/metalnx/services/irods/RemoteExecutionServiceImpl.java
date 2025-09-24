@@ -6,6 +6,7 @@
 package com.emc.metalnx.services.irods;
 
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.IRODSServices;
 import com.emc.metalnx.services.interfaces.RemoteExecutionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class RemoteExecutionServiceImpl implements RemoteExecutionService {
 	//private static final Logger logger = LogManager.getLogger(RemoteExecutionServiceImpl.class);
 	
 	@Override
-	public String execute(String command) throws JargonException, IOException, 
+	public String execute(String command) throws DataGridException, IOException, 
 		DataGridConnectionRefusedException {
 		
 			

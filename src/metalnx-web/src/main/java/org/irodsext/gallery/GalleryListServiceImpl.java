@@ -7,6 +7,7 @@ import org.irodsext.dataprofiler.IrodsextDataProfilerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,7 +36,7 @@ public class GalleryListServiceImpl extends AbstractJargonService implements Gal
 	}
 
 	@Override
-	public ThumbnailList list(String irodsFileAbsolutePath, int offset, int length) throws JargonException {
+	public ThumbnailList list(String irodsFileAbsolutePath, int offset, int length) throws DataGridException {
 		log.info("list()");
 
 		if (irodsFileAbsolutePath == null || irodsFileAbsolutePath.isEmpty()) {
@@ -105,7 +106,7 @@ public class GalleryListServiceImpl extends AbstractJargonService implements Gal
 			return thumbnailListEntry;
 		} catch (JsonProcessingException e) {
 			log.error("error parsing thumbnail response", e);
-			throw new JargonException("Invalid listing response", e);
+			throw new DataGridException("Invalid listing response", e);
 		}
 
 	}

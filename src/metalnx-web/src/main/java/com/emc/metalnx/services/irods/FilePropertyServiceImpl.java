@@ -22,6 +22,7 @@ import com.emc.metalnx.core.domain.entity.DataGridFilePropertySearch;
 import com.emc.metalnx.core.domain.entity.DataGridPageContext;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.UnsupportedDataGridFeatureException;
 import com.emc.metalnx.services.interfaces.ConfigService;
 import com.emc.metalnx.services.interfaces.FilePropertyService;
@@ -51,7 +52,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 	@Override
 	public List<DataGridCollectionAndDataObject> findByFileProperties(List<DataGridFilePropertySearch> searchList,
 			DataGridPageContext pageContext, int pageNum, int pageSize)
-			throws DataGridConnectionRefusedException, JargonException {
+			throws DataGridConnectionRefusedException, DataGridException {
 
 		List<DataGridCollectionAndDataObject> dataGridCollectionAndDataObjects = null;
 		List<DataGridCollectionAndDataObject> dataGridObjects = null;
@@ -122,7 +123,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 						pageContext.getStartItemNumber() + endIndexForDataObjs + dataGridCollections.size() - 1);
 			}
 
-		} catch (JargonException e) {
+		} catch (DataGridException e) {
 			logger.error("Could not find data objects by metadata. ", e);
 			if (e.getCause() instanceof ConnectException) {
 				throw new DataGridConnectionRefusedException();
@@ -150,7 +151,7 @@ public class FilePropertyServiceImpl implements FilePropertyService {
 				} else {
 					permissions = dataObjectAO.listPermissionsForDataObject(obj.getPath());
 				}
-			} catch (JargonException e) {
+			} catch (DataGridException e) {
 				logger.error("Could not get permission list for object {}", obj.getPath(), e);
 			}
 

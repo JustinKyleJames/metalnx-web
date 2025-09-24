@@ -31,6 +31,7 @@ import com.emc.metalnx.controller.utils.LoggedUserUtils;
 import com.emc.metalnx.core.domain.entity.DataGridCollectionAndDataObject;
 import com.emc.metalnx.core.domain.entity.DataGridUser;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.services.interfaces.CollectionService;
 import com.emc.metalnx.services.interfaces.FilePropertyService;
 import com.emc.metalnx.services.interfaces.IRODSServices;
@@ -101,7 +102,7 @@ public class FilePropertiesController {
                          @RequestParam("draw") final int draw,
                          @RequestParam("start") final int start,
                          @RequestParam("length") final int length)
-        throws DataGridConnectionRefusedException, JargonException
+        throws DataGridConnectionRefusedException, DataGridException
     {
         if (jsonFilePropertySearch != null) {
             this.jsonFilePropertySearch = jsonFilePropertySearch;
@@ -142,28 +143,28 @@ public class FilePropertiesController {
             logger.error("data grid error in search", e);
             throw e;
         }
-        catch (JargonException e) {
+        catch (DataGridException e) {
             logger.error("Could not search by metadata: ", e);
             throw e;
         }
         catch (JsonProcessingException e) {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new DataGridException(e);
         }
         catch (GenQueryBuilderException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new DataGridException(e);
         }
         catch (JargonQueryException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new DataGridException(e);
         }
         catch (ParseException e)
         {
             logger.error("Could not search by metadata: ", e);
-            throw new JargonException(e);
+            throw new DataGridException(e);
         }
 
         try {
@@ -171,7 +172,7 @@ public class FilePropertiesController {
         }
         catch (JsonProcessingException e) {
             logger.error("Could not parse hashmap in file properties search to json: {}", e.getMessage());
-            throw new JargonException(e);
+            throw new DataGridException(e);
         }
 
         return jsonString;
@@ -253,7 +254,7 @@ public class FilePropertiesController {
             }
             while (!searchOutput.objects.isEmpty());
         }
-        catch (GenQueryBuilderException | JargonException | JargonQueryException | ParseException e) {
+        catch (GenQueryBuilderException | DataGridException | JargonQueryException | ParseException e) {
             logger.error("CSV export failed.", e);
             throw e;
         }

@@ -1,12 +1,14 @@
 package com.emc.metalnx.services.interfaces;
 
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
+
 /**
  * Exception in processing metadata templates
  * 
  * @author conwaymc
  *
  */
-public class MetadataTemplateException extends JargonException {
+public class MetadataTemplateException extends DataGridException {
 
 	private static final long serialVersionUID = 408138518224024455L;
 

@@ -5,6 +5,7 @@
 
 package com.emc.metalnx.services.irods;
 
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketDownloadException;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketInvalidUserException;
 import com.emc.metalnx.core.domain.exceptions.DataGridTicketUploadException;
@@ -99,7 +100,7 @@ public class TicketClientServiceImpl implements TicketClientService {
         } catch (DataNotFoundException e) {
             logger.error("Could not transfer file to the grid. File not found: {}", e);
             throw new DataGridTicketUploadException("File not found");
-        } catch (JargonException e) {
+        } catch (DataGridException e) {
             logger.error("Could not transfer file to the grid using a ticket: {}", e);
             int code = e.getUnderlyingIRODSExceptionCode();
             String msg = "Transfer failed";
@@ -151,7 +152,7 @@ public class TicketClientServiceImpl implements TicketClientService {
         } catch (FileNotFoundException e) {
             logger.error("Could not get file using ticket. File not found: {}", e);
             throw new DataGridTicketDownloadException("File not found", path, ticketString);
-        } catch (JargonException e) {
+        } catch (DataGridException e) {
             logger.error("Get file using a ticket caused an error: {}", e);
             int code = e.getUnderlyingIRODSExceptionCode();
 
@@ -204,7 +205,7 @@ public class TicketClientServiceImpl implements TicketClientService {
 
             TicketServiceFactory ticketServiceFactory = new TicketServiceFactoryImpl(irodsAccessObjectFactory);
             ticketClientOperations = ticketServiceFactory.instanceTicketClientOperations(irodsAccount);
-        } catch (JargonException e) {
+        } catch (DataGridException e) {
             logger.error("Could not set up anonymous access");
         }
     }

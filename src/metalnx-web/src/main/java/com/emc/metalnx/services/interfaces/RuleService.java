@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.emc.metalnx.core.domain.entity.DataGridResource;
 import com.emc.metalnx.core.domain.exceptions.DataGridConnectionRefusedException;
+import com.emc.metalnx.core.domain.exceptions.DataGridException;
 import com.emc.metalnx.core.domain.exceptions.DataGridRuleException;
 
 public interface RuleService {
@@ -35,14 +36,14 @@ public interface RuleService {
 	 * @param host
 	 *            server's hostname
 	 * @return List of MSIs on the server that resource is.
-	 * @throws JargonException
-	 *             {@link JargonException} for general errors
+	 * @throws DataGridException
+	 *             {@link DataGridException} for general errors
 	 * @throws OperationNotSupportedByThisServerException
 	 *             {@link OperationNotSupportedByThisServerException} if
 	 *             microservice listing not available on this server version
 	 */
 	List<String> execGetMSIsRule(String host) throws DataGridConnectionRefusedException, DataGridRuleException,
-			OperationNotSupportedByThisServerException, JargonException;
+			OperationNotSupportedByThisServerException, DataGridException;
 
 	/**
 	 * Executes the get version MSI.
@@ -158,11 +159,11 @@ public interface RuleService {
 	 *             if rule exection failed.
 	 * @throws DataGridConnectionRefusedException
 	 *             if Metalnx cannot connect to the data grid
-	 * @throws JargonException
+	 * @throws DataGridException
 	 * @throws FileNotFoundException
 	 */
 	void execManifestFileRule(String host, String targetPath, String objPath, String filePath)
-			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, JargonException;
+			throws DataGridRuleException, DataGridConnectionRefusedException, FileNotFoundException, DataGridException;
 
 	/**
 	 * Execute metadata extraction from Illumina files rule.
